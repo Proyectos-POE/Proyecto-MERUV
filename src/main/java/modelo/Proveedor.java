@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class Proveedor implements Serializable
 {
-    private int numero;
+    private static int numero;
     private int id;
     private String nombre;
     private long nit;
@@ -27,6 +27,16 @@ public class Proveedor implements Serializable
         this.telefono= auxTelefono;
         this.direccion= auxDireccion;
         this.razonSocial= auxRazonSocial;
+    }
+
+    public static int getNumeroProveedor()
+    {
+        return numero;
+    }
+
+    public static void setNumeroProveedor(int auxNumero)
+    {
+        Proveedor.numero = auxNumero;
     }
 
     public int getId()

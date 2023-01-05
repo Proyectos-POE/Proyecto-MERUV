@@ -28,6 +28,16 @@ public class Compra implements Serializable
         this.cantidadProductos = auxCantidadProductos;
         this.fecha = auxFecha;
     }
+    public static int getNumeroCompra()
+    {
+        return numero;
+    }
+
+    public static void setNumeroCompra(int auxNumero)
+    {
+        Compra.numero = auxNumero;
+    }
+
     public int getId()
     {
         return id;
