@@ -39,13 +39,13 @@ public class VentaDao
         return true;
     }
     
-    public boolean eliminarProducto(Venta auxVenta)
+    public boolean eliminarVenta(Venta auxVenta)
     {
         ventas.remove(auxVenta);
         return true;
     }
     
-    public boolean actualizarProducto(Venta auxVenta)
+    public boolean actualizarVenta(Venta auxVenta)
     {
         if(ventas.contains(auxVenta))
         {

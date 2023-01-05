@@ -39,7 +39,7 @@ public class Venta implements Serializable
         return numero;
     }
     
-    public static void setNumero(int auxNumero)
+    public static void setNumeroVenta(int auxNumero)
     {
         Venta.numero = auxNumero;
     }
