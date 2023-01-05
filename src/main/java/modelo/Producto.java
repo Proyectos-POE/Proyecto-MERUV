@@ -45,7 +45,7 @@ public class Producto implements Serializable
         return numero;
     }
     
-    public static void setNumero(int auxNumero)
+    public static void setNumeroProducto(int auxNumero)
     {
         Producto.numero = auxNumero;
     }
