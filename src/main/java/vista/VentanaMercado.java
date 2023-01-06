@@ -1645,11 +1645,11 @@ public class VentanaMercado extends javax.swing.JFrame {
             }
             else
             {
-                setIdCliente((String) tabla.getValueAt(tabla.getSelectedRow() , 0));
-                setNitCliente((String) tabla.getValueAt(tabla.getSelectedRow() , 1));
-                setNombreCliente((String) tabla.getValueAt(tabla.getSelectedRow() , 2));
-                setTelefonoCliente((String) tabla.getValueAt(tabla.getSelectedRow() , 3));
-                setDireccionCliente((String) tabla.getValueAt(tabla.getSelectedRow() , 4));
+                setIdCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 0)));
+                setNitCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 1)));
+                setNombreCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 2)));
+                setTelefonoCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 3)));
+                setDireccionCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 4)));
             }
 
         }
