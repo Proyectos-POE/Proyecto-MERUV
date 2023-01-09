@@ -101,6 +101,6 @@ public class Proveedor implements Serializable
 
     public String toString()
     {
-        return id + " - " + nombre;
+        return nombre;
     }
 }

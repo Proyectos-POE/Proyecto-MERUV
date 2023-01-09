@@ -102,7 +102,7 @@ public class Producto implements Serializable
     
     public String toString()
     {
-        String toString = id + " - " + nombre;
+        String toString = nombre;
         return toString;
     }
 }
