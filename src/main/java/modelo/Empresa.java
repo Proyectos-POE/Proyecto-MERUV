@@ -3,16 +3,7 @@ package modelo;
 import dao.*;
 
 import java.io.File;
-import java.io.Serializable;
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.ArrayList;
-
-import static modelo.Producto.setNumeroProducto;
-import static modelo.Cliente.setNumeroCliente;
-import static modelo.Venta.setNumeroVenta;
-import static modelo.Compra.setNumeroCompra;
-import static modelo.Proveedor.setNumeroProveedor;
 
 /*
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
@@ -20,7 +11,7 @@ import static modelo.Proveedor.setNumeroProveedor;
  * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
  */
 
-public class Empresa implements Serializable
+public class Empresa
 {
     private final String nombre;
     private final ProductoDao productoDao;
@@ -28,6 +19,8 @@ public class Empresa implements Serializable
     private final ProveedorDao proveedorDao;
     private final VentaDao ventaDao;
     private final CompraDao compraDao;
+    private final Carrito carritoCompra;
+    private final Carrito carritoVenta;
     private final Conexion conexion;
     
     public Empresa(String auxNombre)
@@ -38,6 +31,8 @@ public class Empresa implements Serializable
         this.proveedorDao = new ProveedorDao();
         this.ventaDao = new VentaDao();
         this.compraDao = new CompraDao();
+        this.carritoCompra = new Carrito();
+        this.carritoVenta = new Carrito();
         this.conexion = new Conexion(new File("src/main/java/archivos/"));
     }
     
@@ -170,9 +165,100 @@ public class Empresa implements Serializable
     {
         return this.compraDao.getCompra(auxId);
     }
-    
-    //Parte de Archivos
 
+    //----------|CarritoCompra|----------//
+    public ArrayList<Producto> getCarritoCompra()
+    {
+        return carritoCompra.getCarrito();
+    }
+
+    public Producto getProductoCarritoCompra(int auxId)
+    {
+        return carritoCompra.getProductoCarrito(auxId);
+    }
+
+    public boolean agregarProductoCarritoCompra(Producto auxProducto)
+    {
+        return carritoCompra.agregarProductoCarrito(auxProducto);
+    }
+
+    public boolean eliminarProductoCarritoCompra(Producto auxProducto)
+    {
+        return carritoCompra.eliminarProductoCarrito(auxProducto);
+    }
+
+    public void calcularPrecioTotalCompra()
+    {
+        carritoCompra.calcularPrecioTotalCompra();
+    }
+
+    public void calcularProductosTotalesCompra()
+    {
+        carritoCompra.calcularProductosTotales();
+    }
+
+    public double getPrecioTotalCompra()
+    {
+        return carritoCompra.getPrecioTotal();
+    }
+
+    public int getProductosTotalesCompra()
+    {
+        return carritoCompra.getProductosTotales();
+    }
+
+    public void vaciarCarritoCompra()
+    {
+        carritoCompra.vaciarCarrito();
+    }
+
+    //----------|CarritoVenta|----------//
+    public ArrayList<Producto> getCarritoVenta()
+    {
+        return carritoVenta.getCarrito();
+    }
+
+    public Producto getProductoCarritoVenta(int auxId)
+    {
+        return carritoVenta.getProductoCarrito(auxId);
+    }
+
+    public boolean agregarProductoCarritoVenta(Producto auxProducto)
+    {
+        return carritoVenta.agregarProductoCarrito(auxProducto);
+    }
+
+    public boolean eliminarProductoCarritoVenta(Producto auxProducto)
+    {
+        return carritoVenta.eliminarProductoCarrito(auxProducto);
+    }
+
+    public void calcularPrecioTotalVenta()
+    {
+        carritoVenta.calcularPrecioTotalVenta();
+    }
+
+    public void calcularProductosTotalesVenta()
+    {
+        carritoVenta.calcularProductosTotales();
+    }
+
+    public double getPrecioTotalVenta()
+    {
+        return carritoVenta.getPrecioTotal();
+    }
+
+    public int getProductosTotalesVenta()
+    {
+        return carritoVenta.getProductosTotales();
+    }
+
+    public void vaciarCarritoVenta()
+    {
+        carritoVenta.vaciarCarrito();
+    }
+
+    //----------|Conexion|----------|
     public void escribirProductos()
     {
         ArrayList auxProductos;
