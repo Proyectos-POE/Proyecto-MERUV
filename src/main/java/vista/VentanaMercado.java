@@ -6,6 +6,7 @@ package vista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -1656,9 +1657,14 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     //=====|Cliente|=====//
-    public void actualizarTablaCliente(DefaultTableModel auxModel)
+    public TableModel getModelTablaCliente()
     {
-        jtTablaCliente.setModel(auxModel);
+        return jtTablaCliente.getModel();
+    }
+
+    public int getFilaSeleccionadaCliente()
+    {
+        return jtTablaCliente.getSelectedRow();
     }
 
     public void deseleccionarFilaTablaCliente()

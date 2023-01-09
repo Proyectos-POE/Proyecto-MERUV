@@ -12,27 +12,27 @@ import java.util.ArrayList;
 public class ControladorMercado
 {
     private final Empresa superMercadoUV;
-    private final VentanaMercado a;
+    private final VentanaMercado ventanaMercado;
 
     public ControladorMercado(Empresa auxEmpresa, VentanaMercado auxA)
     {
         this.superMercadoUV = auxEmpresa;
-        this.a = auxA;
-        a.setVisible(true);
+        this.ventanaMercado = auxA;
+        ventanaMercado.setVisible(true);
 
         //----------|Cliente|----------//
         ClienteListener clienteListener = new ClienteListener();
-        this.a.addBtnAgregarClienteListener(clienteListener);
-        this.a.addBtnEditarClienteListener(clienteListener);
-        this.a.addBtnEliminarClienteListener(clienteListener);
+        this.ventanaMercado.addBtnAgregarClienteListener(clienteListener);
+        this.ventanaMercado.addBtnEditarClienteListener(clienteListener);
+        this.ventanaMercado.addBtnEliminarClienteListener(clienteListener);
     }
 
-    //==========|Clientes|==========//
+    //----------|Clientes|----------//
     private boolean comprobarCamposCliente()
     {
         boolean camposValido;
         camposValido = true;
-        if(a.getNombreCliente().equals("") || a.getNitCliente().equals("") || a.getTelefonoCliente().equals("") || a.getDireccionCliente().equals(""))
+        if(ventanaMercado.getNombreCliente().equals("") || ventanaMercado.getNitCliente().equals("") || ventanaMercado.getTelefonoCliente().equals("") || ventanaMercado.getDireccionCliente().equals(""))
         {
             camposValido = false;
         }
@@ -64,7 +64,7 @@ public class ControladorMercado
         long auxTelefono = auxCliente.getTelefono();
         String auxDireccion = auxCliente.getDireccion();
 
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) a.getModelTablaCliente();
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaCliente();
         auxModeloTabla.addRow(new Object[]{auxId, auxNit, auxNombre, auxTelefono, auxDireccion});
     }
 
@@ -76,8 +76,8 @@ public class ControladorMercado
         long auxTelefono = auxCliente.getTelefono();
         String auxDireccion = auxCliente.getDireccion();
 
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) a.getModelTablaCliente();
-        int auxFila = a.getFilaSeleccionadaCliente();
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaCliente();
+        int auxFila = ventanaMercado.getFilaSeleccionadaCliente();
 
         auxModeloTabla.setValueAt(auxId, auxFila, 0);
         auxModeloTabla.setValueAt(auxNit, auxFila, 1);
@@ -88,8 +88,8 @@ public class ControladorMercado
 
     private void listarClientesEliminar()
     {
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) a.getModelTablaCliente();
-        int auxFila = a.getFilaSeleccionadaCliente();
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaCliente();
+        int auxFila = ventanaMercado.getFilaSeleccionadaCliente();
         auxModeloTabla.removeRow(auxFila);
     }
 
@@ -102,54 +102,54 @@ public class ControladorMercado
         long auxTelefono;
         String auxDireccion;
 
-        auxId = Integer.parseInt(a.getIdCliente());
+        auxId = Integer.parseInt(ventanaMercado.getIdCliente());
         if(auxId == 0)
         {
             if(comprobarCamposCliente())
             {
                 try
                 {
-                    auxNIT = Long.parseLong(a.getNitCliente());
-                    auxNombre = a.getNombreCliente();
-                    auxTelefono = Long.parseLong(a.getTelefonoCliente());
-                    auxDireccion = a.getDireccionCliente();
+                    auxNIT = Long.parseLong(ventanaMercado.getNitCliente());
+                    auxNombre = ventanaMercado.getNombreCliente();
+                    auxTelefono = Long.parseLong(ventanaMercado.getTelefonoCliente());
+                    auxDireccion = ventanaMercado.getDireccionCliente();
 
                     if(comprobarNITCliente(0 ,auxNIT))
                     {
                         auxCliente = new Cliente(auxNIT, auxNombre, auxTelefono, auxDireccion);
                         if(superMercadoUV.agregarCliente(auxCliente))
                         {
-                            a.mostarMensaje("Cliente agregado con exito");
-                            a.setIdCliente("0");
-                            a.setNitCliente("");
-                            a.setNombreCliente("");
-                            a.setTelefonoCliente("");
-                            a.setDireccionCliente("");
+                            ventanaMercado.mostarMensaje("Cliente agregado con exito");
+                            ventanaMercado.setIdCliente("0");
+                            ventanaMercado.setNitCliente("");
+                            ventanaMercado.setNombreCliente("");
+                            ventanaMercado.setTelefonoCliente("");
+                            ventanaMercado.setDireccionCliente("");
                             listarClientesAgregar(auxCliente);
                         }
                         else
                         {
-                            a.mostarMensajeError("Cliente agregado sin exito");
+                            ventanaMercado.mostarMensajeError("Cliente agregado sin exito");
                         }
                     }
                     else
                     {
-                        a.mostarMensajeError("NIT ya registrado");
+                        ventanaMercado.mostarMensajeError("NIT ya registrado");
                     }
                 }
                 catch (NumberFormatException e)
                 {
-                    a.mostarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
+                    ventanaMercado.mostarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
             else
             {
-                a.mostarMensajeError("Rellene todos los campos");
+                ventanaMercado.mostarMensajeError("Rellene todos los campos");
             }
         }
         else
         {
-            a.mostarMensajeError("Deseleccione el cliente");
+            ventanaMercado.mostarMensajeError("Deseleccione el cliente");
         }
 
     }
@@ -163,7 +163,7 @@ public class ControladorMercado
         long auxTelefono;
         String auxDireccion;
 
-        auxId = Integer.parseInt(a.getIdCliente());
+        auxId = Integer.parseInt(ventanaMercado.getIdCliente());
         auxCliente = superMercadoUV.getCliente(auxId);
 
         if(auxCliente != null)
@@ -172,10 +172,10 @@ public class ControladorMercado
             {
                 try
                 {
-                    auxNIT = Long.parseLong(a.getNitCliente());
-                    auxNombre = a.getNombreCliente();
-                    auxTelefono = Long.parseLong(a.getTelefonoCliente());
-                    auxDireccion = a.getDireccionCliente();
+                    auxNIT = Long.parseLong(ventanaMercado.getNitCliente());
+                    auxNombre = ventanaMercado.getNombreCliente();
+                    auxTelefono = Long.parseLong(ventanaMercado.getTelefonoCliente());
+                    auxDireccion = ventanaMercado.getDireccionCliente();
 
                     if(comprobarNITCliente(auxId, auxNIT))
                     {
@@ -186,38 +186,38 @@ public class ControladorMercado
 
                         if(superMercadoUV.actualizarCliente(auxCliente))
                         {
-                            a.mostarMensaje("Cliente editado con exito");
-                            a.setIdCliente("0");
-                            a.setNitCliente("");
-                            a.setNombreCliente("");
-                            a.setTelefonoCliente("");
-                            a.setDireccionCliente("");
+                            ventanaMercado.mostarMensaje("Cliente editado con exito");
+                            ventanaMercado.setIdCliente("0");
+                            ventanaMercado.setNitCliente("");
+                            ventanaMercado.setNombreCliente("");
+                            ventanaMercado.setTelefonoCliente("");
+                            ventanaMercado.setDireccionCliente("");
                             listarClientesEditar(auxCliente);
-                            a.deseleccionarFilaTablaCliente();
+                            ventanaMercado.deseleccionarFilaTablaCliente();
                         }
                         else
                         {
-                            a.mostarMensajeError("Cliente editado sin exito");
+                            ventanaMercado.mostarMensajeError("Cliente editado sin exito");
                         }
                     }
                     else
                     {
-                        a.mostarMensajeError("NIT ya registrado");
+                        ventanaMercado.mostarMensajeError("NIT ya registrado");
                     }
                 }
                 catch (NumberFormatException e)
                 {
-                    a.mostarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
+                    ventanaMercado.mostarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
             else
             {
-                a.mostarMensajeError("Rellene todos los campos");
+                ventanaMercado.mostarMensajeError("Rellene todos los campos");
             }
         }
         else
         {
-            a.mostarMensajeError("Seleccione a un cliente");
+            ventanaMercado.mostarMensajeError("Seleccione a un cliente");
         }
     }
 
@@ -225,30 +225,30 @@ public class ControladorMercado
     {
         Cliente auxCliente;
         int auxId;
-        auxId = Integer.parseInt(a.getIdCliente());
+        auxId = Integer.parseInt(ventanaMercado.getIdCliente());
         auxCliente = superMercadoUV.getCliente(auxId);
 
         if(auxCliente != null)
         {
             if(superMercadoUV.eliminarCliente(auxCliente))
             {
-                a.mostarMensaje("Cliente eliminado con exito");
-                a.setIdCliente("0");
-                a.setNitCliente("");
-                a.setNombreCliente("");
-                a.setTelefonoCliente("");
-                a.setDireccionCliente("");
+                ventanaMercado.mostarMensaje("Cliente eliminado con exito");
+                ventanaMercado.setIdCliente("0");
+                ventanaMercado.setNitCliente("");
+                ventanaMercado.setNombreCliente("");
+                ventanaMercado.setTelefonoCliente("");
+                ventanaMercado.setDireccionCliente("");
                 listarClientesEliminar();
-                a.deseleccionarFilaTablaCliente();
+                ventanaMercado.deseleccionarFilaTablaCliente();
             }
             else
             {
-                a.mostarMensajeError("Cliente eliminado sin exito");
+                ventanaMercado.mostarMensajeError("Cliente eliminado sin exito");
             }
         }
         else
         {
-            a.mostarMensajeError("Seleccione a un cliente");
+            ventanaMercado.mostarMensajeError("Seleccione a un cliente");
         }
     }
 
