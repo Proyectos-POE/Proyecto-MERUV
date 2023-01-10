@@ -4,15 +4,27 @@
  */
 package vista;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author Nicolas Herrera
@@ -28,7 +40,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         this.addBotonesPrincipalListener(new CambiarPaginaListener());
         this.addBotonesPrincipalColorListener(new ManejadoraDeMouse());
         this.addBotonesFormularioListener(new BotonesFormularioListener());
+
         this.addTablaClienteListener(new TablaClienteListener());
+        this.addTablaProveedorListener(new TablaProveedorListener());
+        this.addTablaInventarioListener(new TablaProductoListener());
+        this.addTablaComprarListener(new TablaComprarListener());
     }
 
     /**
@@ -42,19 +58,19 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpBotones = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnClientes = new JButton();
+        btnClientes = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnProveedores = new JButton();
+        btnProveedores = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnInventario = new JButton();
+        btnInventario = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnComprar = new JButton();
+        btnComprar = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnVender = new JButton();
+        btnVender = new javax.swing.JButton();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnCompras = new JButton();
+        btnCompras = new javax.swing.JButton();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        btnVentas = new JButton();
+        btnVentas = new javax.swing.JButton();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jpPrincipal = new javax.swing.JPanel();
         jpInicial = new javax.swing.JPanel();
@@ -71,11 +87,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         lblDireccionCliente = new javax.swing.JLabel();
         txtDireccionCliente = new javax.swing.JTextField();
         jspTablaCliente = new javax.swing.JScrollPane();
-        jtTablaCliente = new JTable();
+        jtTablaCliente = new javax.swing.JTable();
         jpBotonesCliente = new javax.swing.JPanel();
-        btnAgregarCliente = new JButton();
-        btnEditarCliente = new JButton();
-        btnEliminarCliente = new JButton();
+        btnAgregarCliente = new javax.swing.JButton();
+        btnEditarCliente = new javax.swing.JButton();
+        btnEliminarCliente = new javax.swing.JButton();
         jpProveedor = new javax.swing.JPanel();
         jpFormularioProveedor = new javax.swing.JPanel();
         txtIdProveedor = new javax.swing.JTextField();
@@ -90,11 +106,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         lblRazonSocialProveedor = new javax.swing.JLabel();
         txtRazonSocialProveedor = new javax.swing.JTextField();
         jspTablaProveedor = new javax.swing.JScrollPane();
-        jtTablaProveedor = new JTable();
+        jtTablaProveedor = new javax.swing.JTable();
         jpBotonesProveedor = new javax.swing.JPanel();
-        btnAgregarProveedor = new JButton();
-        btnEditarProveedor = new JButton();
-        btnEliminarProveedor = new JButton();
+        btnAgregarProveedor = new javax.swing.JButton();
+        btnEditarProveedor = new javax.swing.JButton();
+        btnEliminarProveedor = new javax.swing.JButton();
         jpInventario = new javax.swing.JPanel();
         jpFormularioInventario = new javax.swing.JPanel();
         txtIdProducto = new javax.swing.JTextField();
@@ -102,19 +118,18 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtCodigoProducto = new javax.swing.JTextField();
         lblNombreProducto = new javax.swing.JLabel();
         txtNombreProducto = new javax.swing.JTextField();
-        lblPrecioCompraProducto = new javax.swing.JLabel();
-        txtPrecioCompraProducto = new javax.swing.JTextField();
         lblPrecioVentaProducto = new javax.swing.JLabel();
         txtPrecioVentaProducto = new javax.swing.JTextField();
         lblStockProducto = new javax.swing.JLabel();
         txtStockProducto = new javax.swing.JTextField();
-        lblProveedorInventario = new javax.swing.JLabel();
-        txtProveedorProducto = new javax.swing.JTextField();
+        lblCategoriaProducto = new javax.swing.JLabel();
+        jcbCategoriaProducto = new javax.swing.JComboBox<>();
         jspTablaInventario = new javax.swing.JScrollPane();
-        jtTablaInventario = new JTable();
+        jtTablaInventario = new javax.swing.JTable();
         jpBotonesInventario = new javax.swing.JPanel();
-        btnEditarProducto = new JButton();
-        btnEliminarProducto = new JButton();
+        btnAgregarProducto = new javax.swing.JButton();
+        btnEditarProducto = new javax.swing.JButton();
+        btnEliminarProducto = new javax.swing.JButton();
         jpComprar = new javax.swing.JPanel();
         jpFormularioComprar = new javax.swing.JPanel();
         lblCodigoCompra = new javax.swing.JLabel();
@@ -123,19 +138,19 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreComprar = new javax.swing.JTextField();
         lblPrecioCompraComprar = new javax.swing.JLabel();
         txtPrecioCompraComprar = new javax.swing.JTextField();
-        lblPrecioVentaComprar = new javax.swing.JLabel();
-        txtPrecioVentaComprar = new javax.swing.JTextField();
         lblStockComprar = new javax.swing.JLabel();
         txtStockComprar = new javax.swing.JTextField();
+        lblCategoriaComprar = new javax.swing.JLabel();
+        txtCategoriaComprar = new javax.swing.JTextField();
         lblProveedorComprar = new javax.swing.JLabel();
         jcbProveedorComprar = new javax.swing.JComboBox<>();
         jspTablaComprar = new javax.swing.JScrollPane();
-        jtTablaComprar = new JTable();
+        jtTablaComprar = new javax.swing.JTable();
         jpInferiorComprar = new javax.swing.JPanel();
         jpBotonesComprar = new javax.swing.JPanel();
-        btnAgregarCompra = new JButton();
-        btnRealizarCompra = new JButton();
-        btnEliminarCompra = new JButton();
+        btnAgregarCompra = new javax.swing.JButton();
+        btnRealizarCompra = new javax.swing.JButton();
+        btnEliminarCompra = new javax.swing.JButton();
         jpValoresTotales = new javax.swing.JPanel();
         lblProductosTotalesComprar = new javax.swing.JLabel();
         lblPrecioTotalComprar = new javax.swing.JLabel();
@@ -148,12 +163,12 @@ public class VentanaMercado extends javax.swing.JFrame {
         lblClienteVender = new javax.swing.JLabel();
         jcbClienteVender = new javax.swing.JComboBox<>();
         jspTablaVender = new javax.swing.JScrollPane();
-        jtTablaVender = new JTable();
+        jtTablaVender = new javax.swing.JTable();
         jpInferiorVender = new javax.swing.JPanel();
         jpBotonesVender = new javax.swing.JPanel();
-        btnAgregarVenta = new JButton();
-        btnRealizarVenta = new JButton();
-        btnEliminarVenta = new JButton();
+        btnAgregarVenta = new javax.swing.JButton();
+        btnRealizarVenta = new javax.swing.JButton();
+        btnEliminarVenta = new javax.swing.JButton();
         jpValoresTotalesVenta = new javax.swing.JPanel();
         lblProductosTotalesVender = new javax.swing.JLabel();
         lblPrecioTotalVender = new javax.swing.JLabel();
@@ -161,14 +176,14 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpSuperiorCompras = new javax.swing.JPanel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jspTablaCompras = new javax.swing.JScrollPane();
-        jtTablaCompras = new JTable();
+        jtTablaCompras = new javax.swing.JTable();
         jpInferiorCompras = new javax.swing.JPanel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jpVentas = new javax.swing.JPanel();
         jpSuperiorVentas = new javax.swing.JPanel();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jspTablaVentas = new javax.swing.JScrollPane();
-        jtTablaVentas = new JTable();
+        jtTablaVentas = new javax.swing.JTable();
         jpInferiorVentas = new javax.swing.JPanel();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jpEncabezado = new javax.swing.JPanel();
@@ -181,27 +196,27 @@ public class VentanaMercado extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1700, 900));
         setState(Frame.NORMAL);
 
-        jpBotones.setBackground(new Color(52, 73, 85));
-        jpBotones.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        jpBotones.setBackground(new java.awt.Color(52, 73, 85));
+        jpBotones.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
         jpBotones.setLayout(new javax.swing.BoxLayout(jpBotones, javax.swing.BoxLayout.Y_AXIS));
         jpBotones.add(filler6);
 
-        btnClientes.setBackground(new Color(249, 170, 51));
-        btnClientes.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnClientes.setForeground(new Color(255, 255, 255));
-        btnClientes.setIcon(new ImageIcon(getClass().getResource("/cliente.png"))); // NOI18N
+        btnClientes.setBackground(new java.awt.Color(249, 170, 51));
+        btnClientes.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente.png"))); // NOI18N
         btnClientes.setText("CLIENTES");
         btnClientes.setToolTipText("");
         btnClientes.setBorderPainted(false);
         btnClientes.setContentAreaFilled(false);
         btnClientes.setFocusable(false);
-        btnClientes.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
+        btnClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnClientesMouseEntered(evt);
             }
         });
-        btnClientes.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClientesActionPerformed(evt);
             }
         });
@@ -210,16 +225,16 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpBotones.add(btnClientes);
         jpBotones.add(filler4);
 
-        btnProveedores.setBackground(new Color(249, 170, 51));
-        btnProveedores.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnProveedores.setForeground(new Color(255, 255, 255));
-        btnProveedores.setIcon(new ImageIcon(getClass().getResource("/proveedor.png"))); // NOI18N
+        btnProveedores.setBackground(new java.awt.Color(249, 170, 51));
+        btnProveedores.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnProveedores.setForeground(new java.awt.Color(255, 255, 255));
+        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proveedor.png"))); // NOI18N
         btnProveedores.setText("PROVEEDORES");
         btnProveedores.setBorderPainted(false);
         btnProveedores.setContentAreaFilled(false);
         btnProveedores.setFocusable(false);
-        btnProveedores.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProveedoresActionPerformed(evt);
             }
         });
@@ -228,10 +243,10 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpBotones.add(btnProveedores);
         jpBotones.add(filler3);
 
-        btnInventario.setBackground(new Color(249, 170, 51));
-        btnInventario.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnInventario.setForeground(new Color(255, 255, 255));
-        btnInventario.setIcon(new ImageIcon(getClass().getResource("/inventario.png"))); // NOI18N
+        btnInventario.setBackground(new java.awt.Color(249, 170, 51));
+        btnInventario.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnInventario.setForeground(new java.awt.Color(255, 255, 255));
+        btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inventario.png"))); // NOI18N
         btnInventario.setText("INVENTARIO");
         btnInventario.setBorderPainted(false);
         btnInventario.setContentAreaFilled(false);
@@ -241,17 +256,17 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpBotones.add(btnInventario);
         jpBotones.add(filler2);
 
-        btnComprar.setBackground(new Color(249, 170, 51));
-        btnComprar.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnComprar.setForeground(new Color(255, 255, 255));
-        btnComprar.setIcon(new ImageIcon(getClass().getResource("/compra.png"))); // NOI18N
+        btnComprar.setBackground(new java.awt.Color(249, 170, 51));
+        btnComprar.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnComprar.setForeground(new java.awt.Color(255, 255, 255));
+        btnComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compra.png"))); // NOI18N
         btnComprar.setText("COMPRAR");
         btnComprar.setToolTipText("");
         btnComprar.setBorderPainted(false);
         btnComprar.setContentAreaFilled(false);
         btnComprar.setFocusable(false);
-        btnComprar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
             }
         });
@@ -260,16 +275,16 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpBotones.add(btnComprar);
         jpBotones.add(filler1);
 
-        btnVender.setBackground(new Color(249, 170, 51));
-        btnVender.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnVender.setForeground(new Color(255, 255, 255));
-        btnVender.setIcon(new ImageIcon(getClass().getResource("/venta.png"))); // NOI18N
+        btnVender.setBackground(new java.awt.Color(249, 170, 51));
+        btnVender.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnVender.setForeground(new java.awt.Color(255, 255, 255));
+        btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/venta.png"))); // NOI18N
         btnVender.setText("VENDER");
         btnVender.setBorderPainted(false);
         btnVender.setContentAreaFilled(false);
         btnVender.setFocusable(false);
-        btnVender.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVenderActionPerformed(evt);
             }
         });
@@ -278,10 +293,10 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpBotones.add(btnVender);
         jpBotones.add(filler5);
 
-        btnCompras.setBackground(new Color(249, 170, 51));
-        btnCompras.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnCompras.setForeground(new Color(255, 255, 255));
-        btnCompras.setIcon(new ImageIcon(getClass().getResource("/factura.png"))); // NOI18N
+        btnCompras.setBackground(new java.awt.Color(249, 170, 51));
+        btnCompras.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnCompras.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factura.png"))); // NOI18N
         btnCompras.setText("COMPRAS");
         btnCompras.setBorderPainted(false);
         btnCompras.setContentAreaFilled(false);
@@ -291,16 +306,16 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpBotones.add(btnCompras);
         jpBotones.add(filler7);
 
-        btnVentas.setBackground(new Color(249, 170, 51));
-        btnVentas.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnVentas.setForeground(new Color(255, 255, 255));
-        btnVentas.setIcon(new ImageIcon(getClass().getResource("/factura.png"))); // NOI18N
+        btnVentas.setBackground(new java.awt.Color(249, 170, 51));
+        btnVentas.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnVentas.setForeground(new java.awt.Color(255, 255, 255));
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/factura.png"))); // NOI18N
         btnVentas.setText("VENTAS");
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
         btnVentas.setFocusable(false);
-        btnVentas.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentasActionPerformed(evt);
             }
         });
@@ -311,18 +326,18 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         getContentPane().add(jpBotones, java.awt.BorderLayout.WEST);
 
-        jpPrincipal.setLayout(new CardLayout());
+        jpPrincipal.setLayout(new java.awt.CardLayout());
 
         jpInicial.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 150));
 
-        jLabel1.setIcon(new ImageIcon(getClass().getResource("/tienda.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tienda.png"))); // NOI18N
         jpInicial.add(jLabel1);
 
         jpPrincipal.add(jpInicial, "inicial");
 
         jpCliente.setLayout(new java.awt.BorderLayout());
 
-        jpFormularioCliente.setBackground(new Color(74, 101, 114));
+        jpFormularioCliente.setBackground(new java.awt.Color(74, 101, 114));
         jpFormularioCliente.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         txtIdCliente.setEditable(false);
@@ -335,70 +350,66 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtIdCliente.setVisible(false);
         jpFormularioCliente.add(txtIdCliente);
 
-        lblNitCliente.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblNitCliente.setForeground(new Color(255, 255, 255));
+        lblNitCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblNitCliente.setForeground(new java.awt.Color(255, 255, 255));
         lblNitCliente.setText("NIT");
         jpFormularioCliente.add(lblNitCliente);
 
-        txtNitCliente.setColumns(15);
-        txtNitCliente.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        txtNitCliente.setColumns(10);
+        txtNitCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNitCliente.setToolTipText("");
-        txtNitCliente.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtNitCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNitCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNitCliente.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtNitCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtNitCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNitClienteActionPerformed(evt);
             }
         });
         jpFormularioCliente.add(txtNitCliente);
 
-        lblNombreCliente.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblNombreCliente.setForeground(new Color(255, 255, 255));
+        lblNombreCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblNombreCliente.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreCliente.setText("NOMBRE");
         jpFormularioCliente.add(lblNombreCliente);
 
-        txtNombreCliente.setColumns(15);
-        txtNombreCliente.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtNombreCliente.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtNombreCliente.setColumns(10);
+        txtNombreCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNombreCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreCliente.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtNombreCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreClienteActionPerformed(evt);
             }
         });
         jpFormularioCliente.add(txtNombreCliente);
 
-        lblTelefonoCliente.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblTelefonoCliente.setForeground(new Color(255, 255, 255));
+        lblTelefonoCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblTelefonoCliente.setForeground(new java.awt.Color(255, 255, 255));
         lblTelefonoCliente.setText("TELEFONO");
         jpFormularioCliente.add(lblTelefonoCliente);
 
-        txtTelefonoCliente.setColumns(15);
-        txtTelefonoCliente.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtTelefonoCliente.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtTelefonoCliente.setColumns(10);
+        txtTelefonoCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtTelefonoCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtTelefonoCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtTelefonoCliente.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtTelefonoCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtTelefonoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoClienteActionPerformed(evt);
             }
         });
         jpFormularioCliente.add(txtTelefonoCliente);
 
-        lblDireccionCliente.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblDireccionCliente.setForeground(new Color(255, 255, 255));
+        lblDireccionCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblDireccionCliente.setForeground(new java.awt.Color(255, 255, 255));
         lblDireccionCliente.setText("DIRECCION");
         jpFormularioCliente.add(lblDireccionCliente);
 
-        txtDireccionCliente.setColumns(15);
-        txtDireccionCliente.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtDireccionCliente.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtDireccionCliente.setColumns(10);
+        txtDireccionCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtDireccionCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtDireccionCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtDireccionCliente.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtDireccionCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtDireccionCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionClienteActionPerformed(evt);
             }
         });
@@ -407,9 +418,9 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpCliente.add(jpFormularioCliente, java.awt.BorderLayout.NORTH);
 
         jtTablaCliente.setDefaultEditor(Object.class, null);
-        jtTablaCliente.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        jtTablaCliente.getTableHeader().setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        jtTablaCliente.setModel(new DefaultTableModel(
+        jtTablaCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaCliente.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jtTablaCliente.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
                         "ID","NIT", "NOMBRE", "TELEFONO", "DIRECCION"
@@ -424,33 +435,33 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpCliente.add(jspTablaCliente, java.awt.BorderLayout.CENTER);
 
-        jpBotonesCliente.setBackground(new Color(74, 101, 114));
+        jpBotonesCliente.setBackground(new java.awt.Color(74, 101, 114));
         jpBotonesCliente.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 15));
 
-        btnAgregarCliente.setBackground(new Color(0, 102, 51));
-        btnAgregarCliente.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnAgregarCliente.setForeground(new Color(255, 255, 255));
+        btnAgregarCliente.setBackground(new java.awt.Color(0, 102, 51));
+        btnAgregarCliente.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnAgregarCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarCliente.setText("AGREGAR");
         btnAgregarCliente.setBorderPainted(false);
         btnAgregarCliente.setFocusable(false);
         jpBotonesCliente.add(btnAgregarCliente);
 
-        btnEditarCliente.setBackground(new Color(249, 170, 51));
-        btnEditarCliente.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEditarCliente.setForeground(new Color(255, 255, 255));
+        btnEditarCliente.setBackground(new java.awt.Color(249, 170, 51));
+        btnEditarCliente.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEditarCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarCliente.setText("EDITAR");
         btnEditarCliente.setBorderPainted(false);
         btnEditarCliente.setFocusable(false);
-        btnEditarCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnEditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarClienteActionPerformed(evt);
             }
         });
         jpBotonesCliente.add(btnEditarCliente);
 
-        btnEliminarCliente.setBackground(new Color(102, 0, 0));
-        btnEliminarCliente.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEliminarCliente.setForeground(new Color(255, 255, 255));
+        btnEliminarCliente.setBackground(new java.awt.Color(102, 0, 0));
+        btnEliminarCliente.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEliminarCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarCliente.setText("ELIMINAR");
         btnEliminarCliente.setBorderPainted(false);
         btnEliminarCliente.setFocusable(false);
@@ -462,7 +473,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpProveedor.setLayout(new java.awt.BorderLayout());
 
-        jpFormularioProveedor.setBackground(new Color(74, 101, 114));
+        jpFormularioProveedor.setBackground(new java.awt.Color(74, 101, 114));
         jpFormularioProveedor.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         txtIdProveedor.setEditable(false);
@@ -475,93 +486,90 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtIdProveedor.setVisible(false);
         jpFormularioProveedor.add(txtIdProveedor);
 
-        lblNitProveedor.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblNitProveedor.setForeground(new Color(255, 255, 255));
+        lblNitProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblNitProveedor.setForeground(new java.awt.Color(255, 255, 255));
         lblNitProveedor.setText("NIT");
         lblNitProveedor.setMinimumSize(new java.awt.Dimension(21, 23));
         lblNitProveedor.setPreferredSize(new java.awt.Dimension(21, 23));
         jpFormularioProveedor.add(lblNitProveedor);
 
-        txtNitProveedor.setColumns(15);
-        txtNitProveedor.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        txtNitProveedor.setColumns(10);
+        txtNitProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNitProveedor.setToolTipText("");
-        txtNitProveedor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtNitProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNitProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNitProveedor.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtNitProveedor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtNitProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNitProveedorActionPerformed(evt);
             }
         });
         jpFormularioProveedor.add(txtNitProveedor);
 
-        lblNombreProveedor.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblNombreProveedor.setForeground(new Color(255, 255, 255));
+        lblNombreProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblNombreProveedor.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreProveedor.setText("NOMBRE");
         jpFormularioProveedor.add(lblNombreProveedor);
 
-        txtNombreProveedor.setColumns(15);
-        txtNombreProveedor.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtNombreProveedor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtNombreProveedor.setColumns(10);
+        txtNombreProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNombreProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreProveedor.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtNombreProveedor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtNombreProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreProveedorActionPerformed(evt);
             }
         });
         jpFormularioProveedor.add(txtNombreProveedor);
 
-        lblTelefonoProveedor.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblTelefonoProveedor.setForeground(new Color(255, 255, 255));
+        lblTelefonoProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblTelefonoProveedor.setForeground(new java.awt.Color(255, 255, 255));
         lblTelefonoProveedor.setText("TELEFONO");
         jpFormularioProveedor.add(lblTelefonoProveedor);
 
-        txtTelefonoProveedor.setColumns(15);
-        txtTelefonoProveedor.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtTelefonoProveedor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtTelefonoProveedor.setColumns(10);
+        txtTelefonoProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtTelefonoProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtTelefonoProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtTelefonoProveedor.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtTelefonoProveedor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtTelefonoProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoProveedorActionPerformed(evt);
             }
         });
         jpFormularioProveedor.add(txtTelefonoProveedor);
 
-        lblDireccionProveedor.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblDireccionProveedor.setForeground(new Color(255, 255, 255));
+        lblDireccionProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblDireccionProveedor.setForeground(new java.awt.Color(255, 255, 255));
         lblDireccionProveedor.setText("DIRECCION");
         jpFormularioProveedor.add(lblDireccionProveedor);
 
-        txtDireccionProveedor.setColumns(15);
-        txtDireccionProveedor.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtDireccionProveedor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtDireccionProveedor.setColumns(10);
+        txtDireccionProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtDireccionProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtDireccionProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtDireccionProveedor.setPreferredSize(new java.awt.Dimension(199, 23));
-        txtDireccionProveedor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtDireccionProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionProveedorActionPerformed(evt);
             }
         });
         jpFormularioProveedor.add(txtDireccionProveedor);
 
-        lblRazonSocialProveedor.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblRazonSocialProveedor.setForeground(new Color(255, 255, 255));
+        lblRazonSocialProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblRazonSocialProveedor.setForeground(new java.awt.Color(255, 255, 255));
         lblRazonSocialProveedor.setText("RAZON SOCIAL");
         jpFormularioProveedor.add(lblRazonSocialProveedor);
 
-        txtRazonSocialProveedor.setColumns(15);
-        txtRazonSocialProveedor.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtRazonSocialProveedor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtRazonSocialProveedor.setColumns(10);
+        txtRazonSocialProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtRazonSocialProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtRazonSocialProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtRazonSocialProveedor.setPreferredSize(new java.awt.Dimension(199, 23));
         jpFormularioProveedor.add(txtRazonSocialProveedor);
 
         jpProveedor.add(jpFormularioProveedor, java.awt.BorderLayout.NORTH);
 
-        jtTablaProveedor.getTableHeader().setFont(new Font("Montserrat", 1, 12));
-        jtTablaProveedor.setModel(new DefaultTableModel(
+        jtTablaProveedor.setDefaultEditor(Object.class, null);
+        jtTablaProveedor.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12));
+        jtTablaProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaProveedor.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
                         "ID","NIT", "NOMBRE", "TELEFONO", "DIRECCION", "RAZON SOCIAL"
@@ -573,33 +581,33 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpProveedor.add(jspTablaProveedor, java.awt.BorderLayout.CENTER);
 
-        jpBotonesProveedor.setBackground(new Color(74, 101, 114));
+        jpBotonesProveedor.setBackground(new java.awt.Color(74, 101, 114));
         jpBotonesProveedor.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 15));
 
-        btnAgregarProveedor.setBackground(new Color(0, 102, 51));
-        btnAgregarProveedor.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnAgregarProveedor.setForeground(new Color(255, 255, 255));
+        btnAgregarProveedor.setBackground(new java.awt.Color(0, 102, 51));
+        btnAgregarProveedor.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnAgregarProveedor.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProveedor.setText("AGREGAR");
         btnAgregarProveedor.setBorderPainted(false);
         btnAgregarProveedor.setFocusable(false);
         jpBotonesProveedor.add(btnAgregarProveedor);
 
-        btnEditarProveedor.setBackground(new Color(249, 170, 51));
-        btnEditarProveedor.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEditarProveedor.setForeground(new Color(255, 255, 255));
+        btnEditarProveedor.setBackground(new java.awt.Color(249, 170, 51));
+        btnEditarProveedor.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEditarProveedor.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarProveedor.setText("EDITAR");
         btnEditarProveedor.setBorderPainted(false);
         btnEditarProveedor.setFocusable(false);
-        btnEditarProveedor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnEditarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProveedorActionPerformed(evt);
             }
         });
         jpBotonesProveedor.add(btnEditarProveedor);
 
-        btnEliminarProveedor.setBackground(new Color(102, 0, 0));
-        btnEliminarProveedor.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEliminarProveedor.setForeground(new Color(255, 255, 255));
+        btnEliminarProveedor.setBackground(new java.awt.Color(102, 0, 0));
+        btnEliminarProveedor.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEliminarProveedor.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarProveedor.setText("ELIMINAR");
         btnEliminarProveedor.setBorderPainted(false);
         btnEliminarProveedor.setFocusable(false);
@@ -611,11 +619,13 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpInventario.setLayout(new java.awt.BorderLayout());
 
-        jpFormularioInventario.setBackground(new Color(74, 101, 114));
+        jpFormularioInventario.setBackground(new java.awt.Color(74, 101, 114));
+        jpFormularioInventario.setPreferredSize(new java.awt.Dimension(1456, 53));
         jpFormularioInventario.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         txtIdProducto.setEditable(false);
         txtIdProducto.setText("0");
+        txtIdProducto.setToolTipText("");
         txtIdProducto.setEnabled(false);
         txtIdProducto.setFocusable(false);
         txtIdProducto.setMinimumSize(new java.awt.Dimension(80, 23));
@@ -624,135 +634,123 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtIdProducto.setVisible(false);
         jpFormularioInventario.add(txtIdProducto);
 
-        lblCodigoProducto.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblCodigoProducto.setForeground(new Color(255, 255, 255));
+        lblCodigoProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblCodigoProducto.setForeground(new java.awt.Color(255, 255, 255));
         lblCodigoProducto.setText("CODIGO");
         jpFormularioInventario.add(lblCodigoProducto);
 
         txtCodigoProducto.setColumns(10);
-        txtCodigoProducto.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        txtCodigoProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtCodigoProducto.setToolTipText("");
-        txtCodigoProducto.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtCodigoProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtCodigoProducto.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtCodigoProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtCodigoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoProductoActionPerformed(evt);
             }
         });
         jpFormularioInventario.add(txtCodigoProducto);
 
-        lblNombreProducto.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblNombreProducto.setForeground(new Color(255, 255, 255));
+        lblNombreProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblNombreProducto.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreProducto.setText("NOMBRE");
         jpFormularioInventario.add(lblNombreProducto);
 
         txtNombreProducto.setColumns(10);
-        txtNombreProducto.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtNombreProducto.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtNombreProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNombreProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreProducto.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtNombreProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreProductoActionPerformed(evt);
             }
         });
         jpFormularioInventario.add(txtNombreProducto);
 
-        lblPrecioCompraProducto.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblPrecioCompraProducto.setForeground(new Color(255, 255, 255));
-        lblPrecioCompraProducto.setText("PRECIO COMPRA");
-        jpFormularioInventario.add(lblPrecioCompraProducto);
-
-        txtPrecioCompraProducto.setColumns(10);
-        txtPrecioCompraProducto.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtPrecioCompraProducto.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        txtPrecioCompraProducto.setEnabled(false);
-        txtPrecioCompraProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioCompraProducto.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtPrecioCompraProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                txtPrecioCompraProductoActionPerformed(evt);
-            }
-        });
-        jpFormularioInventario.add(txtPrecioCompraProducto);
-
-        lblPrecioVentaProducto.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblPrecioVentaProducto.setForeground(new Color(255, 255, 255));
+        lblPrecioVentaProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblPrecioVentaProducto.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioVentaProducto.setText("PRECIO VENTA");
         jpFormularioInventario.add(lblPrecioVentaProducto);
 
         txtPrecioVentaProducto.setColumns(10);
-        txtPrecioVentaProducto.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtPrecioVentaProducto.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtPrecioVentaProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtPrecioVentaProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioVentaProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioVentaProducto.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtPrecioVentaProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtPrecioVentaProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioVentaProductoActionPerformed(evt);
             }
         });
         jpFormularioInventario.add(txtPrecioVentaProducto);
 
-        lblStockProducto.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblStockProducto.setForeground(new Color(255, 255, 255));
+        lblStockProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblStockProducto.setForeground(new java.awt.Color(255, 255, 255));
         lblStockProducto.setText("STOCK");
         jpFormularioInventario.add(lblStockProducto);
 
         txtStockProducto.setColumns(10);
-        txtStockProducto.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtStockProducto.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtStockProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtStockProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtStockProducto.setPreferredSize(new java.awt.Dimension(134, 23));
         jpFormularioInventario.add(txtStockProducto);
 
-        lblProveedorInventario.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblProveedorInventario.setForeground(new Color(255, 255, 255));
-        lblProveedorInventario.setText("PROVEEDOR");
-        jpFormularioInventario.add(lblProveedorInventario);
+        lblCategoriaProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblCategoriaProducto.setForeground(new java.awt.Color(255, 255, 255));
+        lblCategoriaProducto.setText("CATEGORIA");
+        jpFormularioInventario.add(lblCategoriaProducto);
 
-        txtProveedorProducto.setColumns(10);
-        txtProveedorProducto.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtProveedorProducto.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        txtProveedorProducto.setEnabled(false);
-        txtProveedorProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtProveedorProducto.setPreferredSize(new java.awt.Dimension(134, 23));
-        jpFormularioInventario.add(txtProveedorProducto);
+        jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FRUTAS", "VERDURAS", "LACTEOS", "CARNES", "LIMPIEZA", "PROCESADOS" }));
+        jcbCategoriaProducto.setSelectedItem(null);
+        jcbCategoriaProducto.setMinimumSize(new java.awt.Dimension(134, 23));
+        jcbCategoriaProducto.setPreferredSize(new java.awt.Dimension(134, 23));
+        jpFormularioInventario.add(jcbCategoriaProducto);
 
         jpInventario.add(jpFormularioInventario, java.awt.BorderLayout.NORTH);
 
-        jtTablaInventario.getTableHeader().setFont(new Font("Montserrat", 1, 12));
-        jtTablaInventario.setModel(new DefaultTableModel(
+        jtTablaInventario.setDefaultEditor(Object.class, null);
+        jtTablaInventario.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12));
+        jtTablaInventario.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaInventario.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","CODIGO", "NOMBRE", "PRECIO COMPRA", "PRECIO VENTA", "STOCK", "PROVEEDOR"
+                        "ID","CODIGO", "NOMBRE", "PRECIO VENTA", "STOCK", "CATEGORIA"
                 }
         ));
+        DefaultTableModel a = (DefaultTableModel) jtTablaInventario.getModel();
+        a.addRow(new Object[]{1,1,1,1,1,"FRUTAS"});
         jtTablaInventario.getTableHeader().setResizingAllowed(false);
         jtTablaInventario.getTableHeader().setReorderingAllowed(false);
         jspTablaInventario.setViewportView(jtTablaInventario);
 
         jpInventario.add(jspTablaInventario, java.awt.BorderLayout.CENTER);
 
-        jpBotonesInventario.setBackground(new Color(74, 101, 114));
+        jpBotonesInventario.setBackground(new java.awt.Color(74, 101, 114));
         jpBotonesInventario.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 15));
 
-        btnEditarProducto.setBackground(new Color(249, 170, 51));
-        btnEditarProducto.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEditarProducto.setForeground(new Color(255, 255, 255));
+        btnAgregarProducto.setBackground(new java.awt.Color(0, 102, 51));
+        btnAgregarProducto.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnAgregarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarProducto.setText("AGREGAR");
+        btnAgregarProducto.setBorderPainted(false);
+        btnAgregarProducto.setFocusable(false);
+        jpBotonesInventario.add(btnAgregarProducto);
+
+        btnEditarProducto.setBackground(new java.awt.Color(249, 170, 51));
+        btnEditarProducto.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEditarProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarProducto.setText("EDITAR");
         btnEditarProducto.setBorderPainted(false);
         btnEditarProducto.setFocusable(false);
-        btnEditarProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProductoActionPerformed(evt);
             }
         });
         jpBotonesInventario.add(btnEditarProducto);
 
-        btnEliminarProducto.setBackground(new Color(102, 0, 0));
-        btnEliminarProducto.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEliminarProducto.setForeground(new Color(255, 255, 255));
+        btnEliminarProducto.setBackground(new java.awt.Color(102, 0, 0));
+        btnEliminarProducto.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEliminarProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarProducto.setText("ELIMINAR");
         btnEliminarProducto.setBorderPainted(false);
         btnEliminarProducto.setFocusable(false);
@@ -764,97 +762,93 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpComprar.setLayout(new java.awt.BorderLayout());
 
-        jpFormularioComprar.setBackground(new Color(74, 101, 114));
+        jpFormularioComprar.setBackground(new java.awt.Color(74, 101, 114));
         jpFormularioComprar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
-        lblCodigoCompra.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblCodigoCompra.setForeground(new Color(255, 255, 255));
+        lblCodigoCompra.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblCodigoCompra.setForeground(new java.awt.Color(255, 255, 255));
         lblCodigoCompra.setText("CODIGO");
         jpFormularioComprar.add(lblCodigoCompra);
 
         txtCodigoComprar.setColumns(10);
-        txtCodigoComprar.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        txtCodigoComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtCodigoComprar.setToolTipText("");
-        txtCodigoComprar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtCodigoComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoComprar.setMinimumSize(new java.awt.Dimension(4, 23));
         txtCodigoComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtCodigoComprar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtCodigoComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoComprarActionPerformed(evt);
             }
         });
         jpFormularioComprar.add(txtCodigoComprar);
 
-        lblNombreCompra.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblNombreCompra.setForeground(new Color(255, 255, 255));
+        lblNombreCompra.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblNombreCompra.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreCompra.setText("NOMBRE");
         jpFormularioComprar.add(lblNombreCompra);
 
+        txtNombreComprar.setEditable(false);
         txtNombreComprar.setColumns(10);
-        txtNombreComprar.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtNombreComprar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtNombreComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNombreComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreComprar.setMinimumSize(new java.awt.Dimension(4, 23));
         txtNombreComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtNombreComprar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtNombreComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreComprarActionPerformed(evt);
             }
         });
         jpFormularioComprar.add(txtNombreComprar);
 
-        lblPrecioCompraComprar.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblPrecioCompraComprar.setForeground(new Color(255, 255, 255));
+        lblPrecioCompraComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblPrecioCompraComprar.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioCompraComprar.setText("PRECIO COMPRA");
         jpFormularioComprar.add(lblPrecioCompraComprar);
 
         txtPrecioCompraComprar.setColumns(10);
-        txtPrecioCompraComprar.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtPrecioCompraComprar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtPrecioCompraComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtPrecioCompraComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioCompraComprar.setMinimumSize(new java.awt.Dimension(4, 23));
         txtPrecioCompraComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtPrecioCompraComprar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtPrecioCompraComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioCompraComprarActionPerformed(evt);
             }
         });
         jpFormularioComprar.add(txtPrecioCompraComprar);
 
-        lblPrecioVentaComprar.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblPrecioVentaComprar.setForeground(new Color(255, 255, 255));
-        lblPrecioVentaComprar.setText("PRECIO VENTA");
-        jpFormularioComprar.add(lblPrecioVentaComprar);
-
-        txtPrecioVentaComprar.setColumns(10);
-        txtPrecioVentaComprar.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtPrecioVentaComprar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        txtPrecioVentaComprar.setEnabled(false);
-        txtPrecioVentaComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioVentaComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        txtPrecioVentaComprar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                txtPrecioVentaComprarActionPerformed(evt);
-            }
-        });
-        jpFormularioComprar.add(txtPrecioVentaComprar);
-
-        lblStockComprar.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblStockComprar.setForeground(new Color(255, 255, 255));
+        lblStockComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblStockComprar.setForeground(new java.awt.Color(255, 255, 255));
         lblStockComprar.setText("STOCK");
         jpFormularioComprar.add(lblStockComprar);
 
         txtStockComprar.setColumns(10);
-        txtStockComprar.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtStockComprar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtStockComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtStockComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockComprar.setMinimumSize(new java.awt.Dimension(4, 23));
         txtStockComprar.setPreferredSize(new java.awt.Dimension(134, 23));
         jpFormularioComprar.add(txtStockComprar);
 
-        lblProveedorComprar.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblProveedorComprar.setForeground(new Color(255, 255, 255));
+        lblCategoriaComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblCategoriaComprar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCategoriaComprar.setText("CATEGORIA");
+        jpFormularioComprar.add(lblCategoriaComprar);
+
+        txtCategoriaComprar.setEditable(false);
+        txtCategoriaComprar.setColumns(10);
+        txtCategoriaComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtCategoriaComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtCategoriaComprar.setMinimumSize(new java.awt.Dimension(4, 23));
+        txtCategoriaComprar.setPreferredSize(new java.awt.Dimension(134, 23));
+        jpFormularioComprar.add(txtCategoriaComprar);
+
+        lblProveedorComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblProveedorComprar.setForeground(new java.awt.Color(255, 255, 255));
         lblProveedorComprar.setText("PROVEEDOR");
         jpFormularioComprar.add(lblProveedorComprar);
 
-        jcbProveedorComprar.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        jcbProveedorComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jcbProveedorComprar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Real Madrid", "Item 2", "Item 3", "Item 4" }));
         jcbProveedorComprar.setToolTipText("");
         jcbProveedorComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -864,59 +858,63 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpComprar.add(jpFormularioComprar, java.awt.BorderLayout.NORTH);
 
-        jtTablaComprar.getTableHeader().setFont(new Font("Montserrat", 1, 12));
-        jtTablaComprar.setModel(new DefaultTableModel(
+        jtTablaComprar.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12));
+        jtTablaComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaComprar.setDefaultEditor(Object.class, null);
+        jtTablaComprar.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","CODIGO", "NOMBRE", "PRECIO COMPRA", "PRECIO VENTA", "STOCK"
+                        "ID", "CODIGO", "NOMBRE", "PRECIO COMPRA","CATEGORIA", "STOCK"
                 }
         ));
+        DefaultTableModel b = (DefaultTableModel) jtTablaComprar.getModel();
+        b.addRow(new Object[]{1,1,1,1,1,1});
         jtTablaComprar.getTableHeader().setResizingAllowed(false);
         jtTablaComprar.getTableHeader().setReorderingAllowed(false);
         jspTablaComprar.setViewportView(jtTablaComprar);
 
         jpComprar.add(jspTablaComprar, java.awt.BorderLayout.CENTER);
 
-        jpInferiorComprar.setBackground(new Color(74, 101, 114));
+        jpInferiorComprar.setBackground(new java.awt.Color(74, 101, 114));
         jpInferiorComprar.setLayout(new java.awt.BorderLayout());
 
-        jpBotonesComprar.setBackground(new Color(74, 101, 114));
+        jpBotonesComprar.setBackground(new java.awt.Color(74, 101, 114));
         jpBotonesComprar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 15));
 
-        btnAgregarCompra.setBackground(new Color(0, 102, 51));
-        btnAgregarCompra.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnAgregarCompra.setForeground(new Color(255, 255, 255));
+        btnAgregarCompra.setBackground(new java.awt.Color(0, 102, 51));
+        btnAgregarCompra.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnAgregarCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarCompra.setText("AGREGAR");
         btnAgregarCompra.setBorderPainted(false);
         btnAgregarCompra.setFocusable(false);
-        btnAgregarCompra.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarCompraActionPerformed(evt);
             }
         });
         jpBotonesComprar.add(btnAgregarCompra);
 
-        btnRealizarCompra.setBackground(new Color(249, 170, 51));
-        btnRealizarCompra.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnRealizarCompra.setForeground(new Color(255, 255, 255));
+        btnRealizarCompra.setBackground(new java.awt.Color(249, 170, 51));
+        btnRealizarCompra.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnRealizarCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnRealizarCompra.setText("COMPRAR");
         btnRealizarCompra.setBorderPainted(false);
         btnRealizarCompra.setFocusable(false);
-        btnRealizarCompra.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnRealizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRealizarCompraActionPerformed(evt);
             }
         });
         jpBotonesComprar.add(btnRealizarCompra);
 
-        btnEliminarCompra.setBackground(new Color(102, 0, 0));
-        btnEliminarCompra.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEliminarCompra.setForeground(new Color(255, 255, 255));
+        btnEliminarCompra.setBackground(new java.awt.Color(102, 0, 0));
+        btnEliminarCompra.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEliminarCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarCompra.setText("ELIMINAR");
         btnEliminarCompra.setBorderPainted(false);
         btnEliminarCompra.setFocusable(false);
-        btnEliminarCompra.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnEliminarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarCompraActionPerformed(evt);
             }
         });
@@ -924,14 +922,14 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpInferiorComprar.add(jpBotonesComprar, java.awt.BorderLayout.CENTER);
 
-        jpValoresTotales.setBackground(new Color(204, 210, 220));
+        jpValoresTotales.setBackground(new java.awt.Color(204, 210, 220));
         jpValoresTotales.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5));
 
-        lblProductosTotalesComprar.setFont(new Font("Montserrat", 1, 12)); // NOI18N
+        lblProductosTotalesComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblProductosTotalesComprar.setText("PRODUCTO TOTALES : 0");
         jpValoresTotales.add(lblProductosTotalesComprar);
 
-        lblPrecioTotalComprar.setFont(new Font("Montserrat", 1, 12)); // NOI18N
+        lblPrecioTotalComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioTotalComprar.setText("PRECIO TOTAL : 0");
         jpValoresTotales.add(lblPrecioTotalComprar);
 
@@ -943,44 +941,43 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpVender.setLayout(new java.awt.BorderLayout());
 
-        jpFormularioComprar1.setBackground(new Color(74, 101, 114));
+        jpFormularioComprar1.setBackground(new java.awt.Color(74, 101, 114));
         jpFormularioComprar1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
-        lblProductoVender.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblProductoVender.setForeground(new Color(255, 255, 255));
+        lblProductoVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblProductoVender.setForeground(new java.awt.Color(255, 255, 255));
         lblProductoVender.setText("PRODUCTO");
         jpFormularioComprar1.add(lblProductoVender);
 
-        jcbProductoVender.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        jcbProductoVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jcbProductoVender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbProductoVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbProductoVender.setMinimumSize(new java.awt.Dimension(160, 23));
         jcbProductoVender.setPreferredSize(new java.awt.Dimension(160, 23));
         jpFormularioComprar1.add(jcbProductoVender);
 
-        lblStockVender.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblStockVender.setForeground(new Color(255, 255, 255));
+        lblStockVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblStockVender.setForeground(new java.awt.Color(255, 255, 255));
         lblStockVender.setText("STOCK");
         jpFormularioComprar1.add(lblStockVender);
 
-        txtStockVender.setColumns(12);
-        txtStockVender.setFont(new Font("Montserrat", 0, 12)); // NOI18N
-        txtStockVender.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        txtStockVender.setColumns(10);
+        txtStockVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtStockVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtStockVender.setPreferredSize(new java.awt.Dimension(160, 23));
-        txtStockVender.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        txtStockVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockVenderActionPerformed(evt);
             }
         });
         jpFormularioComprar1.add(txtStockVender);
 
-        lblClienteVender.setFont(new Font("Montserrat", 1, 12)); // NOI18N
-        lblClienteVender.setForeground(new Color(255, 255, 255));
+        lblClienteVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblClienteVender.setForeground(new java.awt.Color(255, 255, 255));
         lblClienteVender.setText("CLIENTE");
         jpFormularioComprar1.add(lblClienteVender);
 
-        jcbClienteVender.setFont(new Font("Montserrat", 0, 12)); // NOI18N
+        jcbClienteVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jcbClienteVender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbClienteVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbClienteVender.setMinimumSize(new java.awt.Dimension(160, 23));
@@ -990,8 +987,10 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpVender.add(jpFormularioComprar1, java.awt.BorderLayout.NORTH);
 
-        jtTablaVender.getTableHeader().setFont(new Font("Montserrat", 1, 12));
-        jtTablaVender.setModel(new DefaultTableModel(
+        jtTablaVender.setDefaultEditor(Object.class, null);
+        jtTablaVender.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12));
+        jtTablaVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaVender.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
                         "ID","PRODUCTO", "STOCK", "PRECIO"
@@ -1003,46 +1002,46 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpVender.add(jspTablaVender, java.awt.BorderLayout.CENTER);
 
-        jpInferiorVender.setBackground(new Color(74, 101, 114));
+        jpInferiorVender.setBackground(new java.awt.Color(74, 101, 114));
         jpInferiorVender.setLayout(new java.awt.BorderLayout());
 
-        jpBotonesVender.setBackground(new Color(74, 101, 114));
+        jpBotonesVender.setBackground(new java.awt.Color(74, 101, 114));
         jpBotonesVender.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 15));
 
-        btnAgregarVenta.setBackground(new Color(0, 102, 51));
-        btnAgregarVenta.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnAgregarVenta.setForeground(new Color(255, 255, 255));
+        btnAgregarVenta.setBackground(new java.awt.Color(0, 102, 51));
+        btnAgregarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnAgregarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarVenta.setText("AGREGAR");
         btnAgregarVenta.setBorderPainted(false);
         btnAgregarVenta.setFocusable(false);
-        btnAgregarVenta.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnAgregarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarVentaActionPerformed(evt);
             }
         });
         jpBotonesVender.add(btnAgregarVenta);
 
-        btnRealizarVenta.setBackground(new Color(249, 170, 51));
-        btnRealizarVenta.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnRealizarVenta.setForeground(new Color(255, 255, 255));
+        btnRealizarVenta.setBackground(new java.awt.Color(249, 170, 51));
+        btnRealizarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnRealizarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnRealizarVenta.setText("VENDER");
         btnRealizarVenta.setBorderPainted(false);
         btnRealizarVenta.setFocusable(false);
-        btnRealizarVenta.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRealizarVentaActionPerformed(evt);
             }
         });
         jpBotonesVender.add(btnRealizarVenta);
 
-        btnEliminarVenta.setBackground(new Color(102, 0, 0));
-        btnEliminarVenta.setFont(new Font("Montserrat", 1, 14)); // NOI18N
-        btnEliminarVenta.setForeground(new Color(255, 255, 255));
+        btnEliminarVenta.setBackground(new java.awt.Color(102, 0, 0));
+        btnEliminarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnEliminarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarVenta.setText("ELIMINAR");
         btnEliminarVenta.setBorderPainted(false);
         btnEliminarVenta.setFocusable(false);
-        btnEliminarVenta.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnEliminarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarVentaActionPerformed(evt);
             }
         });
@@ -1050,14 +1049,14 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpInferiorVender.add(jpBotonesVender, java.awt.BorderLayout.CENTER);
 
-        jpValoresTotalesVenta.setBackground(new Color(204, 210, 220));
+        jpValoresTotalesVenta.setBackground(new java.awt.Color(204, 210, 220));
         jpValoresTotalesVenta.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5));
 
-        lblProductosTotalesVender.setFont(new Font("Montserrat", 1, 12)); // NOI18N
+        lblProductosTotalesVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblProductosTotalesVender.setText("PRODUCTO TOTALES : 0");
         jpValoresTotalesVenta.add(lblProductosTotalesVender);
 
-        lblPrecioTotalVender.setFont(new Font("Montserrat", 1, 12)); // NOI18N
+        lblPrecioTotalVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioTotalVender.setText("PRECIO TOTAL : 0");
         jpValoresTotalesVenta.add(lblPrecioTotalVender);
 
@@ -1069,14 +1068,16 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpCompras.setLayout(new java.awt.BorderLayout());
 
-        jpSuperiorCompras.setBackground(new Color(74, 101, 114));
+        jpSuperiorCompras.setBackground(new java.awt.Color(74, 101, 114));
         jpSuperiorCompras.setPreferredSize(new java.awt.Dimension(1307, 53));
         jpSuperiorCompras.add(filler9);
 
         jpCompras.add(jpSuperiorCompras, java.awt.BorderLayout.NORTH);
 
-        jtTablaCompras.getTableHeader().setFont(new Font("Montserrat", 1, 12));
-        jtTablaCompras.setModel(new DefaultTableModel(
+        jtTablaCompras.setDefaultEditor(Object.class, null);
+        jtTablaCompras.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12));
+        jtTablaCompras.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaCompras.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
                         "ID","PRODUCTOS", "PRECIO", "CANTIDAD", "PRECIO TOTAL", "CANTIDAD TOTAL", "PROVEEDOR"
@@ -1088,7 +1089,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpCompras.add(jspTablaCompras, java.awt.BorderLayout.CENTER);
 
-        jpInferiorCompras.setBackground(new Color(74, 101, 114));
+        jpInferiorCompras.setBackground(new java.awt.Color(74, 101, 114));
         jpInferiorCompras.setPreferredSize(new java.awt.Dimension(1307, 53));
         jpInferiorCompras.setRequestFocusEnabled(false);
         jpInferiorCompras.add(filler10);
@@ -1099,14 +1100,16 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpVentas.setLayout(new java.awt.BorderLayout());
 
-        jpSuperiorVentas.setBackground(new Color(74, 101, 114));
+        jpSuperiorVentas.setBackground(new java.awt.Color(74, 101, 114));
         jpSuperiorVentas.setPreferredSize(new java.awt.Dimension(1307, 53));
         jpSuperiorVentas.add(filler11);
 
         jpVentas.add(jpSuperiorVentas, java.awt.BorderLayout.NORTH);
 
-        jtTablaVentas.getTableHeader().setFont(new Font("Montserrat", 1, 12));
-        jtTablaVentas.setModel(new DefaultTableModel(
+        jtTablaVentas.setDefaultEditor(Object.class, null);
+        jtTablaVentas.getTableHeader().setFont(new java.awt.Font("Montserrat", 1, 12));
+        jtTablaVentas.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jtTablaVentas.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
                         "ID","PRODUCTOS", "PRECIO", "CANTIDAD", "PRECIO TOTAL", "CANTIDAD TOTAL", "CLIENTE"
@@ -1119,7 +1122,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpVentas.add(jspTablaVentas, java.awt.BorderLayout.CENTER);
 
-        jpInferiorVentas.setBackground(new Color(74, 101, 114));
+        jpInferiorVentas.setBackground(new java.awt.Color(74, 101, 114));
         jpInferiorVentas.setPreferredSize(new java.awt.Dimension(1307, 53));
         jpInferiorVentas.setRequestFocusEnabled(false);
         jpInferiorVentas.add(filler12);
@@ -1130,16 +1133,16 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         getContentPane().add(jpPrincipal, java.awt.BorderLayout.CENTER);
 
-        jpEncabezado.setBackground(new Color(35, 47, 52));
-        jpEncabezado.setForeground(new Color(255, 255, 255));
-        jpEncabezado.setFont(new Font("Montserrat", 0, 18)); // NOI18N
+        jpEncabezado.setBackground(new java.awt.Color(35, 47, 52));
+        jpEncabezado.setForeground(new java.awt.Color(255, 255, 255));
+        jpEncabezado.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jpEncabezado.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 40, 10));
 
-        lblIcono.setIcon(new ImageIcon(getClass().getResource("/carrito-de-supermercado.png"))); // NOI18N
+        lblIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrito-de-supermercado.png"))); // NOI18N
         jpEncabezado.add(lblIcono);
 
-        lblTitulo.setFont(new Font("Montserrat", 1, 28)); // NOI18N
-        lblTitulo.setForeground(new Color(255, 255, 255));
+        lblTitulo.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo.setText("GESTION SUPERMERCADO UNIVALLE");
         jpEncabezado.add(lblTitulo);
 
@@ -1148,131 +1151,123 @@ public class VentanaMercado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void btnClientesActionPerformed(ActionEvent evt) {
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnProveedoresActionPerformed(ActionEvent evt) {
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnVentasActionPerformed(ActionEvent evt) {
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtNitClienteActionPerformed(ActionEvent evt) {
+    private void txtNitClienteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtNombreClienteActionPerformed(ActionEvent evt) {
+    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtTelefonoClienteActionPerformed(ActionEvent evt) {
+    private void txtTelefonoClienteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtDireccionClienteActionPerformed(ActionEvent evt) {
+    private void txtDireccionClienteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnClientesMouseEntered(MouseEvent evt) {
+    private void btnClientesMouseEntered(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnEditarClienteActionPerformed(ActionEvent evt) {
+    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtNitProveedorActionPerformed(ActionEvent evt) {
+    private void txtNitProveedorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtNombreProveedorActionPerformed(ActionEvent evt) {
+    private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtTelefonoProveedorActionPerformed(ActionEvent evt) {
+    private void txtTelefonoProveedorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtDireccionProveedorActionPerformed(ActionEvent evt) {
+    private void txtDireccionProveedorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnEditarProveedorActionPerformed(ActionEvent evt) {
+    private void btnEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnEditarProductoActionPerformed(ActionEvent evt) {
+    private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnVenderActionPerformed(ActionEvent evt) {
+    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnComprarActionPerformed(ActionEvent evt) {
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtCodigoComprarActionPerformed(ActionEvent evt) {
+    private void txtCodigoComprarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtNombreComprarActionPerformed(ActionEvent evt) {
+    private void txtNombreComprarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtPrecioCompraComprarActionPerformed(ActionEvent evt) {
+    private void txtPrecioCompraComprarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtPrecioVentaComprarActionPerformed(ActionEvent evt) {
+    private void btnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnAgregarCompraActionPerformed(ActionEvent evt) {
+    private void btnEliminarCompraActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnEliminarCompraActionPerformed(ActionEvent evt) {
+    private void btnRealizarCompraActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnRealizarCompraActionPerformed(ActionEvent evt) {
+    private void txtStockVenderActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtStockVenderActionPerformed(ActionEvent evt) {
+    private void btnAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnAgregarVentaActionPerformed(ActionEvent evt) {
+    private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnRealizarVentaActionPerformed(ActionEvent evt) {
+    private void btnEliminarVentaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnEliminarVentaActionPerformed(ActionEvent evt) {
+    private void txtPrecioVentaProductoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtPrecioVentaProductoActionPerformed(ActionEvent evt) {
+    private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void txtPrecioCompraProductoActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreProductoActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtCodigoProductoActionPerformed(ActionEvent evt) {
+    private void txtCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -1310,6 +1305,11 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     //=====|Producto|=====//
+    public void addBtnAgregarProductoListener(ActionListener listenControles)
+    {
+        btnAgregarProducto.addActionListener(listenControles);
+    }
+
     public void addBtnEditarProductoListener(ActionListener listenControles)
     {
         btnEditarProducto.addActionListener(listenControles);
@@ -1646,13 +1646,109 @@ public class VentanaMercado extends javax.swing.JFrame {
             }
             else
             {
-                setIdCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 0)));
-                setNitCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 1)));
-                setNombreCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 2)));
-                setTelefonoCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 3)));
-                setDireccionCliente(String.valueOf(tabla.getValueAt(tabla.getSelectedRow() , 4)));
+                setIdCliente(String.valueOf(tabla.getValueAt(fila , 0)));
+                setNitCliente(String.valueOf(tabla.getValueAt(fila , 1)));
+                setNombreCliente(String.valueOf(tabla.getValueAt(fila , 2)));
+                setTelefonoCliente(String.valueOf(tabla.getValueAt(fila , 3)));
+                setDireccionCliente(String.valueOf(tabla.getValueAt(fila , 4)));
             }
 
+        }
+    }
+
+    class TablaProveedorListener extends MouseAdapter
+    {
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            JTable tabla = (JTable)e.getSource();
+            int fila = tabla.getSelectedRow();
+            if(fila == -1)
+            {
+                setIdProveedor("0");
+                setNitProveedor("");
+                setNombreProveedor("");
+                setTelefonoProveedor("");
+                setDireccionProveedor("");
+                setRazonSocialProveedor("");
+            }
+            else
+            {
+                setIdProveedor(String.valueOf(tabla.getValueAt(fila , 0)));
+                setNitProveedor(String.valueOf(tabla.getValueAt(fila , 1)));
+                setNombreProveedor(String.valueOf(tabla.getValueAt(fila , 2)));
+                setTelefonoProveedor(String.valueOf(tabla.getValueAt(fila , 3)));
+                setDireccionProveedor(String.valueOf(tabla.getValueAt(fila , 4)));
+                setRazonSocialProveedor(String.valueOf(tabla.getValueAt(fila , 5)));
+            }
+        }
+    }
+
+    class TablaProductoListener extends MouseAdapter
+    {
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            JTable tabla = (JTable)e.getSource();
+            int fila = tabla.getSelectedRow();
+            if(fila == -1)
+            {
+                txtCodigoProducto.setEditable(true);
+                jcbCategoriaProducto.setEnabled(true);
+
+                setIdProducto("0");
+                setCodigoProducto("");
+                setNombreProducto("");
+                setPrecioVentaProducto("");
+                setStockProducto("");
+                setCategoriaProducto(null);
+            }
+            else
+            {
+                txtCodigoProducto.setEditable(false);
+                jcbCategoriaProducto.setEnabled(false);
+
+                setIdProducto(String.valueOf(tabla.getValueAt(fila , 0)));
+                setCodigoProducto(String.valueOf(tabla.getValueAt(fila , 1)));
+                setNombreProducto(String.valueOf(tabla.getValueAt(fila , 2)));
+                setPrecioVentaProducto(String.valueOf(tabla.getValueAt(fila , 3)));
+                setStockProducto(String.valueOf(tabla.getValueAt(fila , 4)));
+                setCategoriaProducto(String.valueOf(tabla.getValueAt(fila , 5)));
+            }
+        }
+    }
+
+    class TablaComprarListener extends MouseAdapter
+    {
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            JTable tabla = (JTable)e.getSource();
+            int fila = tabla.getSelectedRow();
+            if(fila == -1)
+            {
+                txtCodigoComprar.setEditable(true);
+                txtPrecioCompraComprar.setEditable(true);
+                txtStockComprar.setEditable(true);
+
+                setCodigoComprar("");
+                setNombreComprar("");
+                setPrecioCompraComprar("");
+                setStockComprar("");
+                setCategoriaComprar("");
+            }
+            else
+            {
+                setCodigoComprar(String.valueOf(tabla.getValueAt(fila , 0)));
+                setNombreComprar(String.valueOf(tabla.getValueAt(fila , 1)));
+                setPrecioCompraComprar(String.valueOf(tabla.getValueAt(fila , 2)));
+                setStockComprar(String.valueOf(tabla.getValueAt(fila , 3)));
+                setCategoriaComprar(String.valueOf(tabla.getValueAt(fila , 4)));
+
+                txtCodigoComprar.setEditable(false);
+                txtPrecioCompraComprar.setEditable(false);
+                txtStockComprar.setEditable(false);
+            }
         }
     }
 
@@ -1802,11 +1898,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreProducto.setText(txt);
     }
 
-    public void setPrecioCompraProducto(String txt)
-    {
-        txtPrecioCompraProducto.setText(txt);
-    }
-
     public void setPrecioVentaProducto(String txt)
     {
         txtPrecioVentaProducto.setText(txt);
@@ -1817,9 +1908,9 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtStockProducto.setText(txt);
     }
 
-    public void setProveedorProducto(String txt)
+    public void setCategoriaProducto(String txt)
     {
-        txtProveedorProducto.setText(txt);
+        jcbCategoriaProducto.setSelectedItem(txt);
     }
 
     //=====|Comprar|=====//
@@ -1846,6 +1937,11 @@ public class VentanaMercado extends javax.swing.JFrame {
     public void setStockComprar(String txt)
     {
         txtStockComprar.setText(txt);
+    }
+
+    public void setCategoriaComprar(String txt)
+    {
+        txtCategoriaComprar.setText(txt);
     }
 
     public void setPrecioTotalComprar(String txt)
@@ -1980,14 +2076,14 @@ public class VentanaMercado extends javax.swing.JFrame {
         return txtPrecioCompraComprar.getText();
     }
 
-    public String getPrecioVentaComprar()
-    {
-        return txtPrecioVentaComprar.getText();
-    }
-
     public String getStockComprar()
     {
         return txtStockComprar.getText();
+    }
+
+    public String getCategoriaComprar()
+    {
+        return txtCategoriaComprar.getText();
     }
 
     /*public Producto getProveedorComprar()
@@ -2056,27 +2152,28 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
-    private JButton btnAgregarCliente;
-    private JButton btnAgregarCompra;
-    private JButton btnAgregarProveedor;
-    private JButton btnAgregarVenta;
-    private JButton btnClientes;
-    private JButton btnComprar;
-    private JButton btnCompras;
-    private JButton btnEditarCliente;
-    private JButton btnEditarProducto;
-    private JButton btnEditarProveedor;
-    private JButton btnEliminarCliente;
-    private JButton btnEliminarCompra;
-    private JButton btnEliminarProducto;
-    private JButton btnEliminarProveedor;
-    private JButton btnEliminarVenta;
-    private JButton btnInventario;
-    private JButton btnProveedores;
-    private JButton btnRealizarCompra;
-    private JButton btnRealizarVenta;
-    private JButton btnVender;
-    private JButton btnVentas;
+    private javax.swing.JButton btnAgregarCliente;
+    private javax.swing.JButton btnAgregarCompra;
+    private javax.swing.JButton btnAgregarProducto;
+    private javax.swing.JButton btnAgregarProveedor;
+    private javax.swing.JButton btnAgregarVenta;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnCompras;
+    private javax.swing.JButton btnEditarCliente;
+    private javax.swing.JButton btnEditarProducto;
+    private javax.swing.JButton btnEditarProveedor;
+    private javax.swing.JButton btnEliminarCliente;
+    private javax.swing.JButton btnEliminarCompra;
+    private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnEliminarProveedor;
+    private javax.swing.JButton btnEliminarVenta;
+    private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnProveedores;
+    private javax.swing.JButton btnRealizarCompra;
+    private javax.swing.JButton btnRealizarVenta;
+    private javax.swing.JButton btnVender;
+    private javax.swing.JButton btnVentas;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
@@ -2090,6 +2187,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jcbCategoriaProducto;
     private javax.swing.JComboBox<String> jcbClienteVender;
     private javax.swing.JComboBox<String> jcbProductoVender;
     private javax.swing.JComboBox<String> jcbProveedorComprar;
@@ -2129,13 +2227,15 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jspTablaProveedor;
     private javax.swing.JScrollPane jspTablaVender;
     private javax.swing.JScrollPane jspTablaVentas;
-    private JTable jtTablaCliente;
-    private JTable jtTablaComprar;
-    private JTable jtTablaCompras;
-    private JTable jtTablaInventario;
-    private JTable jtTablaProveedor;
-    private JTable jtTablaVender;
-    private JTable jtTablaVentas;
+    private javax.swing.JTable jtTablaCliente;
+    private javax.swing.JTable jtTablaComprar;
+    private javax.swing.JTable jtTablaCompras;
+    private javax.swing.JTable jtTablaInventario;
+    private javax.swing.JTable jtTablaProveedor;
+    private javax.swing.JTable jtTablaVender;
+    private javax.swing.JTable jtTablaVentas;
+    private javax.swing.JLabel lblCategoriaComprar;
+    private javax.swing.JLabel lblCategoriaProducto;
     private javax.swing.JLabel lblClienteVender;
     private javax.swing.JLabel lblCodigoCompra;
     private javax.swing.JLabel lblCodigoProducto;
@@ -2149,16 +2249,13 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreProducto;
     private javax.swing.JLabel lblNombreProveedor;
     private javax.swing.JLabel lblPrecioCompraComprar;
-    private javax.swing.JLabel lblPrecioCompraProducto;
     private javax.swing.JLabel lblPrecioTotalComprar;
     private javax.swing.JLabel lblPrecioTotalVender;
-    private javax.swing.JLabel lblPrecioVentaComprar;
     private javax.swing.JLabel lblPrecioVentaProducto;
     private javax.swing.JLabel lblProductoVender;
     private javax.swing.JLabel lblProductosTotalesComprar;
     private javax.swing.JLabel lblProductosTotalesVender;
     private javax.swing.JLabel lblProveedorComprar;
-    private javax.swing.JLabel lblProveedorInventario;
     private javax.swing.JLabel lblRazonSocialProveedor;
     private javax.swing.JLabel lblStockComprar;
     private javax.swing.JLabel lblStockProducto;
@@ -2166,6 +2263,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTelefonoProveedor;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextField txtCategoriaComprar;
     private javax.swing.JTextField txtCodigoComprar;
     private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtDireccionCliente;
@@ -2180,10 +2278,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtNombreProveedor;
     private javax.swing.JTextField txtPrecioCompraComprar;
-    private javax.swing.JTextField txtPrecioCompraProducto;
-    private javax.swing.JTextField txtPrecioVentaComprar;
     private javax.swing.JTextField txtPrecioVentaProducto;
-    private javax.swing.JTextField txtProveedorProducto;
     private javax.swing.JTextField txtRazonSocialProveedor;
     private javax.swing.JTextField txtStockComprar;
     private javax.swing.JTextField txtStockProducto;
