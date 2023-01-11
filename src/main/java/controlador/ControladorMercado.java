@@ -19,6 +19,7 @@ public class ControladorMercado
         this.superMercadoUV = auxEmpresa;
         this.ventanaMercado = auxA;
         ventanaMercado.setVisible(true);
+        ventanaMercado.setLocationRelativeTo(null);
 
         //----------|Cliente|----------//
         ClienteListener clienteListener = new ClienteListener();
