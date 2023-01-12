@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.Cliente;
+import modelo.Proveedor;
 import modelo.Empresa;
 import vista.VentanaMercado;
 
@@ -26,6 +27,13 @@ public class ControladorMercado
         this.ventanaMercado.addBtnAgregarClienteListener(clienteListener);
         this.ventanaMercado.addBtnEditarClienteListener(clienteListener);
         this.ventanaMercado.addBtnEliminarClienteListener(clienteListener);
+
+        //----------|Proveedor|----------//
+        ProveedorListener proveedorListener = new ProveedorListener();
+        this.ventanaMercado.addBtnAgregarProveedorListener(proveedorListener);
+        this.ventanaMercado.addBtnEditarProveedorListener(proveedorListener);
+        this.ventanaMercado.addBtnEliminarProveedorListener(proveedorListener);
+
     }
 
     //----------|Clientes|----------//
@@ -273,4 +281,255 @@ public class ControladorMercado
         }
     }
 
+    //----------|Proveedor|----------//
+
+    class ProveedorListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e.getActionCommand().equalsIgnoreCase("AGREGAR"))
+            {
+                agregarProveedor();
+            }
+            if (e.getActionCommand().equalsIgnoreCase("EDITAR"))
+            {
+                editarProveedor();
+            }
+            if (e.getActionCommand().equalsIgnoreCase("ELIMINAR"))
+            {
+                eliminarProveedor();
+            }
+        }
+    }
+    private void agregarProveedor()
+    {
+        Proveedor auxProveedor;
+        int auxId;
+        long auxNIT;
+        String auxNombre;
+        long auxTelefono;
+        String auxDireccion;
+        String auxRazonSocial;
+
+        auxId = Integer.parseInt(ventanaMercado.getIdCliente());
+        if(auxId == 0)
+        {
+            if(comprobarCamposProveedor())
+            {
+                try
+                {
+                    auxNIT = Long.parseLong(ventanaMercado.getNitProveedor());
+                    auxNombre = ventanaMercado.getNombreProveedor();
+                    auxTelefono = Long.parseLong(ventanaMercado.getTelefonoProveedor());
+                    auxDireccion = ventanaMercado.getDireccionProveedor();
+                    auxRazonSocial = ventanaMercado.getRazonSocialProveedor();
+
+                    if(comprobarNitProveedor(0 ,auxNIT))
+                    {
+                        auxProveedor = new Proveedor(auxNombre, auxNIT, auxTelefono, auxDireccion, auxRazonSocial);
+                        if(superMercadoUV.agregarProveedor(auxProveedor))
+                        {
+                            ventanaMercado.mostarMensaje("Proveedor agregado con exito");
+                            ventanaMercado.setIdProveedor("0");
+                            ventanaMercado.setNitProveedor("");
+                            ventanaMercado.setNombreProveedor("");
+                            ventanaMercado.setTelefonoProveedor("");
+                            ventanaMercado.setDireccionProveedor("");
+                            ventanaMercado.setRazonSocialProveedor("");
+                            listarProveedoresAgregar(auxProveedor);
+                        }
+                        else
+                        {
+                            ventanaMercado.mostarMensajeError("Proveedor no agregado");
+                        }
+                    }
+                    else
+                    {
+                        ventanaMercado.mostarMensajeError("NIT ya registrado");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    ventanaMercado.mostarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
+                }
+            }
+            else
+            {
+                ventanaMercado.mostarMensajeError("Rellene todos los campos");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostarMensajeError("Deseleccione el proveedor");
+        }
+
+    }
+
+    private boolean comprobarCamposProveedor()
+    {
+        boolean camposValido;
+        camposValido = true;
+        if(ventanaMercado.getNombreProveedor().equals("") || ventanaMercado.getNitProveedor().equals("") || ventanaMercado.getTelefonoProveedor().equals("") || ventanaMercado.getDireccionProveedor().equals("") || ventanaMercado.getRazonSocialProveedor().equals(""))
+        {
+            camposValido = false;
+        }
+        return camposValido;
+    }
+
+    private boolean comprobarNitProveedor(int auxId, Long auxNit)
+    {
+        boolean nitValido;
+        nitValido = true;
+        ArrayList<Proveedor> auxProveedores;
+        auxProveedores = superMercadoUV.getProveedores();
+        for(Proveedor proveedor : auxProveedores)
+        {
+            if(proveedor.getNit() == auxNit && proveedor.getId() != auxId)
+            {
+                nitValido = false;
+            }
+        }
+        return nitValido;
+    }
+
+
+
+    private void editarProveedor()
+    {
+        Proveedor auxProveedor;
+        int auxId;
+        long auxNIT;
+        String auxNombre;
+        long auxTelefono;
+        String auxDireccion;
+        String auxRazonSocial;
+
+        auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
+        auxProveedor = superMercadoUV.getProveedor(auxId);
+
+        if(auxProveedor != null)
+        {
+            if(comprobarCamposProveedor())
+            {
+                try
+                {
+                    auxNIT = Long.parseLong(ventanaMercado.getNitProveedor());
+                    auxNombre = ventanaMercado.getNombreProveedor();
+                    auxTelefono = Long.parseLong(ventanaMercado.getTelefonoProveedor());
+                    auxDireccion = ventanaMercado.getDireccionProveedor();
+                    auxRazonSocial = ventanaMercado.getRazonSocialProveedor();
+
+                    if(comprobarNitProveedor(auxId ,auxNIT))
+                    {
+                        if(superMercadoUV.actualizarProveedor(auxProveedor))
+                        {
+                            ventanaMercado.mostarMensaje("Proveedor editado con exito");
+                            ventanaMercado.setIdProveedor("0");
+                            ventanaMercado.setNitProveedor("");
+                            ventanaMercado.setNombreProveedor("");
+                            ventanaMercado.setTelefonoProveedor("");
+                            ventanaMercado.setDireccionProveedor("");
+                            ventanaMercado.setRazonSocialProveedor("");
+                            listarProveedoresEditar(auxProveedor);
+                            ventanaMercado.deseleccionarFilaTablaProveedor();
+                        }
+                        else
+                        {
+                            ventanaMercado.mostarMensajeError("Proveedor no editado");
+                        }
+                    }
+                    else
+                    {
+                        ventanaMercado.mostarMensajeError("NIT ya registrado");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    ventanaMercado.mostarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
+                }
+            }
+            else
+            {
+                ventanaMercado.mostarMensajeError("Rellene todos los campos");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostarMensajeError("Seleccione un proveedor");
+        }
+
+    }
+
+    private void eliminarProveedor()
+    {
+        Proveedor auxProveedor;
+        int auxId;
+        auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
+        auxProveedor = superMercadoUV.getProveedor(auxId);
+
+        if(auxProveedor != null)
+        {
+            if(superMercadoUV.eliminarProveedor(auxProveedor))
+            {
+                ventanaMercado.mostarMensaje("Proveedor eliminado con exito");
+                ventanaMercado.setIdProveedor("0");
+                ventanaMercado.setNitProveedor("");
+                ventanaMercado.setNombreProveedor("");
+                ventanaMercado.setTelefonoProveedor("");
+                ventanaMercado.setDireccionProveedor("");
+                ventanaMercado.setRazonSocialProveedor("");
+                listarProveedoresEliminar();
+                ventanaMercado.deseleccionarFilaTablaProveedor();
+            }
+            else
+            {
+                ventanaMercado.mostarMensajeError("Proveedor no eliminado");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostarMensajeError("Seleccione a un proveedor");
+        }
+    }
+
+    private void listarProveedoresAgregar(Proveedor auxProveedor)
+    {
+        int auxId = auxProveedor.getId();
+        long auxNit = auxProveedor.getNit();
+        String auxNombre = auxProveedor.getNombre();
+        long auxTelefono = auxProveedor.getTelefono();
+        String auxDireccion = auxProveedor.getDireccion();
+        String auxRazonSocial = auxProveedor.getRazonSocial();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
+        auxModeloTabla.addRow(new Object[]{auxId, auxNit, auxNombre, auxTelefono, auxDireccion, auxRazonSocial});
+    }
+
+    private void listarProveedoresEditar(Proveedor auxProveedor)
+    {
+        int auxId = auxProveedor.getId();
+        long auxNit = auxProveedor.getNit();
+        String auxNombre = auxProveedor.getNombre();
+        long auxTelefono = auxProveedor.getTelefono();
+        String auxDireccion = auxProveedor.getDireccion();
+        String auxRazonSocial = auxProveedor.getRazonSocial();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
+        int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
+
+        auxModeloTabla.setValueAt(auxId, auxFila, 0);
+        auxModeloTabla.setValueAt(auxNit, auxFila, 1);
+        auxModeloTabla.setValueAt(auxNombre, auxFila, 2);
+        auxModeloTabla.setValueAt(auxTelefono, auxFila, 3);
+        auxModeloTabla.setValueAt(auxDireccion, auxFila, 4);
+        auxModeloTabla.setValueAt(auxRazonSocial, auxFila, 5);
+    }
+
+    private void listarProveedoresEliminar()
+    {
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
+        int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
+        auxModeloTabla.removeRow(auxFila);
+    }
 }
