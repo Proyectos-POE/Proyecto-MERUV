@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,6 +50,15 @@ public class VentanaMercado extends javax.swing.JFrame {
         this.addTablaInventarioListener(new TablaProductoListener());
         this.addTablaComprarListener(new TablaComprarListener());
         this.addTablaVenderListener(new TablaVenderListener());
+
+        botonesPrincipal = new ArrayList<JButton>();
+        botonesPrincipal.add(btnClientes);
+        botonesPrincipal.add(btnProveedores);
+        botonesPrincipal.add(btnInventario);
+        botonesPrincipal.add(btnComprar);
+        botonesPrincipal.add(btnVender);
+        botonesPrincipal.add(btnCompras);
+        botonesPrincipal.add(btnVentas);
     }
 
     /**
@@ -59,6 +69,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jpBotones = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
@@ -81,7 +92,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jpCliente = new javax.swing.JPanel();
         jpFormularioCliente = new javax.swing.JPanel();
-        txtIdCliente = new javax.swing.JTextField();
         lblNitCliente = new javax.swing.JLabel();
         txtNitCliente = new javax.swing.JTextField();
         lblNombreCliente = new javax.swing.JLabel();
@@ -90,6 +100,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtTelefonoCliente = new javax.swing.JTextField();
         lblDireccionCliente = new javax.swing.JLabel();
         txtDireccionCliente = new javax.swing.JTextField();
+        txtIdCliente = new javax.swing.JTextField();
         jspTablaCliente = new javax.swing.JScrollPane();
         jtTablaCliente = new javax.swing.JTable();
         jpBotonesCliente = new javax.swing.JPanel();
@@ -124,7 +135,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreProducto = new javax.swing.JTextField();
         lblPrecioVentaProducto = new javax.swing.JLabel();
         txtPrecioVentaProducto = new javax.swing.JTextField();
-        lblStockProducto = new javax.swing.JLabel();
+        lblStotckProducto = new javax.swing.JLabel();
         txtStockProducto = new javax.swing.JTextField();
         lblCategoriaProducto = new javax.swing.JLabel();
         jcbCategoriaProducto = new javax.swing.JComboBox<>();
@@ -144,8 +155,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtPrecioCompraComprar = new javax.swing.JTextField();
         lblStockComprar = new javax.swing.JLabel();
         txtStockComprar = new javax.swing.JTextField();
-        lblCategoriaComprar = new javax.swing.JLabel();
-        txtCategoriaComprar = new javax.swing.JTextField();
         lblProveedorComprar = new javax.swing.JLabel();
         jcbProveedorComprar = new javax.swing.JComboBox<>();
         jspTablaComprar = new javax.swing.JScrollPane();
@@ -182,14 +191,14 @@ public class VentanaMercado extends javax.swing.JFrame {
         lblPrecioTotalVender = new javax.swing.JLabel();
         jpCompras = new javax.swing.JPanel();
         jpSuperiorCompras = new javax.swing.JPanel();
-        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        lblRegistroCompras = new javax.swing.JLabel();
         jspTablaCompras = new javax.swing.JScrollPane();
         jtTablaCompras = new javax.swing.JTable();
         jpInferiorCompras = new javax.swing.JPanel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jpVentas = new javax.swing.JPanel();
         jpSuperiorVentas = new javax.swing.JPanel();
-        filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        lblRegistroVentas = new javax.swing.JLabel();
         jspTablaVentas = new javax.swing.JScrollPane();
         jtTablaVentas = new javax.swing.JTable();
         jpInferiorVentas = new javax.swing.JPanel();
@@ -230,6 +239,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         });
         btnClientes.setAlignmentX(CENTER_ALIGNMENT);
         btnClientes.setIconTextGap(8);
+        btnClientes.putClientProperty("seleccionado", false);
         jpBotones.add(btnClientes);
         jpBotones.add(filler4);
 
@@ -248,6 +258,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         });
         btnProveedores.setAlignmentX(CENTER_ALIGNMENT);
         btnProveedores.setIconTextGap(8);
+        btnProveedores.putClientProperty("seleccionado", false);
         jpBotones.add(btnProveedores);
         jpBotones.add(filler3);
 
@@ -261,6 +272,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnInventario.setFocusable(false);
         btnInventario.setAlignmentX(CENTER_ALIGNMENT);
         btnInventario.setIconTextGap(8);
+        btnInventario.putClientProperty("seleccionado", false);
         jpBotones.add(btnInventario);
         jpBotones.add(filler2);
 
@@ -280,6 +292,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         });
         btnComprar.setAlignmentX(CENTER_ALIGNMENT);
         btnComprar.setIconTextGap(8);
+        btnComprar.putClientProperty("seleccionado", false);
         jpBotones.add(btnComprar);
         jpBotones.add(filler1);
 
@@ -298,6 +311,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         });
         btnVender.setAlignmentX(CENTER_ALIGNMENT);
         btnVender.setIconTextGap(8);
+        btnVender.putClientProperty("seleccionado", false);
         jpBotones.add(btnVender);
         jpBotones.add(filler5);
 
@@ -311,6 +325,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnCompras.setFocusable(false);
         btnCompras.setAlignmentX(CENTER_ALIGNMENT);
         btnCompras.setIconTextGap(8);
+        btnCompras.putClientProperty("seleccionado", false);
         jpBotones.add(btnCompras);
         jpBotones.add(filler7);
 
@@ -329,6 +344,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         });
         btnVentas.setAlignmentX(CENTER_ALIGNMENT);
         btnVentas.setIconTextGap(8);
+        btnVentas.putClientProperty("seleccionado", false);
         jpBotones.add(btnVentas);
         jpBotones.add(filler8);
 
@@ -346,22 +362,18 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpCliente.setLayout(new java.awt.BorderLayout());
 
         jpFormularioCliente.setBackground(new java.awt.Color(74, 101, 114));
-        jpFormularioCliente.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
-
-        txtIdCliente.setEditable(false);
-        txtIdCliente.setText("0");
-        txtIdCliente.setEnabled(false);
-        txtIdCliente.setFocusable(false);
-        txtIdCliente.setMinimumSize(new java.awt.Dimension(80, 23));
-        txtIdCliente.setOpaque(true);
-        txtIdCliente.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtIdCliente.setVisible(false);
-        jpFormularioCliente.add(txtIdCliente);
+        jpFormularioCliente.setLayout(new java.awt.GridBagLayout());
 
         lblNitCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNitCliente.setForeground(new java.awt.Color(255, 255, 255));
-        lblNitCliente.setText("NIT");
-        jpFormularioCliente.add(lblNitCliente);
+        lblNitCliente.setText("<html><font color=white>NIT </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioCliente.add(lblNitCliente, gridBagConstraints);
 
         txtNitCliente.setColumns(10);
         txtNitCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -373,12 +385,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtNitClienteActionPerformed(evt);
             }
         });
-        jpFormularioCliente.add(txtNitCliente);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioCliente.add(txtNitCliente, gridBagConstraints);
 
         lblNombreCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNombreCliente.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreCliente.setText("NOMBRE");
-        jpFormularioCliente.add(lblNombreCliente);
+        lblNombreCliente.setText("<html><font color=white>NOMBRE </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioCliente.add(lblNombreCliente, gridBagConstraints);
 
         txtNombreCliente.setColumns(10);
         txtNombreCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -389,12 +412,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtNombreClienteActionPerformed(evt);
             }
         });
-        jpFormularioCliente.add(txtNombreCliente);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioCliente.add(txtNombreCliente, gridBagConstraints);
 
         lblTelefonoCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblTelefonoCliente.setForeground(new java.awt.Color(255, 255, 255));
-        lblTelefonoCliente.setText("TELEFONO");
-        jpFormularioCliente.add(lblTelefonoCliente);
+        lblTelefonoCliente.setText("<html><font color=white>TELEFONO </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioCliente.add(lblTelefonoCliente, gridBagConstraints);
 
         txtTelefonoCliente.setColumns(10);
         txtTelefonoCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -405,12 +439,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtTelefonoClienteActionPerformed(evt);
             }
         });
-        jpFormularioCliente.add(txtTelefonoCliente);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioCliente.add(txtTelefonoCliente, gridBagConstraints);
 
         lblDireccionCliente.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblDireccionCliente.setForeground(new java.awt.Color(255, 255, 255));
-        lblDireccionCliente.setText("DIRECCION");
-        jpFormularioCliente.add(lblDireccionCliente);
+        lblDireccionCliente.setText("<html><font color=white>DIRECCION </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioCliente.add(lblDireccionCliente, gridBagConstraints);
 
         txtDireccionCliente.setColumns(10);
         txtDireccionCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -421,7 +466,26 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtDireccionClienteActionPerformed(evt);
             }
         });
-        jpFormularioCliente.add(txtDireccionCliente);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioCliente.add(txtDireccionCliente, gridBagConstraints);
+
+        txtIdCliente.setEditable(false);
+        txtIdCliente.setText("0");
+        txtIdCliente.setEnabled(false);
+        txtIdCliente.setFocusable(false);
+        txtIdCliente.setMinimumSize(new java.awt.Dimension(80, 23));
+        txtIdCliente.setOpaque(true);
+        txtIdCliente.setPreferredSize(new java.awt.Dimension(80, 23));
+        txtIdCliente.setVisible(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioCliente.add(txtIdCliente, gridBagConstraints);
 
         jpCliente.add(jpFormularioCliente, java.awt.BorderLayout.NORTH);
 
@@ -482,7 +546,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpProveedor.setLayout(new java.awt.BorderLayout());
 
         jpFormularioProveedor.setBackground(new java.awt.Color(74, 101, 114));
-        jpFormularioProveedor.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+        jpFormularioProveedor.setLayout(new java.awt.GridBagLayout());
 
         txtIdProveedor.setEditable(false);
         txtIdProveedor.setText("0");
@@ -492,14 +556,23 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtIdProveedor.setOpaque(true);
         txtIdProveedor.setPreferredSize(new java.awt.Dimension(80, 23));
         txtIdProveedor.setVisible(false);
-        jpFormularioProveedor.add(txtIdProveedor);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioProveedor.add(txtIdProveedor, gridBagConstraints);
 
         lblNitProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNitProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        lblNitProveedor.setText("NIT");
-        lblNitProveedor.setMinimumSize(new java.awt.Dimension(21, 23));
-        lblNitProveedor.setPreferredSize(new java.awt.Dimension(21, 23));
-        jpFormularioProveedor.add(lblNitProveedor);
+        lblNitProveedor.setText("<html><font color=white>NIT </font><font color=F9AA33>*</font></html>");
+        lblNitProveedor.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioProveedor.add(lblNitProveedor, gridBagConstraints);
 
         txtNitProveedor.setColumns(10);
         txtNitProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -511,12 +584,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtNitProveedorActionPerformed(evt);
             }
         });
-        jpFormularioProveedor.add(txtNitProveedor);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioProveedor.add(txtNitProveedor, gridBagConstraints);
 
         lblNombreProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNombreProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreProveedor.setText("NOMBRE");
-        jpFormularioProveedor.add(lblNombreProveedor);
+        lblNombreProveedor.setText("<html><font color=white>NOMBRE </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioProveedor.add(lblNombreProveedor, gridBagConstraints);
 
         txtNombreProveedor.setColumns(10);
         txtNombreProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -527,12 +611,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtNombreProveedorActionPerformed(evt);
             }
         });
-        jpFormularioProveedor.add(txtNombreProveedor);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioProveedor.add(txtNombreProveedor, gridBagConstraints);
 
         lblTelefonoProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblTelefonoProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        lblTelefonoProveedor.setText("TELEFONO");
-        jpFormularioProveedor.add(lblTelefonoProveedor);
+        lblTelefonoProveedor.setText("<html><font color=white>TELEFONO </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioProveedor.add(lblTelefonoProveedor, gridBagConstraints);
 
         txtTelefonoProveedor.setColumns(10);
         txtTelefonoProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -543,12 +638,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtTelefonoProveedorActionPerformed(evt);
             }
         });
-        jpFormularioProveedor.add(txtTelefonoProveedor);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioProveedor.add(txtTelefonoProveedor, gridBagConstraints);
 
         lblDireccionProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblDireccionProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        lblDireccionProveedor.setText("DIRECCION");
-        jpFormularioProveedor.add(lblDireccionProveedor);
+        lblDireccionProveedor.setText("<html><font color=white>DIRECCION </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioProveedor.add(lblDireccionProveedor, gridBagConstraints);
 
         txtDireccionProveedor.setColumns(10);
         txtDireccionProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -559,18 +665,34 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtDireccionProveedorActionPerformed(evt);
             }
         });
-        jpFormularioProveedor.add(txtDireccionProveedor);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioProveedor.add(txtDireccionProveedor, gridBagConstraints);
 
         lblRazonSocialProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblRazonSocialProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        lblRazonSocialProveedor.setText("RAZON SOCIAL");
-        jpFormularioProveedor.add(lblRazonSocialProveedor);
+        lblRazonSocialProveedor.setText("<html><font color=white>RAZON SOCIAL </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioProveedor.add(lblRazonSocialProveedor, gridBagConstraints);
 
         txtRazonSocialProveedor.setColumns(10);
         txtRazonSocialProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtRazonSocialProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtRazonSocialProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        jpFormularioProveedor.add(txtRazonSocialProveedor);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        jpFormularioProveedor.add(txtRazonSocialProveedor, gridBagConstraints);
 
         jpProveedor.add(jpFormularioProveedor, java.awt.BorderLayout.NORTH);
 
@@ -628,24 +750,33 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpInventario.setLayout(new java.awt.BorderLayout());
 
         jpFormularioInventario.setBackground(new java.awt.Color(74, 101, 114));
-        jpFormularioInventario.setPreferredSize(new java.awt.Dimension(1456, 53));
-        jpFormularioInventario.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+        jpFormularioInventario.setLayout(new java.awt.GridBagLayout());
 
         txtIdProducto.setEditable(false);
         txtIdProducto.setText("0");
-        txtIdProducto.setToolTipText("");
         txtIdProducto.setEnabled(false);
         txtIdProducto.setFocusable(false);
         txtIdProducto.setMinimumSize(new java.awt.Dimension(80, 23));
         txtIdProducto.setOpaque(true);
         txtIdProducto.setPreferredSize(new java.awt.Dimension(80, 23));
         txtIdProducto.setVisible(false);
-        jpFormularioInventario.add(txtIdProducto);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioInventario.add(txtIdProducto, gridBagConstraints);
 
         lblCodigoProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblCodigoProducto.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodigoProducto.setText("CODIGO");
-        jpFormularioInventario.add(lblCodigoProducto);
+        lblCodigoProducto.setText("<html><font color=white>CODIGO </font><font color=F9AA33>*</font></html>");
+        lblCodigoProducto.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioInventario.add(lblCodigoProducto, gridBagConstraints);
 
         txtCodigoProducto.setColumns(10);
         txtCodigoProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -657,12 +788,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtCodigoProductoActionPerformed(evt);
             }
         });
-        jpFormularioInventario.add(txtCodigoProducto);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioInventario.add(txtCodigoProducto, gridBagConstraints);
 
         lblNombreProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNombreProducto.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreProducto.setText("NOMBRE");
-        jpFormularioInventario.add(lblNombreProducto);
+        lblNombreProducto.setText("<html><font color=white>NOMBRE </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioInventario.add(lblNombreProducto, gridBagConstraints);
 
         txtNombreProducto.setColumns(10);
         txtNombreProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -673,12 +815,23 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtNombreProductoActionPerformed(evt);
             }
         });
-        jpFormularioInventario.add(txtNombreProducto);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioInventario.add(txtNombreProducto, gridBagConstraints);
 
         lblPrecioVentaProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioVentaProducto.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrecioVentaProducto.setText("PRECIO VENTA");
-        jpFormularioInventario.add(lblPrecioVentaProducto);
+        lblPrecioVentaProducto.setText("<html><font color=white>PRECIO VENTA </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioInventario.add(lblPrecioVentaProducto, gridBagConstraints);
 
         txtPrecioVentaProducto.setColumns(10);
         txtPrecioVentaProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -689,29 +842,60 @@ public class VentanaMercado extends javax.swing.JFrame {
                 txtPrecioVentaProductoActionPerformed(evt);
             }
         });
-        jpFormularioInventario.add(txtPrecioVentaProducto);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioInventario.add(txtPrecioVentaProducto, gridBagConstraints);
 
-        lblStockProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        lblStockProducto.setForeground(new java.awt.Color(255, 255, 255));
-        lblStockProducto.setText("STOCK");
-        jpFormularioInventario.add(lblStockProducto);
+        lblStotckProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblStotckProducto.setForeground(new java.awt.Color(255, 255, 255));
+        lblStotckProducto.setText("STOCK");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioInventario.add(lblStotckProducto, gridBagConstraints);
 
         txtStockProducto.setColumns(10);
         txtStockProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtStockProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        jpFormularioInventario.add(txtStockProducto);
+        txtStockProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockProductoActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioInventario.add(txtStockProducto, gridBagConstraints);
 
         lblCategoriaProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblCategoriaProducto.setForeground(new java.awt.Color(255, 255, 255));
-        lblCategoriaProducto.setText("CATEGORIA");
-        jpFormularioInventario.add(lblCategoriaProducto);
+        lblCategoriaProducto.setText("<html><font color=white>CATEGORIA </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioInventario.add(lblCategoriaProducto, gridBagConstraints);
 
         jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FRUTAS", "VERDURAS", "LACTEOS", "CARNES", "LIMPIEZA", "PROCESADOS" }));
         jcbCategoriaProducto.setSelectedItem(null);
-        jcbCategoriaProducto.setMinimumSize(new java.awt.Dimension(134, 23));
-        jcbCategoriaProducto.setPreferredSize(new java.awt.Dimension(134, 23));
-        jpFormularioInventario.add(jcbCategoriaProducto);
+        jcbCategoriaProducto.setPreferredSize(new java.awt.Dimension(160, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioInventario.add(jcbCategoriaProducto, gridBagConstraints);
 
         jpInventario.add(jpFormularioInventario, java.awt.BorderLayout.NORTH);
 
@@ -771,99 +955,122 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpComprar.setLayout(new java.awt.BorderLayout());
 
         jpFormularioComprar.setBackground(new java.awt.Color(74, 101, 114));
-        jpFormularioComprar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+        jpFormularioComprar.setLayout(new java.awt.GridBagLayout());
 
         lblCodigoCompra.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblCodigoCompra.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodigoCompra.setText("CODIGO");
-        jpFormularioComprar.add(lblCodigoCompra);
+        lblCodigoCompra.setText("<html><font color=white>CODIGO </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar.add(lblCodigoCompra, gridBagConstraints);
 
         txtCodigoComprar.setColumns(10);
         txtCodigoComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtCodigoComprar.setToolTipText("");
         txtCodigoComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtCodigoComprar.setPreferredSize(new java.awt.Dimension(134, 23));
         txtCodigoComprar.setActionCommand("TextFieldComprar");
         txtCodigoComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoComprarActionPerformed(evt);
             }
         });
-        jpFormularioComprar.add(txtCodigoComprar);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar.add(txtCodigoComprar, gridBagConstraints);
 
         lblNombreCompra.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNombreCompra.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreCompra.setText("NOMBRE");
-        jpFormularioComprar.add(lblNombreCompra);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar.add(lblNombreCompra, gridBagConstraints);
 
         txtNombreComprar.setEditable(false);
         txtNombreComprar.setColumns(10);
         txtNombreComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreComprar.setPreferredSize(new java.awt.Dimension(134, 23));
         txtNombreComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreComprarActionPerformed(evt);
             }
         });
-        jpFormularioComprar.add(txtNombreComprar);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar.add(txtNombreComprar, gridBagConstraints);
 
         lblPrecioCompraComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioCompraComprar.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrecioCompraComprar.setText("PRECIO COMPRA");
-        jpFormularioComprar.add(lblPrecioCompraComprar);
+        lblPrecioCompraComprar.setText("<html><font color=white>PRECIO COMPRA </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar.add(lblPrecioCompraComprar, gridBagConstraints);
 
         txtPrecioCompraComprar.setColumns(10);
         txtPrecioCompraComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtPrecioCompraComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioCompraComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioCompraComprar.setPreferredSize(new java.awt.Dimension(134, 23));
         txtPrecioCompraComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioCompraComprarActionPerformed(evt);
             }
         });
-        jpFormularioComprar.add(txtPrecioCompraComprar);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar.add(txtPrecioCompraComprar, gridBagConstraints);
 
         lblStockComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblStockComprar.setForeground(new java.awt.Color(255, 255, 255));
-        lblStockComprar.setText("STOCK");
-        jpFormularioComprar.add(lblStockComprar);
+        lblStockComprar.setText("<html><font color=white>STOCK </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar.add(lblStockComprar, gridBagConstraints);
 
         txtStockComprar.setColumns(10);
         txtStockComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtStockComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtStockComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        jpFormularioComprar.add(txtStockComprar);
-
-        lblCategoriaComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        lblCategoriaComprar.setForeground(new java.awt.Color(255, 255, 255));
-        lblCategoriaComprar.setText("CATEGORIA");
-        jpFormularioComprar.add(lblCategoriaComprar);
-
-        txtCategoriaComprar.setEditable(false);
-        txtCategoriaComprar.setColumns(10);
-        txtCategoriaComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        txtCategoriaComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        txtCategoriaComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtCategoriaComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        jpFormularioComprar.add(txtCategoriaComprar);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar.add(txtStockComprar, gridBagConstraints);
 
         lblProveedorComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblProveedorComprar.setForeground(new java.awt.Color(255, 255, 255));
-        lblProveedorComprar.setText("PROVEEDOR");
-        jpFormularioComprar.add(lblProveedorComprar);
+        lblProveedorComprar.setText("<html><font color=white>PROVEEDOR </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar.add(lblProveedorComprar, gridBagConstraints);
 
         jcbProveedorComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jcbProveedorComprar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Real Madrid", "Item 2", "Item 3", "Item 4" }));
+        jcbProveedorComprar.setSelectedItem(null);
         jcbProveedorComprar.setToolTipText("");
         jcbProveedorComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jcbProveedorComprar.setMinimumSize(new java.awt.Dimension(134, 23));
-        jcbProveedorComprar.setPreferredSize(new java.awt.Dimension(134, 23));
-        jpFormularioComprar.add(jcbProveedorComprar);
+        jcbProveedorComprar.setPreferredSize(new java.awt.Dimension(160, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar.add(jcbProveedorComprar, gridBagConstraints);
 
         jpComprar.add(jpFormularioComprar, java.awt.BorderLayout.NORTH);
 
@@ -873,7 +1080,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaComprar.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID", "CODIGO", "NOMBRE", "PRECIO COMPRA","CATEGORIA", "STOCK"
+                        "ID", "CODIGO", "PRODUCTO", "STOCK", "PRECIO"
                 }
         ));
         DefaultTableModel b = (DefaultTableModel) jtTablaComprar.getModel();
@@ -951,92 +1158,136 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpVender.setLayout(new java.awt.BorderLayout());
 
         jpFormularioComprar1.setBackground(new java.awt.Color(74, 101, 114));
-        jpFormularioComprar1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+        jpFormularioComprar1.setLayout(new java.awt.GridBagLayout());
 
         lblCodigoVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblCodigoVender.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodigoVender.setText("CODIGO");
-        jpFormularioComprar1.add(lblCodigoVender);
+        lblCodigoVender.setText("<html><font color=white>CODIGO </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar1.add(lblCodigoVender, gridBagConstraints);
 
+        txtCodigoVender.setEditable(false);
         txtCodigoVender.setColumns(10);
         txtCodigoVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtCodigoVender.setToolTipText("");
         txtCodigoVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtCodigoVender.setPreferredSize(new java.awt.Dimension(134, 23));
         txtCodigoVender.setActionCommand("TextFieldVender");
         txtCodigoVender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoVenderActionPerformed(evt);
             }
         });
-        jpFormularioComprar1.add(txtCodigoVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(txtCodigoVender, gridBagConstraints);
 
         lblNombreVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblNombreVender.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreVender.setText("NOMBRE");
-        jpFormularioComprar1.add(lblNombreVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar1.add(lblNombreVender, gridBagConstraints);
 
         txtNombreVender.setEditable(false);
         txtNombreVender.setColumns(10);
         txtNombreVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreVender.setPreferredSize(new java.awt.Dimension(134, 23));
         txtNombreVender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreVenderActionPerformed(evt);
             }
         });
-        jpFormularioComprar1.add(txtNombreVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(txtNombreVender, gridBagConstraints);
 
         lblPrecioVentaVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioVentaVender.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioVentaVender.setText("PRECIO VENTA");
-        jpFormularioComprar1.add(lblPrecioVentaVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar1.add(lblPrecioVentaVender, gridBagConstraints);
 
         txtPrecioVentaVender.setEditable(false);
         txtPrecioVentaVender.setColumns(10);
         txtPrecioVentaVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtPrecioVentaVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioVentaVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioVentaVender.setPreferredSize(new java.awt.Dimension(134, 23));
         txtPrecioVentaVender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioVentaVenderActionPerformed(evt);
             }
         });
-        jpFormularioComprar1.add(txtPrecioVentaVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(txtPrecioVentaVender, gridBagConstraints);
 
         lblStockVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblStockVender.setForeground(new java.awt.Color(255, 255, 255));
-        lblStockVender.setText("STOCK");
-        jpFormularioComprar1.add(lblStockVender);
+        lblStockVender.setText("<html><font color=white>STOCK </font><font color=F9AA33>*</font></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar1.add(lblStockVender, gridBagConstraints);
 
         txtStockVender.setColumns(10);
         txtStockVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtStockVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtStockVender.setPreferredSize(new java.awt.Dimension(134, 23));
         txtStockVender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockVenderActionPerformed(evt);
             }
         });
-        jpFormularioComprar1.add(txtStockVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(txtStockVender, gridBagConstraints);
 
         lblClienteVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblClienteVender.setForeground(new java.awt.Color(255, 255, 255));
-        lblClienteVender.setText("CLIENTE");
-        jpFormularioComprar1.add(lblClienteVender);
+        lblClienteVender.setText("<html><font color=white>CLIENTE </font><font color=F9AA33>*</font></html>");
+        lblClienteVender.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        jpFormularioComprar1.add(lblClienteVender, gridBagConstraints);
 
         jcbClienteVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jcbClienteVender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbClienteVender.setSelectedItem(null);
         jcbClienteVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbClienteVender.setMinimumSize(new java.awt.Dimension(160, 23));
         jcbClienteVender.setName(""); // NOI18N
         jcbClienteVender.setPreferredSize(new java.awt.Dimension(160, 23));
-        jpFormularioComprar1.add(jcbClienteVender);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(jcbClienteVender, gridBagConstraints);
 
         jpVender.add(jpFormularioComprar1, java.awt.BorderLayout.NORTH);
 
@@ -1123,7 +1374,12 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpSuperiorCompras.setBackground(new java.awt.Color(74, 101, 114));
         jpSuperiorCompras.setPreferredSize(new java.awt.Dimension(1307, 53));
-        jpSuperiorCompras.add(filler9);
+        jpSuperiorCompras.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 15));
+
+        lblRegistroCompras.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        lblRegistroCompras.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegistroCompras.setText("REGISTRO COMPRAS");
+        jpSuperiorCompras.add(lblRegistroCompras);
 
         jpCompras.add(jpSuperiorCompras, java.awt.BorderLayout.NORTH);
 
@@ -1133,7 +1389,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaCompras.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","PRODUCTOS", "PRECIO", "CANTIDAD", "PRECIO TOTAL", "CANTIDAD TOTAL", "PROVEEDOR"
+                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "PROVEEDOR"
                 }
         ));
         jtTablaCompras.getTableHeader().setResizingAllowed(false);
@@ -1158,7 +1414,12 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         jpSuperiorVentas.setBackground(new java.awt.Color(74, 101, 114));
         jpSuperiorVentas.setPreferredSize(new java.awt.Dimension(1307, 53));
-        jpSuperiorVentas.add(filler11);
+        jpSuperiorVentas.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+
+        lblRegistroVentas.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        lblRegistroVentas.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegistroVentas.setText("REGISTRO VENTAS");
+        jpSuperiorVentas.add(lblRegistroVentas);
 
         jpVentas.add(jpSuperiorVentas, java.awt.BorderLayout.NORTH);
 
@@ -1168,8 +1429,8 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaVentas.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","PRODUCTOS", "PRECIO", "CANTIDAD", "PRECIO TOTAL", "CANTIDAD TOTAL", "CLIENTE"
-                        + ""
+                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "CLIENTE"
+
                 }
         ));
         jtTablaVentas.getTableHeader().setResizingAllowed(false);
@@ -1318,18 +1579,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void txtPrecioVentaProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void txtNombreVenderActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -1339,6 +1588,22 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     private void txtPrecioVentaVenderActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void txtCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void txtPrecioVentaProductoActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void txtStockProductoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -1552,33 +1817,78 @@ public class VentanaMercado extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            for(JButton boton: botonesPrincipal)
+            {
+                if((boolean)boton.getClientProperty("seleccionado"))
+                {
+                    boton.setForeground(Color.white);
+                    boton.putClientProperty("seleccionado", false);
+                    if(boton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/cliente.png")));
+                    }
+                    if(boton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/proveedor.png")));
+                    }
+                    if(boton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/inventario.png")));
+                    }
+                    if(boton.getActionCommand().equalsIgnoreCase("COMPRAR"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/compra.png")));
+                    }
+                    if(boton.getActionCommand().equalsIgnoreCase("VENDER"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/venta.png")));
+                    }
+                    if(boton.getActionCommand().equalsIgnoreCase("COMPRAS"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                    }
+                    if(boton.getActionCommand().equalsIgnoreCase("VENTAS"))
+                    {
+                        boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                    }
+                }
+            }
+
+            JButton auxBoton = ((JButton) e.getSource());
             if (e.getActionCommand().equalsIgnoreCase("CLIENTES"))
             {
                 pagCliente();
+                auxBoton.putClientProperty("seleccionado", true);
             }
             if (e.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
             {
                 pagProveedor();
+                auxBoton.putClientProperty("seleccionado", true);
             }
             if (e.getActionCommand().equalsIgnoreCase("INVENTARIO"))
             {
                 pagInventario();
+                auxBoton.putClientProperty("seleccionado", true);
             }
             if (e.getActionCommand().equalsIgnoreCase("COMPRAR"))
             {
                 pagComprar();
+                auxBoton.putClientProperty("seleccionado", true);
             }
             if (e.getActionCommand().equalsIgnoreCase("VENDER"))
             {
                 pagVender();
+                auxBoton.putClientProperty("seleccionado", true);
             }
             if (e.getActionCommand().equalsIgnoreCase("COMPRAS"))
             {
                 pagCompras();
+                auxBoton.putClientProperty("seleccionado", true);
             }
             if (e.getActionCommand().equalsIgnoreCase("VENTAS"))
             {
                 pagVentas();
+                auxBoton.putClientProperty("seleccionado", true);
             }
         }
     }
@@ -1590,34 +1900,37 @@ public class VentanaMercado extends javax.swing.JFrame {
         public void mouseEntered(MouseEvent arg0)
         {
             JButton auxBoton = (JButton)arg0.getSource();
-            auxBoton.setForeground(new Color(249,170,51));
-            if(auxBoton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+            if(!(boolean)auxBoton.getClientProperty("seleccionado"))
             {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/clienteSeleccionado.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/proveedorSeleccionado.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/inventarioSeleccionado.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAR"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/compraSeleccionada.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("VENDER"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/ventaSeleccionada.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAS"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/facturaSeleccionada.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("VENTAS"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                auxBoton.setForeground(new Color(249,170,51));
+                if(auxBoton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/clienteSeleccionado.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/proveedorSeleccionado.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/inventarioSeleccionado.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAR"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/compraSeleccionada.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("VENDER"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/ventaSeleccionada.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAS"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/facturaSeleccionada.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("VENTAS"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/facturaSeleccionada.png")));
+                }
             }
         }
 
@@ -1625,35 +1938,37 @@ public class VentanaMercado extends javax.swing.JFrame {
         public void mouseExited(MouseEvent e)
         {
             JButton auxBoton = (JButton)e.getSource();
-            auxBoton.setForeground(Color.white);
-            if(auxBoton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+            if(!(boolean)auxBoton.getClientProperty("seleccionado"))
             {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/cliente.png")));
-
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/proveedor.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/inventario.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAR"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/compra.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("VENDER"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/venta.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAS"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
-            }
-            if(auxBoton.getActionCommand().equalsIgnoreCase("VENTAS"))
-            {
-                auxBoton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                auxBoton.setForeground(Color.white);
+                if(auxBoton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/cliente.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/proveedor.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/inventario.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAR"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/compra.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("VENDER"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/venta.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("COMPRAS"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                }
+                if(auxBoton.getActionCommand().equalsIgnoreCase("VENTAS"))
+                {
+                    auxBoton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                }
             }
         }
     }
@@ -1806,7 +2121,6 @@ public class VentanaMercado extends javax.swing.JFrame {
                 setNombreComprar("");
                 setPrecioCompraComprar("");
                 setStockComprar("");
-                setCategoriaComprar("");
             }
             else
             {
@@ -1814,7 +2128,6 @@ public class VentanaMercado extends javax.swing.JFrame {
                 setNombreComprar(String.valueOf(tabla.getValueAt(fila , 1)));
                 setPrecioCompraComprar(String.valueOf(tabla.getValueAt(fila , 2)));
                 setStockComprar(String.valueOf(tabla.getValueAt(fila , 3)));
-                setCategoriaComprar(String.valueOf(tabla.getValueAt(fila , 4)));
 
                 txtCodigoComprar.setEditable(false);
                 txtPrecioCompraComprar.setEditable(false);
@@ -2071,11 +2384,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtStockComprar.setText(txt);
     }
 
-    public void setCategoriaComprar(String txt)
-    {
-        txtCategoriaComprar.setText(txt);
-    }
-
     public void setPrecioTotalComprar(String txt)
     {
         lblPrecioTotalComprar.setText("PRECIO TOTAL : " + txt);
@@ -2223,31 +2531,16 @@ public class VentanaMercado extends javax.swing.JFrame {
         return txtStockComprar.getText();
     }
 
-    public String getCategoriaComprar()
-    {
-        return txtCategoriaComprar.getText();
-    }
-
     /*public Producto getProveedorComprar()
     {
         return jcbProveedorComprar.getSelectedItem();
     }*/
 
     //=====|Vender|=====//
-    public String getCodigoVender()
+    /*public Cliente getClienteVender()
     {
-        return txtCodigoVender.getText();
-    }
-
-    public String getNombreVender()
-    {
-        return txtNombreVender.getText();
-    }
-
-    public String getPrecioVentaVender()
-    {
-        return txtPrecioVentaVender.getText();
-    }
+        return jcbClienteVender.getSelectedItem();
+    }*/
 
     public String getStockVender()
     {
@@ -2307,7 +2600,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
     public void addTextFieldComprarListener(ActionListener listenControles)
     {
-        txtCodigoComprar.addActionListener(listenControles);
+        txtCodigoVender.addActionListener(listenControles);
     }
 
     public void addTextFieldVenderListener(ActionListener listenControles)
@@ -2344,6 +2637,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
 
+    private ArrayList<JButton> botonesPrincipal;
     // Variables declaration - do not modify
     private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton btnAgregarCompra;
@@ -2369,7 +2663,6 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JButton btnVentas;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
-    private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
@@ -2378,7 +2671,6 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
-    private javax.swing.Box.Filler filler9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> jcbCategoriaProducto;
     private javax.swing.JComboBox<String> jcbClienteVender;
@@ -2426,7 +2718,6 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JTable jtTablaProveedor;
     private javax.swing.JTable jtTablaVender;
     private javax.swing.JTable jtTablaVentas;
-    private javax.swing.JLabel lblCategoriaComprar;
     private javax.swing.JLabel lblCategoriaProducto;
     private javax.swing.JLabel lblClienteVender;
     private javax.swing.JLabel lblCodigoCompra;
@@ -2451,13 +2742,14 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblProductosTotalesVender;
     private javax.swing.JLabel lblProveedorComprar;
     private javax.swing.JLabel lblRazonSocialProveedor;
+    private javax.swing.JLabel lblRegistroCompras;
+    private javax.swing.JLabel lblRegistroVentas;
     private javax.swing.JLabel lblStockComprar;
-    private javax.swing.JLabel lblStockProducto;
     private javax.swing.JLabel lblStockVender;
+    private javax.swing.JLabel lblStotckProducto;
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTelefonoProveedor;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtCategoriaComprar;
     private javax.swing.JTextField txtCodigoComprar;
     private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtCodigoVender;
@@ -2484,6 +2776,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefonoProveedor;
     // End of variables declaration
 }
+
 
 
 
