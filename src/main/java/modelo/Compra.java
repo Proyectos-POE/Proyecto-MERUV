@@ -18,7 +18,7 @@ public class Compra implements Serializable
     private ArrayList<Producto> productosCompra;
     private int cantidadProductos;
     private Fecha fecha;
-    Compra(Proveedor auxProveedor, double auxValorTotal, ArrayList<Producto> auxProductosCompra, int auxCantidadProductos, Fecha auxFecha)
+    public Compra(Proveedor auxProveedor, double auxValorTotal, ArrayList<Producto> auxProductosCompra, int auxCantidadProductos, Fecha auxFecha)
     {
         numero++;
         id=numero;
@@ -92,5 +92,43 @@ public class Compra implements Serializable
     public void setFecha(Fecha auxFecha)
     {
         this.fecha = auxFecha;
+    }
+
+    public String getNombresProductosCompra()
+    {
+        String auxProductos;
+        auxProductos = "";
+        for (Producto producto : productosCompra)
+        {
+            auxProductos = auxProductos + producto.getNombre() + "\n";
+        }
+        System.out.println(productosCompra.size());
+        System.out.println(auxProductos.length());
+        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
+        return auxProductos;
+    }
+
+    public String getPreciosProductosCompra()
+    {
+        String auxProductos;
+        auxProductos = "";
+        for (Producto producto : productosCompra)
+        {
+            auxProductos = auxProductos + producto.getPrecioCompra() + "\n";
+        }
+        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
+        return auxProductos;
+    }
+
+    public String getStockProductosCompra()
+    {
+        String auxProductos;
+        auxProductos = "";
+        for (Producto producto : productosCompra)
+        {
+            auxProductos = auxProductos + producto.getStock() + "\n";
+        }
+        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
+        return auxProductos;
     }
 }

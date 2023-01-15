@@ -55,6 +55,18 @@ public class ProductoDao
         }
         return false;
     }
+
+    public Producto getProductoCodigo(long auxCodigo)
+    {
+        Producto auxProducto = null;
+        for (Producto producto : productos) {
+            if (producto.getCodigo() == auxCodigo) {
+                auxProducto = producto;
+                break;
+            }
+        }
+        return auxProducto;
+    }
     
     public ArrayList<Producto> getProductos()
     {

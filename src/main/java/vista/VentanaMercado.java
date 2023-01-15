@@ -4,28 +4,23 @@
  */
 package vista;
 
+import modelo.Cliente;
+import modelo.Proveedor;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -1059,7 +1054,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpFormularioComprar.add(lblProveedorComprar, gridBagConstraints);
 
         jcbProveedorComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jcbProveedorComprar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Real Madrid", "Item 2", "Item 3", "Item 4" }));
         jcbProveedorComprar.setSelectedItem(null);
         jcbProveedorComprar.setToolTipText("");
         jcbProveedorComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1083,7 +1077,6 @@ public class VentanaMercado extends javax.swing.JFrame {
                 }
         ));
         DefaultTableModel b = (DefaultTableModel) jtTablaComprar.getModel();
-        b.addRow(new Object[]{1,1,1,1,1,1});
         jtTablaComprar.getTableHeader().setResizingAllowed(false);
         jtTablaComprar.getTableHeader().setReorderingAllowed(false);
         jspTablaComprar.setViewportView(jtTablaComprar);
@@ -1275,7 +1268,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpFormularioComprar1.add(lblClienteVender, gridBagConstraints);
 
         jcbClienteVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jcbClienteVender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbClienteVender.setSelectedItem(null);
         jcbClienteVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbClienteVender.setMinimumSize(new java.awt.Dimension(160, 23));
@@ -1388,7 +1380,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaCompras.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "PROVEEDOR"
+                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "PROVEEDOR", "FECHA"
                 }
         ));
         jtTablaCompras.getTableHeader().setResizingAllowed(false);
@@ -1428,7 +1420,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaVentas.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "CLIENTE"
+                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "CLIENTE", "FECHA"
 
                 }
         ));
@@ -2126,10 +2118,10 @@ public class VentanaMercado extends javax.swing.JFrame {
             }
             else
             {
-                setCodigoComprar(String.valueOf(tabla.getValueAt(fila , 0)));
-                setNombreComprar(String.valueOf(tabla.getValueAt(fila , 1)));
-                setPrecioCompraComprar(String.valueOf(tabla.getValueAt(fila , 2)));
-                setStockComprar(String.valueOf(tabla.getValueAt(fila , 3)));
+                setCodigoComprar(String.valueOf(tabla.getValueAt(fila , 1)));
+                setNombreComprar(String.valueOf(tabla.getValueAt(fila , 2)));
+                setPrecioCompraComprar(String.valueOf(tabla.getValueAt(fila , 3)));
+                setStockComprar(String.valueOf(tabla.getValueAt(fila , 4)));
 
                 txtCodigoComprar.setEditable(false);
                 txtPrecioCompraComprar.setEditable(false);
@@ -2231,6 +2223,21 @@ public class VentanaMercado extends javax.swing.JFrame {
     public void deseleccionarFilaTablaComprar()
     {
         jtTablaComprar.getSelectionModel().clearSelection();
+    }
+
+    public void activarTxtCodigoComprar()
+    {
+        txtCodigoComprar.setEditable(true);
+    }
+
+    public void activarTxtPrecioComprar()
+    {
+        txtPrecioCompraComprar.setEditable(true);
+    }
+
+    public void activarTxtStockComprar()
+    {
+        txtStockComprar.setEditable(true);
     }
 
     //=====|Vender|=====//
@@ -2396,6 +2403,10 @@ public class VentanaMercado extends javax.swing.JFrame {
         lblProductosTotalesComprar.setText("PRODUCTO TOTALES : " + txt);
     }
 
+    public void setProveedorComprar(Proveedor auxProveedor)
+    {
+        jcbProveedorComprar.setSelectedItem(auxProveedor);
+    }
     //=====|Vender|=====//
     public void setCodigoVender(String txt)
     {
@@ -2553,10 +2564,10 @@ public class VentanaMercado extends javax.swing.JFrame {
         return txtStockComprar.getText();
     }
 
-    /*public Producto getProveedorComprar()
+    public Proveedor getProveedorComprar()
     {
-        return jcbProveedorComprar.getSelectedItem();
-    }*/
+        return (Proveedor) jcbProveedorComprar.getSelectedItem();
+    }
 
     //=====|Vender|=====//
     /*public Cliente getClienteVender()
@@ -2576,10 +2587,11 @@ public class VentanaMercado extends javax.swing.JFrame {
 
     //==========|Rellenar y Vaciar JComboBox|==========//
     //=====|Comprar|=====//
-    /*public void rellenarProveedorComprar(Proveedor auxProveedor)
+
+    public void rellenarProveedorComprar(Proveedor auxProveedor)
     {
         jcbProveedorComprar.addItem(auxProveedor);
-    }*/
+    }
 
     public void vaciarProveedorComprar()
     {
@@ -2608,12 +2620,12 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     //==========|Mensajes Emergentes|==========//
-    public void mostarMensajeError(String auxMensaje)
+    public void mostrarMensajeError(String auxMensaje)
     {
         JOptionPane.showMessageDialog(this, auxMensaje, "", JOptionPane.ERROR_MESSAGE);
     }
 
-    public void mostarMensaje(String auxMensaje)
+    public void mostrarMensaje(String auxMensaje)
     {
         JOptionPane.showMessageDialog(this, auxMensaje);
     }
@@ -2622,7 +2634,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
     public void addTextFieldComprarListener(ActionListener listenControles)
     {
-        txtCodigoVender.addActionListener(listenControles);
+        txtCodigoComprar.addActionListener(listenControles);
     }
 
     public void addTextFieldVenderListener(ActionListener listenControles)
@@ -2695,8 +2707,8 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> jcbCategoriaProducto;
-    private javax.swing.JComboBox<String> jcbClienteVender;
-    private javax.swing.JComboBox<String> jcbProveedorComprar;
+    private javax.swing.JComboBox<Cliente> jcbClienteVender;
+    private javax.swing.JComboBox<Proveedor> jcbProveedorComprar;
     private javax.swing.JPanel jpBotones;
     private javax.swing.JPanel jpBotonesCliente;
     private javax.swing.JPanel jpBotonesComprar;

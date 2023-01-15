@@ -166,6 +166,11 @@ public class Empresa
         return this.compraDao.getCompra(auxId);
     }
 
+    public Producto getProductoCodigo(long auxCodigo)
+    {
+        return productoDao.getProductoCodigo(auxCodigo);
+    }
+
     //----------|CarritoCompra|----------//
     public ArrayList<Producto> getCarritoCompra()
     {
@@ -182,7 +187,7 @@ public class Empresa
         return carritoCompra.agregarProductoCarrito(auxProducto);
     }
 
-    public boolean eliminarProductoCarritoCompra(Producto auxProducto)
+    public boolean eliminarProductoCarritoCompra(int auxProducto)
     {
         return carritoCompra.eliminarProductoCarrito(auxProducto);
     }
@@ -228,7 +233,7 @@ public class Empresa
         return carritoVenta.agregarProductoCarrito(auxProducto);
     }
 
-    public boolean eliminarProductoCarritoVenta(Producto auxProducto)
+    public boolean eliminarProductoCarritoVenta(int auxProducto)
     {
         return carritoVenta.eliminarProductoCarrito(auxProducto);
     }
