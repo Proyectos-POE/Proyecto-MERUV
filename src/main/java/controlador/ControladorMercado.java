@@ -1,8 +1,6 @@
 package controlador;
 
-import modelo.Cliente;
-import modelo.Proveedor;
-import modelo.Empresa;
+import modelo.*;
 import vista.VentanaMercado;
 
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +31,12 @@ public class ControladorMercado
         this.ventanaMercado.addBtnAgregarProveedorListener(proveedorListener);
         this.ventanaMercado.addBtnEditarProveedorListener(proveedorListener);
         this.ventanaMercado.addBtnEliminarProveedorListener(proveedorListener);
+        
+        //----------|Proveedor|----------//
+        ProductoListener productoListener = new ProductoListener();
+        this.ventanaMercado.addBtnAgregarProductoListener(productoListener);
+        this.ventanaMercado.addBtnEditarProductoListener(productoListener);
+        this.ventanaMercado.addBtnEliminarProductoListener(productoListener);
 
     }
 
@@ -530,6 +534,252 @@ public class ControladorMercado
     {
         DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
         int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
+        auxModeloTabla.removeRow(auxFila);
+    }
+    
+    //----------|Proveedor|----------//
+    
+    class ProductoListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e.getActionCommand().equalsIgnoreCase("AGREGAR"))
+            {
+                agregarProducto();
+                System.out.print(superMercadoUV.getProductos());
+            }
+            if (e.getActionCommand().equalsIgnoreCase("EDITAR"))
+            {
+                editarProducto();
+                System.out.print(superMercadoUV.getProductos());
+            }
+            if (e.getActionCommand().equalsIgnoreCase("ELIMINAR"))
+            {
+                eliminarProducto();
+            }
+        }
+    }
+    
+    private boolean comprobarCamposProducto()
+    {
+        boolean camposValido;
+        camposValido = true;
+        if(ventanaMercado.getNombreProducto().equals("") || ventanaMercado.getCodigoProducto().equals("") || ventanaMercado.getPrecioVentaProducto().equals("") || ventanaMercado.getCategoriaProducto().equals(""))
+        {
+            camposValido = false;
+        }
+        return camposValido;
+    }
+
+    private boolean comprobarCodigoProducto(int auxId, long auxCodigo)
+    {
+        boolean codigoValido;
+        codigoValido = true;
+        ArrayList<Producto> auxProductos;
+        auxProductos = superMercadoUV.getProductos();
+        for(Producto producto : auxProductos)
+        {
+            if(producto.getCodigo() == auxCodigo && producto.getId() != auxId)
+            {
+                codigoValido = false;
+            }
+        }
+        return codigoValido;
+    }
+    
+    private void agregarProducto()
+    {
+        Producto auxProducto;
+        int auxId;
+        long auxCodigo;
+        String auxNombre;
+        double auxPrecioVenta;
+        String auxCategoria;
+
+        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
+        if(auxId == 0)
+        {
+            if(comprobarCamposProducto())
+            {
+                try
+                {
+                    auxCodigo = Long.parseLong(ventanaMercado.getCodigoProducto());
+                    auxNombre = ventanaMercado.getNombreProducto();
+                    auxPrecioVenta = Double.parseDouble(ventanaMercado.getPrecioVentaProducto());
+                    auxCategoria = ventanaMercado.getCategoriaProducto();
+
+                    if(comprobarCodigoProducto(0 ,auxCodigo))
+                    {
+                        auxProducto = new Producto(auxCodigo, auxNombre, auxPrecioVenta, auxCategoria);
+                        if(superMercadoUV.agregarProducto(auxProducto))
+                        {
+                            ventanaMercado.mostarMensaje("Producto agregado con exito");
+                            ventanaMercado.setIdProducto("0");
+                            ventanaMercado.setCodigoProducto("");
+                            ventanaMercado.setNombreProducto("");
+                            ventanaMercado.setPrecioVentaProducto("");
+                            ventanaMercado.setStockProducto("");
+                            ventanaMercado.setCategoriaProducto(null);
+                            listarProductosAgregar(auxProducto);
+                        }
+                        else
+                        {
+                            ventanaMercado.mostarMensajeError("Producto no agregado");
+                        }
+                    }
+                    else
+                    {
+                        ventanaMercado.mostarMensajeError("Codigo ya registrado");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    ventanaMercado.mostarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
+                }
+            }
+            else
+            {
+                ventanaMercado.mostarMensajeError("Rellene todos los campos");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostarMensajeError("Deseleccione el producto");
+        }
+    }
+    
+    private void editarProducto()
+    {
+        Producto auxProducto;
+        int auxId;
+        long auxCodigo;
+        String auxNombre;
+        double auxPrecioVenta;
+        String auxCategoria;
+
+        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
+        auxProducto = superMercadoUV.getProducto(auxId);
+
+        if(auxProducto != null)
+        {
+            if(comprobarCamposProducto())
+            {
+                try
+                {
+                    auxNombre = ventanaMercado.getNombreProducto();
+                    auxPrecioVenta = Double.parseDouble(ventanaMercado.getPrecioVentaProducto());
+                    
+                    auxProducto.setNombre(auxNombre);
+                    auxProducto.setPrecioVenta(auxPrecioVenta);
+                    
+                    if(superMercadoUV.actualizarProducto(auxProducto))
+                    {
+                        ventanaMercado.mostarMensaje("Producto editado con exito");
+                        ventanaMercado.setIdProducto("0");
+                        ventanaMercado.setCodigoProducto("");
+                        ventanaMercado.setNombreProducto("");
+                        ventanaMercado.setPrecioVentaProducto("");
+                        ventanaMercado.setStockProducto("");
+                        ventanaMercado.setCategoriaProducto(null);
+                        ventanaMercado.activarCategoriaProducto();
+                        ventanaMercado.activarCodigoProducto();
+                        listarProductosEditar(auxProducto);
+                        ventanaMercado.deseleccionarFilaTablaInventario();
+                    }
+                    else
+                    {
+                        ventanaMercado.mostarMensajeError("Producto no editado");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    ventanaMercado.mostarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
+                }
+            }
+            else
+            {
+                ventanaMercado.mostarMensajeError("Rellene todos los campos");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostarMensajeError("Seleccione un producto");
+        }
+
+    }
+
+    private void eliminarProducto()
+    {
+        Producto auxProducto;
+        int auxId;
+        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
+        auxProducto = superMercadoUV.getProducto(auxId);
+
+        if(auxProducto != null)
+        {
+            if(superMercadoUV.eliminarProducto(auxProducto))
+            {
+                ventanaMercado.mostarMensaje("Producto eliminado con exito");
+                ventanaMercado.setIdProducto("0");
+                ventanaMercado.setCodigoProducto("");
+                ventanaMercado.setNombreProducto("");
+                ventanaMercado.setPrecioVentaProducto("");
+                ventanaMercado.setStockProducto("");
+                ventanaMercado.setCategoriaProducto(null);
+                ventanaMercado.activarCategoriaProducto();
+                ventanaMercado.activarCodigoProducto();
+                listarProductosEliminar();
+                ventanaMercado.deseleccionarFilaTablaInventario();
+            }
+            else
+            {
+                ventanaMercado.mostarMensajeError("Producto no eliminado");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostarMensajeError("Seleccione un producto");
+        }
+    }
+
+    private void listarProductosAgregar(Producto auxProducto)
+    {
+        int auxId = auxProducto.getId();
+        long auxCodigo = auxProducto.getCodigo();
+        String auxNombre = auxProducto.getNombre();
+        double auxPrecioVenta = auxProducto.getPrecioVenta();
+        int auxStock = auxProducto.getStock();
+        String auxCategoria = auxProducto.getCategoria();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProducto();
+        auxModeloTabla.addRow(new Object[]{auxId, auxCodigo, auxNombre, auxPrecioVenta, auxStock, auxCategoria});
+    }
+
+    private void listarProductosEditar(Producto auxProducto)
+    {
+        int auxId = auxProducto.getId();
+        long auxCodigo = auxProducto.getCodigo();
+        String auxNombre = auxProducto.getNombre();
+        double auxPrecioVenta = auxProducto.getPrecioVenta();
+        int auxStock = auxProducto.getStock();
+        String auxCategoria = auxProducto.getCategoria();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProducto();
+        int auxFila = ventanaMercado.getFilaSeleccionadaProducto();
+
+        auxModeloTabla.setValueAt(auxId, auxFila, 0);
+        auxModeloTabla.setValueAt(auxCodigo, auxFila, 1);
+        auxModeloTabla.setValueAt(auxNombre, auxFila, 2);
+        auxModeloTabla.setValueAt(auxPrecioVenta, auxFila, 3);
+        auxModeloTabla.setValueAt(auxStock, auxFila, 4);
+        auxModeloTabla.setValueAt(auxCategoria, auxFila, 5);
+    }
+
+    private void listarProductosEliminar()
+    {
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProducto();
+        int auxFila = ventanaMercado.getFilaSeleccionadaProducto();
         auxModeloTabla.removeRow(auxFila);
     }
 }

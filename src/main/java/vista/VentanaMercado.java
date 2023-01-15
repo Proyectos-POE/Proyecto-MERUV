@@ -887,7 +887,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         jpFormularioInventario.add(lblCategoriaProducto, gridBagConstraints);
 
-        jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FRUTAS", "VERDURAS", "LACTEOS", "CARNES", "LIMPIEZA", "PROCESADOS" }));
+        jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FRUTAS", "VERDURAS", "LACTEOS", "CARNES", "LIMPIEZA", "PROCESADOS", "OTROS" }));
         jcbCategoriaProducto.setSelectedItem(null);
         jcbCategoriaProducto.setPreferredSize(new java.awt.Dimension(160, 23));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -909,7 +909,6 @@ public class VentanaMercado extends javax.swing.JFrame {
                 }
         ));
         DefaultTableModel a = (DefaultTableModel) jtTablaInventario.getModel();
-        a.addRow(new Object[]{1,1,1,1,1,"FRUTAS"});
         jtTablaInventario.getTableHeader().setResizingAllowed(false);
         jtTablaInventario.getTableHeader().setReorderingAllowed(false);
         jspTablaInventario.setViewportView(jtTablaInventario);
@@ -1817,44 +1816,47 @@ public class VentanaMercado extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            for(JButton boton: botonesPrincipal)
+            JButton auxBoton = ((JButton) e.getSource());
+            if(!(boolean)auxBoton.getClientProperty("seleccionado"))
             {
-                if((boolean)boton.getClientProperty("seleccionado"))
+                for(JButton boton: botonesPrincipal)
                 {
-                    boton.setForeground(Color.white);
-                    boton.putClientProperty("seleccionado", false);
-                    if(boton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+                    if((boolean)boton.getClientProperty("seleccionado"))
                     {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/cliente.png")));
-                    }
-                    if(boton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
-                    {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/proveedor.png")));
-                    }
-                    if(boton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
-                    {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/inventario.png")));
-                    }
-                    if(boton.getActionCommand().equalsIgnoreCase("COMPRAR"))
-                    {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/compra.png")));
-                    }
-                    if(boton.getActionCommand().equalsIgnoreCase("VENDER"))
-                    {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/venta.png")));
-                    }
-                    if(boton.getActionCommand().equalsIgnoreCase("COMPRAS"))
-                    {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
-                    }
-                    if(boton.getActionCommand().equalsIgnoreCase("VENTAS"))
-                    {
-                        boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                        boton.setForeground(Color.white);
+                        boton.putClientProperty("seleccionado", false);
+                        if(boton.getActionCommand().equalsIgnoreCase("CLIENTES"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/cliente.png")));
+                        }
+                        if(boton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/proveedor.png")));
+                        }
+                        if(boton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/inventario.png")));
+                        }
+                        if(boton.getActionCommand().equalsIgnoreCase("COMPRAR"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/compra.png")));
+                        }
+                        if(boton.getActionCommand().equalsIgnoreCase("VENDER"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/venta.png")));
+                        }
+                        if(boton.getActionCommand().equalsIgnoreCase("COMPRAS"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                        }
+                        if(boton.getActionCommand().equalsIgnoreCase("VENTAS"))
+                        {
+                            boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                        }
                     }
                 }
             }
 
-            JButton auxBoton = ((JButton) e.getSource());
             if (e.getActionCommand().equalsIgnoreCase("CLIENTES"))
             {
                 pagCliente();
@@ -2205,7 +2207,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         return jtTablaInventario.getModel();
     }
 
-    public int getFilaSeleccionadaProdcuto()
+    public int getFilaSeleccionadaProducto()
     {
         return jtTablaInventario.getSelectedRow();
     }
@@ -2497,7 +2499,12 @@ public class VentanaMercado extends javax.swing.JFrame {
 
     public String getNombreProducto()
     {
-        return txtNombreProveedor.getText();
+        return txtNombreProducto.getText();
+    }
+    
+    public String getCodigoProducto()
+    {
+        return txtCodigoProducto.getText();
     }
 
     public String getPrecioVentaProducto()
@@ -2508,6 +2515,21 @@ public class VentanaMercado extends javax.swing.JFrame {
     public String getStockProducto()
     {
         return txtStockProducto.getText();
+    }
+    
+    public String getCategoriaProducto()
+    {
+        return (String) jcbCategoriaProducto.getSelectedItem();
+    }
+    
+    public void activarCodigoProducto()
+    {
+        txtCodigoProducto.setEditable(true);
+    }
+    
+    public void activarCategoriaProducto()
+    {
+        jcbCategoriaProducto.setEnabled(true);
     }
 
     //=====|Comprar|=====//
