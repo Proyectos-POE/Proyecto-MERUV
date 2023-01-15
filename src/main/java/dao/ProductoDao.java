@@ -24,7 +24,7 @@ public class ProductoDao
         Producto auxProducto = null;
         for(Producto producto: productos)
         {
-            if(producto.getId() == auxId)
+            if(producto.getId()== auxId)
             {
                 auxProducto = producto;
                 break;
