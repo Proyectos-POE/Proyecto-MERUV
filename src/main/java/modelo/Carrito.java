@@ -26,7 +26,7 @@ public class Carrito
         return carrito.get(auxId);
     }
 
-    public boolean eliminarProductoCarrito(Producto auxProducto)
+    public boolean eliminarProductoCarrito(int auxProducto)
     {
         carrito.remove(auxProducto);
         return true;

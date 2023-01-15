@@ -16,18 +16,28 @@ public class Producto implements Serializable
     private String nombre;
     private double precioVenta;
     private int stock;
+    private double precioCompra;
     private String categoria;
     private static final long serialVersionUID = 1L;
-    
-    public Producto(long auxCodigo, String auxNombre, double auxPrecioVenta, String auxCategoria)
+
+    public Producto(long auxCodigo, String auxNombre, double auxPrecioCompra, double auxPrecioVenta, int auxStock, String auxCategoria)
     {
         numero++;
         id = numero;
         this.codigo = auxCodigo;
         this.nombre = auxNombre;
+        this.precioCompra = auxPrecioCompra;
         this.precioVenta = auxPrecioVenta;
-        this.stock = 0;
+        this.stock = auxStock;
         this.categoria = auxCategoria;
+    }
+
+    public Producto(long auxCodigo, String auxNombre, double auxPrecioCompra, int auxStock)
+    {
+        this.codigo = auxCodigo;
+        this.nombre = auxNombre;
+        this.precioCompra = auxPrecioCompra;
+        this.stock = auxStock;
     }
     
     public int getId()
@@ -78,6 +88,16 @@ public class Producto implements Serializable
     public void setPrecioVenta(double auxPrecioVenta)
     {
         this.precioVenta = auxPrecioVenta;
+    }
+
+    public double getPrecioCompra()
+    {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(double auxPrecioCompra)
+    {
+        this.precioCompra = auxPrecioCompra;
     }
     
     public int getStock()
