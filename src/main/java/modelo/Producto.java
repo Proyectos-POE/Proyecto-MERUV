@@ -125,4 +125,14 @@ public class Producto implements Serializable
         String toString = nombre;
         return toString;
     }
+
+    public void aumentarStock(int auxStock)
+    {
+        this.stock = stock + auxStock;
+    }
+
+    public void disminuirStock(int auxStock)
+    {
+        this.stock = stock - auxStock;
+    }
 }

@@ -16,11 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -856,6 +852,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpFormularioInventario.add(lblStotckProducto, gridBagConstraints);
 
         txtStockProducto.setColumns(10);
+        txtStockProducto.setEditable(false);
         txtStockProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtStockProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockProducto.setMinimumSize(new java.awt.Dimension(4, 23));
@@ -2075,6 +2072,7 @@ public class VentanaMercado extends javax.swing.JFrame {
             {
                 txtCodigoProducto.setEditable(true);
                 jcbCategoriaProducto.setEnabled(true);
+                txtStockProducto.setEditable(false);
 
                 setIdProducto("0");
                 setCodigoProducto("");
@@ -2087,6 +2085,7 @@ public class VentanaMercado extends javax.swing.JFrame {
             {
                 txtCodigoProducto.setEditable(false);
                 jcbCategoriaProducto.setEnabled(false);
+                txtStockProducto.setEditable(true);
 
                 setIdProducto(String.valueOf(tabla.getValueAt(fila , 0)));
                 setCodigoProducto(String.valueOf(tabla.getValueAt(fila , 1)));
@@ -2591,6 +2590,13 @@ public class VentanaMercado extends javax.swing.JFrame {
     public void rellenarProveedorComprar(Proveedor auxProveedor)
     {
         jcbProveedorComprar.addItem(auxProveedor);
+        jcbProveedorComprar.setSelectedItem(null);
+    }
+
+    public void eliminarProveedorComprar(Proveedor auxProveedor)
+    {
+        jcbProveedorComprar.removeItem(auxProveedor);
+        jcbProveedorComprar.setSelectedItem(null);
     }
 
     public void vaciarProveedorComprar()
@@ -2599,22 +2605,19 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     //=====|Vender|=====//
-    /*public void agregarClienteVender(Cliente auxCliente)
+    public void rellenarClienteVender(Cliente auxCliente)
     {
         jcbClienteVender.addItem(auxCliente);
-    }*/
-
-    public void vaciarClienteVender()
-    {
-        jcbClienteVender.removeAllItems();
+        jcbClienteVender.setSelectedItem(null);
     }
 
-    /*public void agregarProductoVender(Producto auxProducto)
+    public void eliminarClienteVender(Cliente auxCliente)
     {
-        jcbClienteVender.addItem(auxProducto);
-    }*/
+        jcbClienteVender.removeItem(auxCliente);
+        jcbClienteVender.setSelectedItem(null);
+    }
 
-    public void vaciarProductoVender()
+    public void vaciarClienteVender()
     {
         jcbClienteVender.removeAllItems();
     }

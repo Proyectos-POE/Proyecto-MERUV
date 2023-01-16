@@ -102,8 +102,6 @@ public class Compra implements Serializable
         {
             auxProductos = auxProductos + producto.getNombre() + "\n";
         }
-        System.out.println(productosCompra.size());
-        System.out.println(auxProductos.length());
         auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
         return auxProductos;
     }
