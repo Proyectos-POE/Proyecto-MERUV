@@ -9,6 +9,7 @@ import static modelo.Cliente.setNumeroCliente;
 import static modelo.Compra.setNumeroCompra;
 import static modelo.Producto.setNumeroProducto;
 import static modelo.Proveedor.setNumeroProveedor;
+import static modelo.Venta.setNumeroVenta;
 
 /*
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
@@ -337,34 +338,15 @@ public class Empresa
             setNumeroCompra(auxCompra.getId());
         }
 
-        /*conexion.setArchivo("citas.bin");
+        conexion.setArchivo("ventas.bin");
         auxDatos = conexion.leerDatosBinario();
-        Cita auxCita;
-        Hora auxHora;
+        Venta auxVenta;
         for(Object objeto : auxDatos)
         {
-            auxCita = (Cita) objeto;
-            auxAfiliado = getAfiliado(auxCita.getAfiliado().getId());
-            auxMedico = getMedico(auxCita.getMedico().getId());
-            auxConsultorio = getConsultorio(auxMedico.getConsultorio().getId());
-            auxServicio = getServicio(auxCita.getServicio().getId());
-            auxHora = getHora(auxCita.getHora().getId());
-
-            if(auxServicio == null || auxConsultorio == null || auxAfiliado == null || auxMedico == null || auxHora == null)
-            {
-                datosValidos = false;
-                escribirMedicos();
-                break;
-            }
-
-            auxCita.setAfiliado(auxAfiliado);
-            auxCita.setMedico(auxMedico);
-            auxCita.setServicio(auxServicio);
-            auxCita.setConsultorio(auxConsultorio);
-            auxCita.setHora(auxHora);
-            agregarCita(auxCita);
-            setNumeroCita(auxCita.getId());
-        }*/
+            auxVenta = (Venta) objeto;
+            agregarVenta(auxVenta);
+            setNumeroVenta(auxVenta.getId());
+        }
 
         return datosValidos;
     }

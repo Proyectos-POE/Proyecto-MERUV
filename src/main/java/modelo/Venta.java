@@ -23,7 +23,7 @@ public class Venta implements Serializable
     private Fecha fecha;
     private static final long serialVersionUID = 1L;
     
-    public Venta(Cliente auxCliente, double auxValorTotal, int auxCantidadProductos, ArrayList<Producto> auxProductosVenta, Fecha fecha) 
+    public Venta(Cliente auxCliente, double auxValorTotal, ArrayList<Producto> auxProductosVenta, int auxCantidadProductos,  Fecha fecha) 
     {
         numero++;
         id = numero;
@@ -101,5 +101,43 @@ public class Venta implements Serializable
     public void setFecha(Fecha auxFecha)
     {
         this.fecha = auxFecha;
+    }
+    
+    public String getNombresProductosVenta()
+    {
+        String auxProductos;
+        auxProductos = "";
+        for (Producto producto : productosVenta)
+        {
+            auxProductos = auxProductos + producto.getNombre() + "\n";
+        }
+        System.out.println(productosVenta.size());
+        System.out.println(auxProductos.length());
+        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
+        return auxProductos;
+    }
+
+    public String getPreciosProductosVenta()
+    {
+        String auxProductos;
+        auxProductos = "";
+        for (Producto producto : productosVenta)
+        {
+            auxProductos = auxProductos + producto.getPrecioVenta() + "\n";
+        }
+        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
+        return auxProductos;
+    }
+
+    public String getStockProductosVenta()
+    {
+        String auxProductos;
+        auxProductos = "";
+        for (Producto producto : productosVenta)
+        {
+            auxProductos = auxProductos + producto.getStock() + "\n";
+        }
+        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
+        return auxProductos;
     }
 }
