@@ -40,6 +40,14 @@ public class Producto implements Serializable
         this.stock = auxStock;
     }
     
+     public Producto(long auxCodigo, String auxNombre, int auxStock, double auxPrecioVenta)
+    {
+        this.codigo = auxCodigo;
+        this.nombre = auxNombre;
+        this.precioVenta = auxPrecioVenta;
+        this.stock = auxStock;
+    }
+    
     public int getId()
     {
         return id;

@@ -1158,7 +1158,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         jpFormularioComprar1.add(lblCodigoVender, gridBagConstraints);
 
-        txtCodigoVender.setEditable(false);
+        txtCodigoVender.setEditable(true);
         txtCodigoVender.setColumns(10);
         txtCodigoVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtCodigoVender.setToolTipText("");
@@ -2252,6 +2252,11 @@ public class VentanaMercado extends javax.swing.JFrame {
     {
         jtTablaVender.getSelectionModel().clearSelection();
     }
+    
+    public void activarTxtStockVender()
+    {
+        txtStockVender.setEditable(true);
+    }
 
     //=====|Compras|=====//
     public TableModel getModelTablaCompras()
@@ -2425,9 +2430,9 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtStockVender.setText(txt);
     }
 
-    public void setNullClienteVender()
+    public void setClienteVender(Cliente auxCliente)
     {
-        jcbClienteVender.setSelectedItem(null);
+        jcbClienteVender.setSelectedItem(auxCliente);
     }
 
     public void setPrecioTotalVender(String txt)
@@ -2567,20 +2572,30 @@ public class VentanaMercado extends javax.swing.JFrame {
     }
 
     //=====|Vender|=====//
-    /*public Cliente getClienteVender()
+    public String getCodigoVender()
     {
-        return jcbClienteVender.getSelectedItem();
-    }*/
+        return txtCodigoVender.getText();
+    }
+
+    public String getNombreVender()
+    {
+        return txtNombreVender.getText();
+    }
+
+    public String getPrecioVentaVender()
+    {
+        return txtPrecioVentaVender.getText();
+    }
 
     public String getStockVender()
     {
         return txtStockVender.getText();
     }
 
-    /*public Producto getProductoVender()
+    public Cliente getClienteVender()
     {
-        return jcbProveedorComprar.getSelectedItem();
-    }*/
+        return (Cliente) jcbClienteVender.getSelectedItem();
+    }
 
     //==========|Rellenar y Vaciar JComboBox|==========//
     //=====|Comprar|=====//
