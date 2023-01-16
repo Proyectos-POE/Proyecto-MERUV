@@ -815,7 +815,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         lblPrecioVentaProducto.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioVentaProducto.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrecioVentaProducto.setText("<html><font color=white>PRECIO VENTA </font><font color=F9AA33>*</font></html>");
+        lblPrecioVentaProducto.setText("<html><font color=white>PRECIO VENTA</font><font color=F9AA33>*</font></html>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -1001,7 +1001,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         lblPrecioCompraComprar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioCompraComprar.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrecioCompraComprar.setText("<html><font color=white>PRECIO COMPRA </font><font color=F9AA33>*</font></html>");
+        lblPrecioCompraComprar.setText("<html><font color=white>PRECIO UNITARIO </font><font color=F9AA33>*</font></html>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
@@ -1205,7 +1205,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         lblPrecioVentaVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblPrecioVentaVender.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrecioVentaVender.setText("PRECIO VENTA");
+        lblPrecioVentaVender.setText("PRECIO");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
@@ -1377,7 +1377,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaCompras.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "PROVEEDOR", "FECHA"
+                        "ID","PRODUCTOS", "PRECIO UNITARIO", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "PROVEEDOR", "FECHA"
                 }
         ));
         jtTablaCompras.getTableHeader().setResizingAllowed(false);
@@ -1417,7 +1417,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaVentas.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String [] {
-                        "ID","PRODUCTOS", "PRECIOS", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "CLIENTE", "FECHA"
+                        "ID","PRODUCTOS", "PRECIO UNITARIO", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "CLIENTE", "FECHA"
 
                 }
         ));
@@ -2072,7 +2072,6 @@ public class VentanaMercado extends javax.swing.JFrame {
             {
                 txtCodigoProducto.setEditable(true);
                 jcbCategoriaProducto.setEnabled(true);
-                txtStockProducto.setEditable(false);
 
                 setIdProducto("0");
                 setCodigoProducto("");
@@ -2085,7 +2084,6 @@ public class VentanaMercado extends javax.swing.JFrame {
             {
                 txtCodigoProducto.setEditable(false);
                 jcbCategoriaProducto.setEnabled(false);
-                txtStockProducto.setEditable(true);
 
                 setIdProducto(String.valueOf(tabla.getValueAt(fila , 0)));
                 setCodigoProducto(String.valueOf(tabla.getValueAt(fila , 1)));

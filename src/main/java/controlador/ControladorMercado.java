@@ -373,7 +373,8 @@ public class ControladorMercado
         String auxDireccion;
         String auxRazonSocial;
 
-        auxId = Integer.parseInt(ventanaMercado.getIdCliente());
+        auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
+        System.out.println(auxId);
         if(auxId == 0)
         {
             if(comprobarCamposProveedor())
@@ -894,14 +895,14 @@ public class ControladorMercado
                 try
                 {
                     auxCodigo = Long.parseLong(ventanaMercado.getCodigoComprar());
-                    auxNombre = ventanaMercado.getNombreComprar();
                     auxPrecioCompra = Double.parseDouble(ventanaMercado.getPrecioCompraComprar());
                     auxStock = Integer.parseInt(ventanaMercado.getStockComprar());
 
-                    if(auxStock > 0)
+                    if(auxStock > 0 && auxPrecioCompra>0)
                     {
                         if(superMercadoUV.getProductoCodigo(auxCodigo) != null)
                         {
+                            auxNombre =  superMercadoUV.getProductoCodigo(auxCodigo).getNombre();
                             auxProducto = new Producto(auxCodigo, auxNombre, auxPrecioCompra, auxStock);
                             if (superMercadoUV.agregarProductoCarritoCompra(auxProducto, auxProducto.getPrecioCompra()))
                             {
@@ -926,7 +927,7 @@ public class ControladorMercado
                     }
                     else
                     {
-                        ventanaMercado.mostrarMensajeError("Ingrese un stock mayor a 0");
+                        ventanaMercado.mostrarMensajeError("Ingrese un stock y un precio unitario mayor a 0");
                     }
                 }
                 catch (NumberFormatException e)
@@ -1010,8 +1011,8 @@ public class ControladorMercado
                         ventanaMercado.setNombreComprar("");
                         ventanaMercado.setPrecioCompraComprar("");
                         ventanaMercado.setStockComprar("");
-                        ventanaMercado.setPrecioTotalComprar("");
-                        ventanaMercado.setProductosTotalesComprar("");
+                        ventanaMercado.setPrecioTotalComprar("0");
+                        ventanaMercado.setProductosTotalesComprar("0");
                         ventanaMercado.setProveedorComprar(null);
 
                         listarComprasAgregar(auxCompra);
