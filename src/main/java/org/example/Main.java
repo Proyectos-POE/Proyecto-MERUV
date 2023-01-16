@@ -10,5 +10,6 @@ public class Main {
         VentanaMercado ventanaMercado = new VentanaMercado();
         Empresa superMercadoUV = new Empresa("SuperMercado Univalle");
         ControladorMercado controladorMercado = new ControladorMercado(superMercadoUV, ventanaMercado);
+        controladorMercado.recuperarDatos();
     }
 }

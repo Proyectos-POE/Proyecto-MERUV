@@ -5,6 +5,11 @@ import dao.*;
 import java.io.File;
 import java.util.ArrayList;
 
+import static modelo.Cliente.setNumeroCliente;
+import static modelo.Compra.setNumeroCompra;
+import static modelo.Producto.setNumeroProducto;
+import static modelo.Proveedor.setNumeroProveedor;
+
 /*
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
@@ -182,24 +187,14 @@ public class Empresa
         return carritoCompra.getProductoCarrito(auxId);
     }
 
-    public boolean agregarProductoCarritoCompra(Producto auxProducto)
+    public boolean agregarProductoCarritoCompra(Producto auxProducto, double auxPrecio)
     {
-        return carritoCompra.agregarProductoCarrito(auxProducto);
+        return carritoCompra.agregarProductoCarrito(auxProducto, auxPrecio);
     }
 
-    public boolean eliminarProductoCarritoCompra(int auxProducto)
+    public boolean eliminarProductoCarritoCompra(Producto auxProducto, double auxPrecio)
     {
-        return carritoCompra.eliminarProductoCarrito(auxProducto);
-    }
-
-    public void calcularPrecioTotalCompra()
-    {
-        carritoCompra.calcularPrecioTotalCompra();
-    }
-
-    public void calcularProductosTotalesCompra()
-    {
-        carritoCompra.calcularProductosTotales();
+        return carritoCompra.eliminarProductoCarrito(auxProducto, auxPrecio);
     }
 
     public double getPrecioTotalCompra()
@@ -228,24 +223,14 @@ public class Empresa
         return carritoVenta.getProductoCarrito(auxId);
     }
 
-    public boolean agregarProductoCarritoVenta(Producto auxProducto)
+    public boolean agregarProductoCarritoVenta(Producto auxProducto, double auxPrecio)
     {
-        return carritoVenta.agregarProductoCarrito(auxProducto);
+        return carritoVenta.agregarProductoCarrito(auxProducto, auxPrecio);
     }
 
-    public boolean eliminarProductoCarritoVenta(int auxProducto)
+    public boolean eliminarProductoCarritoVenta(Producto auxProducto, double auxPrecio)
     {
-        return carritoVenta.eliminarProductoCarrito(auxProducto);
-    }
-
-    public void calcularPrecioTotalVenta()
-    {
-        carritoVenta.calcularPrecioTotalVenta();
-    }
-
-    public void calcularProductosTotalesVenta()
-    {
-        carritoVenta.calcularProductosTotales();
+        return carritoVenta.eliminarProductoCarrito(auxProducto, auxPrecio);
     }
 
     public double getPrecioTotalVenta()
@@ -288,6 +273,14 @@ public class Empresa
         conexion.escribirDatosBinario(auxProveedores);
     }
 
+    public void escribirCompras()
+    {
+        ArrayList auxCompras;
+        auxCompras = getCompras();
+        conexion.setArchivo("compras.bin");
+        conexion.escribirDatosBinario(auxCompras);
+    }
+
     public void escribirVentas()
     {
         ArrayList auxVentas;
@@ -296,11 +289,83 @@ public class Empresa
         conexion.escribirDatosBinario(auxVentas);
     }
 
-    public void escribirCompras()
+
+
+    public boolean recuperarDatos()
     {
-        ArrayList auxCompras;
-        auxCompras = getCompras();
+        boolean datosValidos;
+        datosValidos = true;
+
+        ArrayList<Object> auxDatos;
+        conexion.setArchivo("clientes.bin");
+        auxDatos = conexion.leerDatosBinario();
+        Cliente auxCliente;
+        for(Object objeto : auxDatos)
+        {
+            auxCliente = (Cliente) objeto;
+            agregarCliente(auxCliente);
+            setNumeroCliente(auxCliente.getId());
+        }
+
+        conexion.setArchivo("proveedores.bin");
+        auxDatos = conexion.leerDatosBinario();
+        Proveedor auxProveedor;
+        for(Object objeto : auxDatos)
+        {
+            auxProveedor = (Proveedor) objeto;
+            agregarProveedor(auxProveedor);
+            setNumeroProveedor(auxProveedor.getId());
+        }
+
+        conexion.setArchivo("productos.bin");
+        auxDatos = conexion.leerDatosBinario();
+        Producto auxProducto;
+        for(Object objeto : auxDatos)
+        {
+            auxProducto = (Producto) objeto;
+            agregarProducto(auxProducto);
+            setNumeroProducto(auxProducto.getId());
+        }
+
         conexion.setArchivo("compras.bin");
-        conexion.escribirDatosBinario(auxCompras);
+        auxDatos = conexion.leerDatosBinario();
+        Compra auxCompra;
+        for(Object objeto : auxDatos)
+        {
+            auxCompra = (Compra) objeto;
+            agregarCompra(auxCompra);
+            setNumeroCompra(auxCompra.getId());
+        }
+
+        /*conexion.setArchivo("citas.bin");
+        auxDatos = conexion.leerDatosBinario();
+        Cita auxCita;
+        Hora auxHora;
+        for(Object objeto : auxDatos)
+        {
+            auxCita = (Cita) objeto;
+            auxAfiliado = getAfiliado(auxCita.getAfiliado().getId());
+            auxMedico = getMedico(auxCita.getMedico().getId());
+            auxConsultorio = getConsultorio(auxMedico.getConsultorio().getId());
+            auxServicio = getServicio(auxCita.getServicio().getId());
+            auxHora = getHora(auxCita.getHora().getId());
+
+            if(auxServicio == null || auxConsultorio == null || auxAfiliado == null || auxMedico == null || auxHora == null)
+            {
+                datosValidos = false;
+                escribirMedicos();
+                break;
+            }
+
+            auxCita.setAfiliado(auxAfiliado);
+            auxCita.setMedico(auxMedico);
+            auxCita.setServicio(auxServicio);
+            auxCita.setConsultorio(auxConsultorio);
+            auxCita.setHora(auxHora);
+            agregarCita(auxCita);
+            setNumeroCita(auxCita.getId());
+        }*/
+
+        return datosValidos;
     }
 }

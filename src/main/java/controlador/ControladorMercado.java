@@ -18,8 +18,10 @@ public class ControladorMercado
     {
         this.superMercadoUV = auxEmpresa;
         this.ventanaMercado = auxA;
+
         ventanaMercado.setVisible(true);
         ventanaMercado.setLocationRelativeTo(null);
+
         TextFieldListener textFieldListener = new TextFieldListener();
 
         //----------|Cliente|----------//
@@ -53,11 +55,7 @@ public class ControladorMercado
     private boolean comprobarCamposCliente()
     {
         boolean camposValido;
-        camposValido = true;
-        if(ventanaMercado.getNombreCliente().equals("") || ventanaMercado.getNitCliente().equals("") || ventanaMercado.getTelefonoCliente().equals("") || ventanaMercado.getDireccionCliente().equals(""))
-        {
-            camposValido = false;
-        }
+        camposValido = !ventanaMercado.getNombreCliente().equals("") && !ventanaMercado.getNitCliente().equals("") && !ventanaMercado.getTelefonoCliente().equals("") && !ventanaMercado.getDireccionCliente().equals("");
         return camposValido;
     }
 
@@ -70,9 +68,10 @@ public class ControladorMercado
 
         for(Cliente cliente : auxClientes)
         {
-            if(cliente.getNIT() == auxNIT && cliente.getId() != auxId)
+            if (cliente.getNIT() == auxNIT && cliente.getId() != auxId)
             {
                 nitValido = false;
+                break;
             }
         }
         return nitValido;
@@ -147,7 +146,9 @@ public class ControladorMercado
                             ventanaMercado.setNombreCliente("");
                             ventanaMercado.setTelefonoCliente("");
                             ventanaMercado.setDireccionCliente("");
+                            superMercadoUV.escribirClientes();
                             listarClientesAgregar(auxCliente);
+                            ventanaMercado.rellenarClienteVender(auxCliente);
                         }
                         else
                         {
@@ -214,6 +215,7 @@ public class ControladorMercado
                             ventanaMercado.setNombreCliente("");
                             ventanaMercado.setTelefonoCliente("");
                             ventanaMercado.setDireccionCliente("");
+                            superMercadoUV.escribirClientes();
                             listarClientesEditar(auxCliente);
                             ventanaMercado.deseleccionarFilaTablaCliente();
                         }
@@ -260,7 +262,9 @@ public class ControladorMercado
                 ventanaMercado.setNombreCliente("");
                 ventanaMercado.setTelefonoCliente("");
                 ventanaMercado.setDireccionCliente("");
+                superMercadoUV.escribirClientes();
                 listarClientesEliminar();
+                ventanaMercado.eliminarClienteVender(auxCliente);
                 ventanaMercado.deseleccionarFilaTablaCliente();
             }
             else
@@ -294,27 +298,71 @@ public class ControladorMercado
         }
     }
 
-    //----------|Proveedor|----------//
-
-    class ProveedorListener implements ActionListener
+    //----------|Proveedores|----------//
+    private boolean comprobarCamposProveedor()
     {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        boolean camposValido;
+        camposValido = !ventanaMercado.getNombreProveedor().equals("") && !ventanaMercado.getNitProveedor().equals("") && !ventanaMercado.getTelefonoProveedor().equals("") && !ventanaMercado.getDireccionProveedor().equals("") && !ventanaMercado.getRazonSocialProveedor().equals("");
+        return camposValido;
+    }
+
+    private boolean comprobarNitProveedor(int auxId, Long auxNit)
+    {
+        boolean nitValido;
+        nitValido = true;
+        ArrayList<Proveedor> auxProveedores;
+        auxProveedores = superMercadoUV.getProveedores();
+        for(Proveedor proveedor : auxProveedores)
         {
-            if (e.getActionCommand().equalsIgnoreCase("AGREGAR"))
+            if(proveedor.getNit() == auxNit && proveedor.getId() != auxId)
             {
-                agregarProveedor();
-            }
-            if (e.getActionCommand().equalsIgnoreCase("EDITAR"))
-            {
-                editarProveedor();
-            }
-            if (e.getActionCommand().equalsIgnoreCase("ELIMINAR"))
-            {
-                eliminarProveedor();
+                nitValido = false;
+                break;
             }
         }
+        return nitValido;
     }
+
+    private void listarProveedoresAgregar(Proveedor auxProveedor)
+    {
+        int auxId = auxProveedor.getId();
+        long auxNit = auxProveedor.getNit();
+        String auxNombre = auxProveedor.getNombre();
+        long auxTelefono = auxProveedor.getTelefono();
+        String auxDireccion = auxProveedor.getDireccion();
+        String auxRazonSocial = auxProveedor.getRazonSocial();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
+        auxModeloTabla.addRow(new Object[]{auxId, auxNit, auxNombre, auxTelefono, auxDireccion, auxRazonSocial});
+    }
+
+    private void listarProveedoresEditar(Proveedor auxProveedor)
+    {
+        int auxId = auxProveedor.getId();
+        long auxNit = auxProveedor.getNit();
+        String auxNombre = auxProveedor.getNombre();
+        long auxTelefono = auxProveedor.getTelefono();
+        String auxDireccion = auxProveedor.getDireccion();
+        String auxRazonSocial = auxProveedor.getRazonSocial();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
+        int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
+
+        auxModeloTabla.setValueAt(auxId, auxFila, 0);
+        auxModeloTabla.setValueAt(auxNit, auxFila, 1);
+        auxModeloTabla.setValueAt(auxNombre, auxFila, 2);
+        auxModeloTabla.setValueAt(auxTelefono, auxFila, 3);
+        auxModeloTabla.setValueAt(auxDireccion, auxFila, 4);
+        auxModeloTabla.setValueAt(auxRazonSocial, auxFila, 5);
+    }
+
+    private void listarProveedoresEliminar()
+    {
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
+        int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
+        auxModeloTabla.removeRow(auxFila);
+    }
+
     private void agregarProveedor()
     {
         Proveedor auxProveedor;
@@ -350,6 +398,7 @@ public class ControladorMercado
                             ventanaMercado.setTelefonoProveedor("");
                             ventanaMercado.setDireccionProveedor("");
                             ventanaMercado.setRazonSocialProveedor("");
+                            superMercadoUV.escribirProveedores();
                             listarProveedoresAgregar(auxProveedor);
                             ventanaMercado.rellenarProveedorComprar(auxProveedor);
                         }
@@ -380,33 +429,6 @@ public class ControladorMercado
 
     }
 
-    private boolean comprobarCamposProveedor()
-    {
-        boolean camposValido;
-        camposValido = true;
-        if(ventanaMercado.getNombreProveedor().equals("") || ventanaMercado.getNitProveedor().equals("") || ventanaMercado.getTelefonoProveedor().equals("") || ventanaMercado.getDireccionProveedor().equals("") || ventanaMercado.getRazonSocialProveedor().equals(""))
-        {
-            camposValido = false;
-        }
-        return camposValido;
-    }
-
-    private boolean comprobarNitProveedor(int auxId, Long auxNit)
-    {
-        boolean nitValido;
-        nitValido = true;
-        ArrayList<Proveedor> auxProveedores;
-        auxProveedores = superMercadoUV.getProveedores();
-        for(Proveedor proveedor : auxProveedores)
-        {
-            if(proveedor.getNit() == auxNit && proveedor.getId() != auxId)
-            {
-                nitValido = false;
-            }
-        }
-        return nitValido;
-    }
-
     private void editarProveedor()
     {
         Proveedor auxProveedor;
@@ -434,6 +456,12 @@ public class ControladorMercado
 
                     if(comprobarNitProveedor(auxId ,auxNIT))
                     {
+                        auxProveedor.setNit(auxNIT);
+                        auxProveedor.setNombre(auxNombre);
+                        auxProveedor.setTelefono(auxTelefono);
+                        auxProveedor.setDireccion(auxDireccion);
+                        auxProveedor.setRazonSocial(auxRazonSocial);
+
                         if(superMercadoUV.actualizarProveedor(auxProveedor))
                         {
                             ventanaMercado.mostrarMensaje("Proveedor editado con exito");
@@ -443,6 +471,7 @@ public class ControladorMercado
                             ventanaMercado.setTelefonoProveedor("");
                             ventanaMercado.setDireccionProveedor("");
                             ventanaMercado.setRazonSocialProveedor("");
+                            superMercadoUV.escribirProveedores();
                             listarProveedoresEditar(auxProveedor);
                             ventanaMercado.deseleccionarFilaTablaProveedor();
                         }
@@ -490,7 +519,9 @@ public class ControladorMercado
                 ventanaMercado.setTelefonoProveedor("");
                 ventanaMercado.setDireccionProveedor("");
                 ventanaMercado.setRazonSocialProveedor("");
+                superMercadoUV.escribirProveedores();
                 listarProveedoresEliminar();
+                ventanaMercado.eliminarProveedorComprar(auxProveedor);
                 ventanaMercado.deseleccionarFilaTablaProveedor();
             }
             else
@@ -504,76 +535,31 @@ public class ControladorMercado
         }
     }
 
-    private void listarProveedoresAgregar(Proveedor auxProveedor)
-    {
-        int auxId = auxProveedor.getId();
-        long auxNit = auxProveedor.getNit();
-        String auxNombre = auxProveedor.getNombre();
-        long auxTelefono = auxProveedor.getTelefono();
-        String auxDireccion = auxProveedor.getDireccion();
-        String auxRazonSocial = auxProveedor.getRazonSocial();
-
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
-        auxModeloTabla.addRow(new Object[]{auxId, auxNit, auxNombre, auxTelefono, auxDireccion, auxRazonSocial});
-    }
-
-    private void listarProveedoresEditar(Proveedor auxProveedor)
-    {
-        int auxId = auxProveedor.getId();
-        long auxNit = auxProveedor.getNit();
-        String auxNombre = auxProveedor.getNombre();
-        long auxTelefono = auxProveedor.getTelefono();
-        String auxDireccion = auxProveedor.getDireccion();
-        String auxRazonSocial = auxProveedor.getRazonSocial();
-
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
-        int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
-
-        auxModeloTabla.setValueAt(auxId, auxFila, 0);
-        auxModeloTabla.setValueAt(auxNit, auxFila, 1);
-        auxModeloTabla.setValueAt(auxNombre, auxFila, 2);
-        auxModeloTabla.setValueAt(auxTelefono, auxFila, 3);
-        auxModeloTabla.setValueAt(auxDireccion, auxFila, 4);
-        auxModeloTabla.setValueAt(auxRazonSocial, auxFila, 5);
-    }
-
-    private void listarProveedoresEliminar()
-    {
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProveedor();
-        int auxFila = ventanaMercado.getFilaSeleccionadaProveedor();
-        auxModeloTabla.removeRow(auxFila);
-    }
-
-    //----------|Producto|----------//
-
-    class ProductoListener implements ActionListener
+    class ProveedorListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
             if (e.getActionCommand().equalsIgnoreCase("AGREGAR"))
             {
-                agregarProducto();
+                agregarProveedor();
             }
             if (e.getActionCommand().equalsIgnoreCase("EDITAR"))
             {
-                editarProducto();
+                editarProveedor();
             }
             if (e.getActionCommand().equalsIgnoreCase("ELIMINAR"))
             {
-                eliminarProducto();
+                eliminarProveedor();
             }
         }
     }
 
+    //----------|Producto|----------//
     private boolean comprobarCamposProducto()
     {
         boolean camposValido;
-        camposValido = true;
-        if(ventanaMercado.getNombreProducto().equals("") || ventanaMercado.getCodigoProducto().equals("") || ventanaMercado.getPrecioVentaProducto().equals("") || ventanaMercado.getCategoriaProducto()==null)
-        {
-            camposValido = false;
-        }
+        camposValido = !ventanaMercado.getNombreProducto().equals("") && !ventanaMercado.getCodigoProducto().equals("") && !ventanaMercado.getPrecioVentaProducto().equals("") && ventanaMercado.getCategoriaProducto() != null;
         return camposValido;
     }
 
@@ -588,164 +574,10 @@ public class ControladorMercado
             if(producto.getCodigo() == auxCodigo && producto.getId() != auxId)
             {
                 codigoValido = false;
+                break;
             }
         }
         return codigoValido;
-    }
-
-    private void agregarProducto()
-    {
-        Producto auxProducto;
-        int auxId;
-        long auxCodigo;
-        String auxNombre;
-        double auxPrecioVenta;
-        String auxCategoria;
-
-        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
-        if(auxId == 0)
-        {
-            if(comprobarCamposProducto())
-            {
-                try
-                {
-                    auxCodigo = Long.parseLong(ventanaMercado.getCodigoProducto());
-                    auxNombre = ventanaMercado.getNombreProducto();
-                    auxPrecioVenta = Double.parseDouble(ventanaMercado.getPrecioVentaProducto());
-                    auxCategoria = ventanaMercado.getCategoriaProducto();
-
-                    if(comprobarCodigoProducto(0 ,auxCodigo))
-                    {
-                        auxProducto = new Producto(auxCodigo, auxNombre, 0,auxPrecioVenta,0, auxCategoria);
-                        if(superMercadoUV.agregarProducto(auxProducto))
-                        {
-                            ventanaMercado.mostrarMensaje("Producto agregado con exito");
-                            ventanaMercado.setIdProducto("0");
-                            ventanaMercado.setCodigoProducto("");
-                            ventanaMercado.setNombreProducto("");
-                            ventanaMercado.setPrecioVentaProducto("");
-                            ventanaMercado.setStockProducto("");
-                            ventanaMercado.setCategoriaProducto(null);
-                            listarProductosAgregar(auxProducto);
-                        }
-                        else
-                        {
-                            ventanaMercado.mostrarMensajeError("Producto no agregado");
-                        }
-                    }
-                    else
-                    {
-                        ventanaMercado.mostrarMensajeError("Codigo ya registrado");
-                    }
-                }
-                catch (NumberFormatException e)
-                {
-                    ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
-                }
-            }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
-        }
-        else
-        {
-            ventanaMercado.mostrarMensajeError("Deseleccione el producto");
-        }
-    }
-
-    private void editarProducto()
-    {
-        Producto auxProducto;
-        int auxId;
-        long auxCodigo;
-        String auxNombre;
-        double auxPrecioVenta;
-        String auxCategoria;
-
-        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
-        auxProducto = superMercadoUV.getProducto(auxId);
-
-        if(auxProducto != null)
-        {
-            if(comprobarCamposProducto())
-            {
-                try
-                {
-                    auxNombre = ventanaMercado.getNombreProducto();
-                    auxPrecioVenta = Double.parseDouble(ventanaMercado.getPrecioVentaProducto());
-
-                    auxProducto.setNombre(auxNombre);
-                    auxProducto.setPrecioVenta(auxPrecioVenta);
-
-                    if(superMercadoUV.actualizarProducto(auxProducto))
-                    {
-                        ventanaMercado.mostrarMensaje("Producto editado con exito");
-                        ventanaMercado.setIdProducto("0");
-                        ventanaMercado.setCodigoProducto("");
-                        ventanaMercado.setNombreProducto("");
-                        ventanaMercado.setPrecioVentaProducto("");
-                        ventanaMercado.setStockProducto("");
-                        ventanaMercado.setCategoriaProducto(null);
-                        ventanaMercado.activarCategoriaProducto();
-                        ventanaMercado.activarCodigoProducto();
-                        listarProductosEditar(auxProducto);
-                        ventanaMercado.deseleccionarFilaTablaInventario();
-                    }
-                    else
-                    {
-                        ventanaMercado.mostrarMensajeError("Producto no editado");
-                    }
-                }
-                catch (NumberFormatException e)
-                {
-                    ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
-                }
-            }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
-        }
-        else
-        {
-            ventanaMercado.mostrarMensajeError("Seleccione un producto");
-        }
-
-    }
-
-    private void eliminarProducto()
-    {
-        Producto auxProducto;
-        int auxId;
-        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
-        auxProducto = superMercadoUV.getProducto(auxId);
-
-        if(auxProducto != null)
-        {
-            if(superMercadoUV.eliminarProducto(auxProducto))
-            {
-                ventanaMercado.mostrarMensaje("Producto eliminado con exito");
-                ventanaMercado.setIdProducto("0");
-                ventanaMercado.setCodigoProducto("");
-                ventanaMercado.setNombreProducto("");
-                ventanaMercado.setPrecioVentaProducto("");
-                ventanaMercado.setStockProducto("");
-                ventanaMercado.setCategoriaProducto(null);
-                ventanaMercado.activarCategoriaProducto();
-                ventanaMercado.activarCodigoProducto();
-                listarProductosEliminar();
-                ventanaMercado.deseleccionarFilaTablaInventario();
-            }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Producto no eliminado");
-            }
-        }
-        else
-        {
-            ventanaMercado.mostrarMensajeError("Seleccione un producto");
-        }
     }
 
     private void listarProductosAgregar(Producto auxProducto)
@@ -781,6 +613,25 @@ public class ControladorMercado
         auxModeloTabla.setValueAt(auxCategoria, auxFila, 5);
     }
 
+    private void listarProductosEditar(int auxFila ,Producto auxProducto)
+    {
+        int auxId = auxProducto.getId();
+        long auxCodigo = auxProducto.getCodigo();
+        String auxNombre = auxProducto.getNombre();
+        double auxPrecioVenta = auxProducto.getPrecioVenta();
+        int auxStock = auxProducto.getStock();
+        String auxCategoria = auxProducto.getCategoria();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProducto();
+
+        auxModeloTabla.setValueAt(auxId, auxFila, 0);
+        auxModeloTabla.setValueAt(auxCodigo, auxFila, 1);
+        auxModeloTabla.setValueAt(auxNombre, auxFila, 2);
+        auxModeloTabla.setValueAt(auxPrecioVenta, auxFila, 3);
+        auxModeloTabla.setValueAt(auxStock, auxFila, 4);
+        auxModeloTabla.setValueAt(auxCategoria, auxFila, 5);
+    }
+
     private void listarProductosEliminar()
     {
         DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaProducto();
@@ -788,39 +639,257 @@ public class ControladorMercado
         auxModeloTabla.removeRow(auxFila);
     }
 
-    //----------|Compra|----------//
+    private void agregarProducto()
+    {
+        Producto auxProducto;
+        int auxId;
+        long auxCodigo;
+        String auxNombre;
+        double auxPrecioVenta;
+        String auxCategoria;
 
-    class CompraListener implements ActionListener
+        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
+        if(auxId == 0)
+        {
+            if(comprobarCamposProducto())
+            {
+                try
+                {
+                    auxCodigo = Long.parseLong(ventanaMercado.getCodigoProducto());
+                    auxNombre = ventanaMercado.getNombreProducto();
+                    auxPrecioVenta = Double.parseDouble(ventanaMercado.getPrecioVentaProducto());
+                    auxCategoria = ventanaMercado.getCategoriaProducto();
+
+                    if(comprobarCodigoProducto(0 ,auxCodigo))
+                    {
+                        auxProducto = new Producto(auxCodigo, auxNombre, 0,auxPrecioVenta,0, auxCategoria);
+                        if(superMercadoUV.agregarProducto(auxProducto))
+                        {
+                            ventanaMercado.mostrarMensaje("Producto agregado con exito");
+                            ventanaMercado.setIdProducto("0");
+                            ventanaMercado.setCodigoProducto("");
+                            ventanaMercado.setNombreProducto("");
+                            ventanaMercado.setPrecioVentaProducto("");
+                            ventanaMercado.setStockProducto("");
+                            ventanaMercado.setCategoriaProducto(null);
+                            superMercadoUV.escribirProductos();
+                            listarProductosAgregar(auxProducto);
+                        }
+                        else
+                        {
+                            ventanaMercado.mostrarMensajeError("Producto no agregado");
+                        }
+                    }
+                    else
+                    {
+                        ventanaMercado.mostrarMensajeError("Codigo ya registrado");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
+                }
+            }
+            else
+            {
+                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostrarMensajeError("Deseleccione el producto");
+        }
+    }
+
+    private void editarProducto()
+    {
+        Producto auxProducto;
+        int auxId;
+        String auxNombre;
+        double auxPrecioVenta;
+
+        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
+        auxProducto = superMercadoUV.getProducto(auxId);
+
+        if(auxProducto != null)
+        {
+            if(comprobarCamposProducto())
+            {
+                try
+                {
+                    auxNombre = ventanaMercado.getNombreProducto();
+                    auxPrecioVenta = Double.parseDouble(ventanaMercado.getPrecioVentaProducto());
+
+                    auxProducto.setNombre(auxNombre);
+                    auxProducto.setPrecioVenta(auxPrecioVenta);
+
+                    if(superMercadoUV.actualizarProducto(auxProducto))
+                    {
+                        ventanaMercado.mostrarMensaje("Producto editado con exito");
+                        ventanaMercado.setIdProducto("0");
+                        ventanaMercado.setCodigoProducto("");
+                        ventanaMercado.setNombreProducto("");
+                        ventanaMercado.setPrecioVentaProducto("");
+                        ventanaMercado.setStockProducto("");
+                        ventanaMercado.setCategoriaProducto(null);
+                        ventanaMercado.activarCategoriaProducto();
+                        ventanaMercado.activarCodigoProducto();
+                        superMercadoUV.escribirProductos();
+                        listarProductosEditar(auxProducto);
+                        ventanaMercado.deseleccionarFilaTablaInventario();
+                    }
+                    else
+                    {
+                        ventanaMercado.mostrarMensajeError("Producto no editado");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
+                }
+            }
+            else
+            {
+                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostrarMensajeError("Seleccione un producto");
+        }
+    }
+
+    private void eliminarProducto()
+    {
+        Producto auxProducto;
+        int auxId;
+        auxId = Integer.parseInt(ventanaMercado.getIdProducto());
+        auxProducto = superMercadoUV.getProducto(auxId);
+
+        if(auxProducto != null)
+        {
+            if(superMercadoUV.eliminarProducto(auxProducto))
+            {
+                ventanaMercado.mostrarMensaje("Producto eliminado con exito");
+                ventanaMercado.setIdProducto("0");
+                ventanaMercado.setCodigoProducto("");
+                ventanaMercado.setNombreProducto("");
+                ventanaMercado.setPrecioVentaProducto("");
+                ventanaMercado.setStockProducto("");
+                ventanaMercado.setCategoriaProducto(null);
+                ventanaMercado.activarCategoriaProducto();
+                ventanaMercado.activarCodigoProducto();
+                superMercadoUV.escribirProductos();
+                listarProductosEliminar();
+                ventanaMercado.deseleccionarFilaTablaInventario();
+            }
+            else
+            {
+                ventanaMercado.mostrarMensajeError("Producto no eliminado");
+            }
+        }
+        else
+        {
+            ventanaMercado.mostrarMensajeError("Seleccione un producto");
+        }
+    }
+
+    class ProductoListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-             if(e.getActionCommand().equalsIgnoreCase("agregar"))
-             {
-                 agregarProductoCompra();
-             }
-             if(e.getActionCommand().equalsIgnoreCase("COMPRAR"))
-             {
-                 realizarCompra();
-             }
-             if(e.getActionCommand().equalsIgnoreCase("eliminar"))
-             {
-                 eliminarProductoCarritoCompra();
-             }
+            if (e.getActionCommand().equalsIgnoreCase("AGREGAR"))
+            {
+                agregarProducto();
+            }
+            if (e.getActionCommand().equalsIgnoreCase("EDITAR"))
+            {
+                editarProducto();
+            }
+            if (e.getActionCommand().equalsIgnoreCase("ELIMINAR"))
+            {
+                eliminarProducto();
+            }
+        }
+    }
+
+    //----------|Compra|----------//
+    private Boolean comprobarCamposCarritoCompra()
+    {
+        boolean camposValidos;
+        camposValidos = !ventanaMercado.getCodigoComprar().equals("") && !ventanaMercado.getNombreComprar().equals("") && !ventanaMercado.getPrecioCompraComprar().equals("") && !ventanaMercado.getStockComprar().equals("");
+        return camposValidos;
+    }
+
+    private void actualizarIds(DefaultTableModel auxModelTabla)
+    {
+        if(auxModelTabla.getRowCount() >0)
+        {
+            for(int i=0; i<auxModelTabla.getRowCount(); i++)
+            {
+                auxModelTabla.setValueAt(i + 1, i, 0);
+            }
+        }
+    }
+
+    private void listarCarritoComprarAgregar(Producto auxProducto)
+    {
+        long auxCodigo = auxProducto.getCodigo();
+        String auxNombre = auxProducto.getNombre();
+        double auxPrecio = auxProducto.getPrecioCompra();
+        int auxStock = auxProducto.getStock();
+
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaComprar();
+        int auxId = auxModeloTabla.getRowCount()+1;
+        auxModeloTabla.addRow(new Object[]{auxId, auxCodigo, auxNombre, auxStock, auxPrecio});
+    }
+
+    private void listarComprasAgregar(Compra auxCompra)
+    {
+        DefaultTableModel tablaModel = (DefaultTableModel) ventanaMercado.getModelTablaCompras();
+        System.out.println(auxCompra.getId() + "-" + auxCompra.getNombresProductosCompra() + "-" + auxCompra.getPreciosProductosCompra() + "-" + auxCompra.getStockProductosCompra() + "-" + Math.round(auxCompra.getValorTotal()) + "-" + auxCompra.getCantidadProductos() + "-" + auxCompra.getProveedor().toString() + "-" + auxCompra.getFecha().getFecha().toString());
+        tablaModel.addRow(new Object[]{auxCompra.getId(), auxCompra.getNombresProductosCompra(),  auxCompra.getPreciosProductosCompra(), auxCompra.getStockProductosCompra(), Math.round(auxCompra.getValorTotal()), auxCompra.getCantidadProductos(), auxCompra.getProveedor().toString(), auxCompra.getFecha().getFecha().toString()});
+    }
+
+    private void listarCarritoComprarEliminar()
+    {
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaComprar();
+        int auxFila = ventanaMercado.getFilaSeleccionadaComprar();
+        auxModeloTabla.removeRow(auxFila);
+        actualizarIds(auxModeloTabla);
+    }
+
+    private void listarCarritoComprarEliminarAll()
+    {
+        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaComprar();
+        auxModeloTabla.setRowCount(0);
+    }
+
+    public void actuliazarStockCompra(ArrayList<Producto> auxCarrito)
+    {
+        for(Producto producto : auxCarrito)
+        {
+            Producto auxProducto = superMercadoUV.getProductoCodigo(producto.getCodigo());
+            if(auxProducto != null)
+            {
+                auxProducto.aumentarStock(producto.getStock());
+                listarProductosEditar(superMercadoUV.getProductos().indexOf(auxProducto), auxProducto);
+            }
         }
     }
 
     private void agregarProductoCompra()
     {
-        if (ventanaMercado.getFilaSeleccionadaComprar() == -1)
-        {
-            Producto auxProducto;
-            long auxCodigo;
-            String auxNombre;
-            double auxPrecioCompra;
-            int auxStock;
+        Producto auxProducto;
+        long auxCodigo;
+        String auxNombre;
+        double auxPrecioCompra;
+        int auxStock;
 
-            if (comprobarCamposCarritoCompra())
+        if(ventanaMercado.getFilaSeleccionadaComprar() == -1)
+        {
+            if(comprobarCamposCarritoCompra())
             {
                 try
                 {
@@ -829,30 +898,35 @@ public class ControladorMercado
                     auxPrecioCompra = Double.parseDouble(ventanaMercado.getPrecioCompraComprar());
                     auxStock = Integer.parseInt(ventanaMercado.getStockComprar());
 
-                    if(auxStock>0)
+                    if(auxStock > 0)
                     {
-
-                        if (comprobarExistenciaProducto(auxCodigo))
+                        if(superMercadoUV.getProductoCodigo(auxCodigo) != null)
                         {
                             auxProducto = new Producto(auxCodigo, auxNombre, auxPrecioCompra, auxStock);
-                            if (superMercadoUV.agregarProductoCarritoCompra(auxProducto))
+                            if (superMercadoUV.agregarProductoCarritoCompra(auxProducto, auxProducto.getPrecioCompra()))
                             {
-                                listarCarritoCompraAgregar(auxProducto);
-                                superMercadoUV.calcularPrecioTotalCompra();
-                                superMercadoUV.calcularProductosTotalesCompra();
-
+                                ventanaMercado.mostrarMensaje("Producto agregado al carrito");
                                 ventanaMercado.setCodigoComprar("");
                                 ventanaMercado.setNombreComprar("");
                                 ventanaMercado.setPrecioCompraComprar("");
                                 ventanaMercado.setStockComprar("");
                                 ventanaMercado.setPrecioTotalComprar("" + Math.round(superMercadoUV.getPrecioTotalCompra()));
                                 ventanaMercado.setProductosTotalesComprar("" + superMercadoUV.getProductosTotalesCompra());
+                                listarCarritoComprarAgregar(auxProducto);
+                            }
+                            else
+                            {
+                                ventanaMercado.mostrarMensajeError("Producto no agregado al carrito");
                             }
                         }
                         else
                         {
                             ventanaMercado.mostrarMensajeError("El producto no existe, por favor agreguelo al inventario antes de continuar");
                         }
+                    }
+                    else
+                    {
+                        ventanaMercado.mostrarMensajeError("Ingrese un stock mayor a 0");
                     }
                 }
                 catch (NumberFormatException e)
@@ -865,53 +939,34 @@ public class ControladorMercado
                 ventanaMercado.mostrarMensajeError("Rellene los campos correctamente");
             }
         }
-    }
-
-    private Boolean comprobarCamposCarritoCompra()
-    {
-        boolean camposValidos = true;
-
-        if(ventanaMercado.getCodigoComprar().equals("") || ventanaMercado.getPrecioCompraComprar().equals("") || ventanaMercado.getStockComprar().equals(""))
+        else
         {
-            camposValidos = false;
+            ventanaMercado.mostrarMensajeError("Deseleccione el producto");
         }
-
-        return camposValidos;
-    }
-
-    private Boolean comprobarExistenciaProducto(long auxCodigo)
-    {
-        boolean existe = false;
-        ArrayList<Producto> productos;
-        productos = superMercadoUV.getProductos();
-        if(productos!=null)
-        {
-            for (Producto producto : productos)
-            {
-                if (auxCodigo == producto.getCodigo())
-                {
-                    existe=true;
-                    break;
-                }
-            }
-        }
-        return existe;
     }
 
     private  void eliminarProductoCarritoCompra()
     {
+        Producto auxProducto;
+
         if (ventanaMercado.getFilaSeleccionadaComprar() != -1)
         {
-            if (superMercadoUV.eliminarProductoCarritoCompra(ventanaMercado.getFilaSeleccionadaComprar()))
+            auxProducto = superMercadoUV.getProductoCarritoCompra(ventanaMercado.getFilaSeleccionadaComprar());
+
+            if(superMercadoUV.eliminarProductoCarritoCompra(auxProducto, auxProducto.getPrecioCompra()))
             {
+                ventanaMercado.mostrarMensaje("Producto eliminado del carrito");
                 ventanaMercado.setCodigoComprar("");
                 ventanaMercado.setNombreComprar("");
                 ventanaMercado.setPrecioCompraComprar("");
                 ventanaMercado.setStockComprar("");
+                ventanaMercado.setProductosTotalesComprar(String.valueOf(superMercadoUV.getProductosTotalesCompra()));
+                ventanaMercado.setPrecioTotalComprar(String.valueOf(Math.round(superMercadoUV.getPrecioTotalCompra())));
                 ventanaMercado.activarTxtStockComprar();
                 ventanaMercado.activarTxtCodigoComprar();
                 ventanaMercado.activarTxtPrecioComprar();
-                listarCarritoCompraEliminar();
+
+                listarCarritoComprarEliminar();
                 ventanaMercado.deseleccionarFilaTablaComprar();
             }
             else
@@ -927,107 +982,64 @@ public class ControladorMercado
 
     private void realizarCompra()
     {
-        if(ventanaMercado.getFilaSeleccionadaComprar()==-1)
+        Compra auxCompra;
+        Proveedor auxProveedor;
+        double auxValorCompra;
+        int auxProductosTotales;
+        Fecha auxFecha;
+
+        ArrayList<Producto> auxProductosCarrito;
+
+        if(ventanaMercado.getFilaSeleccionadaComprar() == -1)
         {
-            ArrayList<Producto> auxCarrito = superMercadoUV.getCarritoCompra();
-            if(!auxCarrito.isEmpty())
+            if(ventanaMercado.getProveedorComprar() != null)
             {
-                ArrayList<Producto> auxInventario = superMercadoUV.getProductos();
-
-                Compra auxCompra;
-                Proveedor auxProveedor = ventanaMercado.getProveedorComprar();
-                double auxValorCompra = superMercadoUV.getPrecioTotalCompra();
-                int productosCompra = superMercadoUV.getProductosTotalesCompra();
-                Fecha auxFecha = new Fecha(LocalDate.now());
-                auxCompra = new Compra(auxProveedor, auxValorCompra, auxCarrito, productosCompra, auxFecha);
-
-                int stockCompra;
-                int stockInventario;
-
-                if (superMercadoUV.agregarCompra(auxCompra))
+                auxProductosCarrito = superMercadoUV.getCarritoCompra();
+                if(!auxProductosCarrito.isEmpty())
                 {
-                    for (Producto auxProductoCarrito : auxCarrito)
+                    auxProveedor = ventanaMercado.getProveedorComprar();
+                    auxValorCompra = superMercadoUV.getPrecioTotalCompra();
+                    auxProductosTotales = superMercadoUV.getProductosTotalesCompra();
+                    auxFecha = new Fecha(LocalDate.now());
+
+                    auxCompra = new Compra(auxProveedor, auxValorCompra, auxProductosCarrito, auxProductosTotales, auxFecha);
+                    if (superMercadoUV.agregarCompra(auxCompra))
                     {
-                        for (Producto auxProductoInventario : auxInventario)
-                        {
-                            if (auxProductoCarrito.getCodigo() == auxProductoInventario.getCodigo())
-                            {
-                                stockCompra = auxProductoCarrito.getStock();
-                                stockInventario = auxProductoInventario.getStock();
-                                auxProductoInventario.setStock(stockCompra + stockInventario);
-                                ventanaMercado.setCodigoComprar("");
-                                ventanaMercado.setNombreComprar("");
-                                ventanaMercado.setPrecioCompraComprar("");
-                                ventanaMercado.setStockComprar("");
-                                ventanaMercado.setProveedorComprar(null);
-                            }
-                        }
+                        ventanaMercado.mostrarMensaje("Compra realizada con exito");
+                        ventanaMercado.setCodigoComprar("");
+                        ventanaMercado.setNombreComprar("");
+                        ventanaMercado.setPrecioCompraComprar("");
+                        ventanaMercado.setStockComprar("");
+                        ventanaMercado.setPrecioTotalComprar("");
+                        ventanaMercado.setProductosTotalesComprar("");
+                        ventanaMercado.setProveedorComprar(null);
+
+                        listarComprasAgregar(auxCompra);
+                        listarCarritoComprarEliminarAll();
+                        actuliazarStockCompra(auxProductosCarrito);
+
+                        superMercadoUV.escribirCompras();
+                        superMercadoUV.escribirProductos();
+                        superMercadoUV.vaciarCarritoCompra();
                     }
-                    listarComprasAgregar(auxCompra);
-                    superMercadoUV.vaciarCarritoCompra();
-                    listarCarritoCompraEliminarAll();
+                    else
+                    {
+                        ventanaMercado.mostrarMensajeError("Compra no realizada");
+                    }
                 }
                 else
                 {
-                    ventanaMercado.mostrarMensaje("No se pudo realizar la compra");
+                    ventanaMercado.mostrarMensajeError("Rellene la compra con productos");
                 }
             }
             else
             {
-                ventanaMercado.mostrarMensajeError("Rellene la compra con productos");
+                ventanaMercado.mostrarMensajeError("Seleccione un proveedor");
             }
         }
         else
         {
             ventanaMercado.mostrarMensajeError("Deseleccione el producto");
-        }
-    }
-
-    private void actualizarIds(DefaultTableModel auxModelTabla)
-    {
-        for(int i=0; i<auxModelTabla.getRowCount()+1; i++)
-        {
-            if(auxModelTabla.getRowCount()>0)
-            {
-                auxModelTabla.setValueAt(i + 1, i, 0);
-            }
-        }
-    }
-    private void listarCarritoCompraAgregar(Producto auxProducto)
-    {
-        long auxCodigo = auxProducto.getCodigo();
-        String auxNombre = auxProducto.getNombre();
-        double auxPrecio = Double.parseDouble(ventanaMercado.getPrecioCompraComprar());
-        int auxStock = Integer.parseInt(ventanaMercado.getStockComprar());
-
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaComprar();
-        int auxId = auxModeloTabla.getRowCount()+1;
-        auxModeloTabla.addRow(new Object[]{auxId, auxCodigo, auxNombre, auxStock, auxPrecio});
-    }
-
-    private void listarComprasAgregar(Compra auxCompra)
-    {
-        DefaultTableModel tablaModel = (DefaultTableModel) ventanaMercado.getModelTablaCompras();
-        tablaModel.addRow(new Object[]{auxCompra.getId(), auxCompra.getNombresProductosCompra(),  auxCompra.getPreciosProductosCompra(), auxCompra.getStockProductosCompra(), Math.round(auxCompra.getValorTotal()), auxCompra.getCantidadProductos(), auxCompra.getProveedor().toString(), auxCompra.getFecha().getFecha().toString()});
-    }
-
-    private void listarCarritoCompraEliminar()
-    {
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaComprar();
-        int auxFila = ventanaMercado.getFilaSeleccionadaComprar();
-        auxModeloTabla.removeRow(auxFila);
-        actualizarIds(auxModeloTabla);
-    }
-
-    private void listarCarritoCompraEliminarAll()
-    {
-        DefaultTableModel auxModeloTabla = (DefaultTableModel) ventanaMercado.getModelTablaComprar();
-        for(int i = 0; i < auxModeloTabla.getRowCount()+1; i++)
-        {
-            if(auxModeloTabla.getRowCount()>0)
-            {
-                auxModeloTabla.removeRow(0);
-            }
         }
     }
 
@@ -1096,6 +1108,68 @@ public class ControladorMercado
                     ventanaMercado.setPrecioVentaVender("");
                 }
             }
+        }
+    }
+
+    class CompraListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if(e.getActionCommand().equalsIgnoreCase("agregar"))
+            {
+                agregarProductoCompra();
+            }
+            if(e.getActionCommand().equalsIgnoreCase("COMPRAR"))
+            {
+                realizarCompra();
+            }
+            if(e.getActionCommand().equalsIgnoreCase("eliminar"))
+            {
+                eliminarProductoCarritoCompra();
+            }
+        }
+    }
+
+    //----------|Conexion|----------//
+    public void recuperarDatos()
+    {
+        if(superMercadoUV.recuperarDatos())
+        {
+            if(!superMercadoUV.getClientes().isEmpty())
+            {
+                for(Cliente cliente : superMercadoUV.getClientes())
+                {
+                    listarClientesAgregar(cliente);
+                    ventanaMercado.rellenarClienteVender(cliente);
+                }
+            }
+            if(!superMercadoUV.getProveedores().isEmpty())
+            {
+                for(Proveedor proveedor : superMercadoUV.getProveedores())
+                {
+                    listarProveedoresAgregar(proveedor);
+                    ventanaMercado.rellenarProveedorComprar(proveedor);
+                }
+            }
+            if(!superMercadoUV.getProductos().isEmpty())
+            {
+                for(Producto producto : superMercadoUV.getProductos())
+                {
+                    listarProductosAgregar(producto);
+                }
+            }
+            if(!superMercadoUV.getCompras().isEmpty())
+            {
+                for(Compra compra : superMercadoUV.getCompras())
+                {
+                    listarComprasAgregar(compra);
+                }
+            }
+        }
+        else
+        {
+            ventanaMercado.mostrarMensajeError("Error a recuperar los datos. Hace falta informacion. Porfavor cargue el backUp mas reciente");
         }
     }
 }
