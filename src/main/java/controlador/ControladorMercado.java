@@ -305,6 +305,7 @@ public class ControladorMercado
     {
         boolean camposValido;
         camposValido = !ventanaMercado.getNombreProveedor().equals("") && !ventanaMercado.getNitProveedor().equals("") && !ventanaMercado.getTelefonoProveedor().equals("") && !ventanaMercado.getDireccionProveedor().equals("") && !ventanaMercado.getRazonSocialProveedor().equals("");
+        ventanaMercado.asignarBorderErrorProveedor();
         return camposValido;
     }
 
@@ -419,10 +420,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -443,6 +440,7 @@ public class ControladorMercado
 
         auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
         auxProveedor = superMercadoUV.getProveedor(auxId);
+        ventanaMercado.limpiarBordesProveedor();
 
         if(auxProveedor != null)
         {
@@ -492,10 +490,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -507,8 +501,10 @@ public class ControladorMercado
     {
         Proveedor auxProveedor;
         int auxId;
+
         auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
         auxProveedor = superMercadoUV.getProveedor(auxId);
+        ventanaMercado.limpiarBordesProveedor();
 
         if(auxProveedor != null)
         {

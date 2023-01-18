@@ -128,6 +128,12 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtDireccionProveedor = new javax.swing.JTextField();
         lblRazonSocialProveedor = new javax.swing.JLabel();
         txtRazonSocialProveedor = new javax.swing.JTextField();
+        lblNombreProveedorVacio = new javax.swing.JLabel();
+        lblTelefonoProveedorVacio = new javax.swing.JLabel();
+        lblDireccionProveedorVacio = new javax.swing.JLabel();
+        lblRSProveedorVacio = new javax.swing.JLabel();
+        lblProveedorVacio = new javax.swing.JLabel();
+        lblNitProveedorVacio = new javax.swing.JLabel();
         jspTablaProveedor = new javax.swing.JScrollPane();
         jtTablaProveedor = new javax.swing.JTable();
         jpBotonesProveedor = new javax.swing.JPanel();
@@ -618,7 +624,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioProveedor.add(txtIdProveedor, gridBagConstraints);
 
         lblNitProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -647,7 +653,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioProveedor.add(txtNitProveedor, gridBagConstraints);
 
         lblNombreProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -674,7 +680,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioProveedor.add(txtNombreProveedor, gridBagConstraints);
 
         lblTelefonoProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -701,7 +707,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioProveedor.add(txtTelefonoProveedor, gridBagConstraints);
 
         lblDireccionProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -728,7 +734,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioProveedor.add(txtDireccionProveedor, gridBagConstraints);
 
         lblRazonSocialProveedor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -750,8 +756,62 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 14, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioProveedor.add(txtRazonSocialProveedor, gridBagConstraints);
+
+        lblNombreProveedorVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblNombreProveedorVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioProveedor.add(lblNombreProveedorVacio, gridBagConstraints);
+
+        lblTelefonoProveedorVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblTelefonoProveedorVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioProveedor.add(lblTelefonoProveedorVacio, gridBagConstraints);
+
+        lblDireccionProveedorVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblDireccionProveedorVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioProveedor.add(lblDireccionProveedorVacio, gridBagConstraints);
+
+        lblRSProveedorVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblRSProveedorVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioProveedor.add(lblRSProveedorVacio, gridBagConstraints);
+
+        lblProveedorVacio.setForeground(new java.awt.Color(74, 101, 114));
+        lblProveedorVacio.setText("jLabel2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioProveedor.add(lblProveedorVacio, gridBagConstraints);
+
+        lblNitProveedorVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblNitProveedorVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioProveedor.add(lblNitProveedorVacio, gridBagConstraints);
 
         jpProveedor.add(jpFormularioProveedor, java.awt.BorderLayout.NORTH);
 
@@ -1911,6 +1971,7 @@ public class VentanaMercado extends javax.swing.JFrame {
                             boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
                         }
                         limpiarBordesCliente();
+                        limpiarBordesProveedor();
                     }
                 }
             }
@@ -2121,6 +2182,7 @@ public class VentanaMercado extends javax.swing.JFrame {
             }
             else
             {
+                limpiarBordesProveedor();
                 setIdProveedor(String.valueOf(tabla.getValueAt(fila , 0)));
                 setNitProveedor(String.valueOf(tabla.getValueAt(fila , 1)));
                 setNombreProveedor(String.valueOf(tabla.getValueAt(fila , 2)));
@@ -2773,6 +2835,104 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
+    public void asignarBorderErrorProveedor()
+    {
+        if(txtNitProveedor.getText().equals(""))
+        {
+            txtNitProveedor.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblNitProveedorVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblNitProveedorVacio.equals(""))
+            {
+                txtNitProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblNitProveedorVacio.setText("");
+            }
+        }
+        if(txtNombreProveedor.getText().equals(""))
+        {
+            txtNombreProveedor.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));;
+            lblNombreProveedorVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblNombreProveedorVacio.equals(""))
+            {
+                txtNombreProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblNombreProveedorVacio.setText("");
+            }
+        }
+        if(txtTelefonoProveedor.getText().equals(""))
+        {
+            txtTelefonoProveedor.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblTelefonoProveedorVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblTelefonoProveedorVacio.equals(""))
+            {
+                txtTelefonoProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblTelefonoProveedorVacio.setText("");
+            }
+        }
+        if(txtDireccionProveedor.getText().equals(""))
+        {
+            txtDireccionProveedor.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblDireccionProveedorVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblDireccionProveedorVacio.equals(""))
+            {
+                txtDireccionProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblDireccionProveedorVacio.setText("");
+            }
+        }
+        if(txtRazonSocialProveedor.getText().equals(""))
+        {
+            txtRazonSocialProveedor.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblRSProveedorVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblRSProveedorVacio.equals(""))
+            {
+                txtRazonSocialProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblRSProveedorVacio.setText("");
+            }
+        }
+    }
+
+    public void limpiarBordesProveedor()
+    {
+        if(!lblNitProveedorVacio.equals(""))
+        {
+            txtNitProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNitProveedorVacio.setText("");
+        }
+        if(!lblNombreProveedorVacio.equals(""))
+        {
+            txtNombreProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreProveedorVacio.setText("");
+        }
+        if(!lblTelefonoProveedorVacio.equals(""))
+        {
+            txtTelefonoProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblTelefonoProveedorVacio.setText("");
+        }
+        if(!lblDireccionProveedorVacio.equals(""))
+        {
+            txtDireccionProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblDireccionProveedorVacio.setText("");
+        }
+        if(!lblRSProveedorVacio.equals(""))
+        {
+            txtRazonSocialProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblRSProveedorVacio.setText("");
+        }
+    }
+
     public void limpiarBordesCliente()
     {
         txtNitCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
@@ -2902,15 +3062,18 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblDireccionCliente;
     private javax.swing.JLabel lblDireccionClienteVacio;
     private javax.swing.JLabel lblDireccionProveedor;
+    private javax.swing.JLabel lblDireccionProveedorVacio;
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblNitCliente;
     private javax.swing.JLabel lblNitClienteVacio;
     private javax.swing.JLabel lblNitProveedor;
+    private javax.swing.JLabel lblNitProveedorVacio;
     private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblNombreClienteVacio;
     private javax.swing.JLabel lblNombreCompra;
     private javax.swing.JLabel lblNombreProducto;
     private javax.swing.JLabel lblNombreProveedor;
+    private javax.swing.JLabel lblNombreProveedorVacio;
     private javax.swing.JLabel lblNombreVender;
     private javax.swing.JLabel lblPrecioCompraComprar;
     private javax.swing.JLabel lblPrecioTotalComprar;
@@ -2920,6 +3083,9 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblProductosTotalesComprar;
     private javax.swing.JLabel lblProductosTotalesVender;
     private javax.swing.JLabel lblProveedorComprar;
+
+    private javax.swing.JLabel lblProveedorVacio;
+    private javax.swing.JLabel lblRSProveedorVacio;
     private javax.swing.JLabel lblRazonSocialProveedor;
     private javax.swing.JLabel lblRegistroCompras;
     private javax.swing.JLabel lblRegistroVentas;
@@ -2929,6 +3095,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTelefonoClienteVacio;
     private javax.swing.JLabel lblTelefonoProveedor;
+    private javax.swing.JLabel lblTelefonoProveedorVacio;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblVacio;
     private javax.swing.JTextField txtCodigoComprar;
@@ -2955,6 +3122,7 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JTextField txtStockVender;
     private javax.swing.JTextField txtTelefonoCliente;
     private javax.swing.JTextField txtTelefonoProveedor;
+
     // End of variables declaration
 }
 
