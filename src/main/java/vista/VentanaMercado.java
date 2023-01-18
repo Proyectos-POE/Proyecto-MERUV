@@ -10,11 +10,9 @@ import modelo.Proveedor;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -25,11 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 /**
@@ -108,7 +102,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         lblTelefonoClienteVacio = new javax.swing.JLabel();
         lblDireccionClienteVacio = new javax.swing.JLabel();
         lblNitClienteVacio = new javax.swing.JLabel();
-        lblVacio = new javax.swing.JLabel();
+        lblClienteVacio = new javax.swing.JLabel();
         jspTablaCliente = new javax.swing.JScrollPane();
         jtTablaCliente = new javax.swing.JTable();
         jpBotonesCliente = new javax.swing.JPanel();
@@ -204,6 +198,12 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtStockVender = new javax.swing.JTextField();
         lblClienteVender = new javax.swing.JLabel();
         jcbClienteVender = new javax.swing.JComboBox<>();
+        lblNombreVenderVacio = new javax.swing.JLabel();
+        lblPrecioVenderVacio = new javax.swing.JLabel();
+        lblStockVenderVacio = new javax.swing.JLabel();
+        lblClienteVenderVacio = new javax.swing.JLabel();
+        lblVenderVacio = new javax.swing.JLabel();
+        lblCodigoVenderVacio = new javax.swing.JLabel();
         jspTablaVender = new javax.swing.JScrollPane();
         jtTablaVender = new javax.swing.JTable();
         jpInferiorVender = new javax.swing.JPanel();
@@ -552,15 +552,15 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
         jpFormularioCliente.add(lblNitClienteVacio, gridBagConstraints);
 
-        lblVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
-        lblVacio.setForeground(new java.awt.Color(74, 101, 114));
-        lblVacio.setText("a");
+        lblClienteVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblClienteVacio.setForeground(new java.awt.Color(74, 101, 114));
+        lblClienteVacio.setText("a");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
-        jpFormularioCliente.add(lblVacio, gridBagConstraints);
+        jpFormularioCliente.add(lblClienteVacio, gridBagConstraints);
 
         jpCliente.add(jpFormularioCliente, java.awt.BorderLayout.NORTH);
 
@@ -1020,6 +1020,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpFormularioInventario.add(lblCategoriaProducto, gridBagConstraints);
 
         jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FRUTAS", "VERDURAS", "LACTEOS", "CARNES", "LIMPIEZA", "PROCESADOS", "OTROS" }));
+        jcbCategoriaProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jcbCategoriaProducto.setSelectedItem(null);
         jcbCategoriaProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         jcbCategoriaProducto.setFocusable(false);
@@ -1416,7 +1417,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioComprar1.add(txtCodigoVender, gridBagConstraints);
 
         lblNombreVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -1442,7 +1443,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioComprar1.add(txtNombreVender, gridBagConstraints);
 
         lblPrecioVentaVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -1468,7 +1469,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioComprar1.add(txtPrecioVentaVender, gridBagConstraints);
 
         lblStockVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -1493,7 +1494,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioComprar1.add(txtStockVender, gridBagConstraints);
 
         lblClienteVender.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -1507,18 +1508,75 @@ public class VentanaMercado extends javax.swing.JFrame {
         jpFormularioComprar1.add(lblClienteVender, gridBagConstraints);
 
         jcbClienteVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jcbClienteVender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbClienteVender.setSelectedItem(null);
+        jcbClienteVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         jcbClienteVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jcbClienteVender.setFocusable(false);
         jcbClienteVender.setMinimumSize(new java.awt.Dimension(160, 23));
         jcbClienteVender.setName(""); // NOI18N
-        jcbClienteVender.setPreferredSize(new java.awt.Dimension(160, 23));
+        jcbClienteVender.setPreferredSize(new java.awt.Dimension(134, 19));
+        jcbClienteVender.setUI(new MyComboBoxUI());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         jpFormularioComprar1.add(jcbClienteVender, gridBagConstraints);
+
+        lblNombreVenderVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblNombreVenderVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(lblNombreVenderVacio, gridBagConstraints);
+
+        lblPrecioVenderVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblPrecioVenderVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(lblPrecioVenderVacio, gridBagConstraints);
+
+        lblStockVenderVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblStockVenderVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(lblStockVenderVacio, gridBagConstraints);
+
+        lblClienteVenderVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblClienteVenderVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(lblClienteVenderVacio, gridBagConstraints);
+
+        lblVenderVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblVenderVacio.setForeground(new java.awt.Color(74, 101, 114));
+        lblVenderVacio.setText("jLabel2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(lblVenderVacio, gridBagConstraints);
+
+        lblCodigoVenderVacio.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        lblCodigoVenderVacio.setForeground(new java.awt.Color(249, 170, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        jpFormularioComprar1.add(lblCodigoVenderVacio, gridBagConstraints);
 
         jpVender.add(jpFormularioComprar1, java.awt.BorderLayout.NORTH);
 
@@ -2090,6 +2148,8 @@ public class VentanaMercado extends javax.swing.JFrame {
                         limpiarBordesProducto();
                         limpiarBordesComprar();
                         limpiarBordesComprarProveedor();
+                        limpiarBordesVender();
+                        limpiarBordesVenderCliente();
                     }
                 }
             }
@@ -2402,6 +2462,9 @@ public class VentanaMercado extends javax.swing.JFrame {
             }
             else
             {
+                limpiarBordesVender();
+                limpiarBordesVenderCliente();
+
                 setCodigoComprar(String.valueOf(tabla.getValueAt(fila , 0)));
                 setNombreComprar(String.valueOf(tabla.getValueAt(fila , 1)));
                 setPrecioCompraComprar(String.valueOf(tabla.getValueAt(fila , 2)));
@@ -3166,6 +3229,15 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
+    public void limpiarBordesComprarNombre()
+    {
+        if(!lblNombreComprarVacio.equals(""))
+        {
+            txtNombreComprar.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreComprarVacio.setText("");
+        }
+    }
+
     public void limpiarBordesComprar()
     {
         if(!lblCodigoComprarVacio.equals(""))
@@ -3187,6 +3259,127 @@ public class VentanaMercado extends javax.swing.JFrame {
         {
             txtStockComprar.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
             lblStockComprarVacio.setText("");
+        }
+    }
+
+    //----------|Venta|----------//
+    public void asignarBorderErrorVender()
+    {
+        if(txtCodigoVender.getText().equals(""))
+        {
+            txtCodigoVender.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblCodigoVenderVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblCodigoComprarVacio.equals(""))
+            {
+                txtCodigoVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblCodigoVenderVacio.setText("");
+            }
+        }
+        if(txtNombreVender.getText().equals(""))
+        {
+            txtNombreVender.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));;
+            lblNombreVenderVacio.setText("Presione Enter");
+        }
+        else
+        {
+            if(!lblNombreVenderVacio.equals(""))
+            {
+                txtNombreVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblNombreVenderVacio.setText("");
+            }
+        }
+        if(txtPrecioVentaVender.getText().equals(""))
+        {
+            txtPrecioVentaVender.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblPrecioVenderVacio.setText("Presione Enter");
+        }
+        else
+        {
+            if(!lblPrecioVenderVacio.equals(""))
+            {
+                txtPrecioVentaVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblPrecioVenderVacio.setText("");
+            }
+        }
+        if(txtStockVender.getText().equals(""))
+        {
+            txtStockVender.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblStockVenderVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblStockVenderVacio.equals(""))
+            {
+                txtStockVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblStockVenderVacio.setText("");
+            }
+        }
+    }
+
+    public void asignarBorderErrorVenderCliente()
+    {
+        if(jcbClienteVender.getSelectedItem() == null)
+        {
+            jcbClienteVender.setBorder(BorderFactory.createLineBorder(new Color(249,170,51), 2));
+            lblClienteVenderVacio.setText("Rellene el campo");
+        }
+        else
+        {
+            if(!lblClienteVenderVacio.getText().equals(""))
+            {
+                jcbClienteVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblClienteVenderVacio.setText("");
+            }
+        }
+    }
+
+    public void limpiarBordesVenderCliente()
+    {
+        if(!lblClienteVenderVacio.equals(""))
+        {
+            jcbClienteVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblClienteVenderVacio.setText("");
+        }
+    }
+
+    public void limpiarBordesVenderNombrePrecio()
+    {
+        if(!lblNombreVenderVacio.equals(""))
+        {
+            txtNombreVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreVenderVacio.setText("");
+        }
+        if(!lblPrecioComprarVacio.equals(""))
+        {
+            txtPrecioVentaVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblPrecioVenderVacio.setText("");
+        }
+    }
+
+    public void limpiarBordesVender()
+    {
+        if(!lblCodigoVenderVacio.equals(""))
+        {
+            txtCodigoVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblCodigoVenderVacio.setText("");
+        }
+        if(!lblNombreVenderVacio.equals(""))
+        {
+            txtNombreVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreVenderVacio.setText("");
+        }
+        if(!lblPrecioVenderVacio.equals(""))
+        {
+            txtPrecioVentaVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblPrecioVenderVacio.setText("");
+        }
+        if(!lblStockVenderVacio.equals(""))
+        {
+            txtStockVender.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblStockVenderVacio.setText("");
         }
     }
 
@@ -3388,11 +3581,13 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblCategoriaProducto;
     private javax.swing.JLabel lblCategoriaProductoVacio;
     private javax.swing.JLabel lblClienteVender;
+    private javax.swing.JLabel lblClienteVenderVacio;
     private javax.swing.JLabel lblCodigoCompra;
     private javax.swing.JLabel lblCodigoComprarVacio;
     private javax.swing.JLabel lblCodigoProducto;
     private javax.swing.JLabel lblCodigoProductoVacio;
     private javax.swing.JLabel lblCodigoVender;
+    private javax.swing.JLabel lblCodigoVenderVacio;
     private javax.swing.JLabel lblComprarVacio;
     private javax.swing.JLabel lblDireccionCliente;
     private javax.swing.JLabel lblDireccionClienteVacio;
@@ -3412,11 +3607,13 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreProveedor;
     private javax.swing.JLabel lblNombreProveedorVacio;
     private javax.swing.JLabel lblNombreVender;
+    private javax.swing.JLabel lblNombreVenderVacio;
     private javax.swing.JLabel lblPrecioCompraComprar;
     private javax.swing.JLabel lblPrecioComprarVacio;
     private javax.swing.JLabel lblPrecioProductoVacio;
     private javax.swing.JLabel lblPrecioTotalComprar;
     private javax.swing.JLabel lblPrecioTotalVender;
+    private javax.swing.JLabel lblPrecioVenderVacio;
     private javax.swing.JLabel lblPrecioVentaProducto;
     private javax.swing.JLabel lblPrecioVentaVender;
     private javax.swing.JLabel lblProductoVacio;
@@ -3432,13 +3629,15 @@ public class VentanaMercado extends javax.swing.JFrame {
     private javax.swing.JLabel lblStockComprar;
     private javax.swing.JLabel lblStockComprarVacio;
     private javax.swing.JLabel lblStockVender;
+    private javax.swing.JLabel lblStockVenderVacio;
     private javax.swing.JLabel lblStotckProducto;
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTelefonoClienteVacio;
     private javax.swing.JLabel lblTelefonoProveedor;
     private javax.swing.JLabel lblTelefonoProveedorVacio;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblVacio;
+    private javax.swing.JLabel lblClienteVacio;
+    private javax.swing.JLabel lblVenderVacio;
     private javax.swing.JTextField txtCodigoComprar;
     private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtCodigoVender;

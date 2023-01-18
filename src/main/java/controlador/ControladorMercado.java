@@ -1088,7 +1088,8 @@ public class ControladorMercado
     private boolean comprobarCamposCarritoVenta()
     {
         boolean camposValidos;
-        camposValidos = !ventanaMercado.getCodigoVender().equals("") && !ventanaMercado.getStockVender().equals("");
+        camposValidos = !ventanaMercado.getCodigoVender().equals("") && !ventanaMercado.getStockVender().equals("") && !ventanaMercado.getPrecioVentaVender().equals("") && !ventanaMercado.getNombreVender().equals("");
+        ventanaMercado.asignarBorderErrorVender();
         return camposValidos;
     }
 
@@ -1145,6 +1146,8 @@ public class ControladorMercado
         double auxPrecioVenta;
         int auxStock;
 
+        ventanaMercado.limpiarBordesVenderCliente();
+
         if(ventanaMercado.getFilaSeleccionadaVender() == -1)
         {
             if(comprobarCamposCarritoVenta())
@@ -1156,9 +1159,9 @@ public class ControladorMercado
 
                     if(auxStock > 0)
                     {
-                        if(auxStock <= superMercadoUV.getProductoCodigo(auxCodigo).getStock())
+                        if(superMercadoUV.getProductoCodigo(auxCodigo) != null)
                         {
-                            if(superMercadoUV.getProductoCodigo(auxCodigo) != null)
+                            if(auxStock <= superMercadoUV.getProductoCodigo(auxCodigo).getStock())
                             {
                                 auxNombre =  superMercadoUV.getProductoCodigo(auxCodigo).getNombre();
                                 auxPrecioVenta = superMercadoUV.getProductoCodigo(auxCodigo).getPrecioVenta();
@@ -1182,12 +1185,12 @@ public class ControladorMercado
                             }
                             else
                             {
-                                ventanaMercado.mostrarMensajeError("El producto no existe, por favor agreguelo al inventario antes de continuar");
+                                ventanaMercado.mostrarMensajeError("Cantidad de este producto no disponible");
                             }
                         }
                         else
                         {
-                            ventanaMercado.mostrarMensajeError("Cantidad de este producto no disponible");
+                            ventanaMercado.mostrarMensajeError("El producto no existe, por favor agreguelo al inventario antes de continuar");
                         }
                     }
                     else
@@ -1200,10 +1203,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese valores validos en los campos codigo y stock");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene los campos correctamente");
-            }
         }
         else
         {
@@ -1214,6 +1213,9 @@ public class ControladorMercado
     private  void eliminarProductoCarritoVenta()
     {
         Producto auxProducto;
+
+        ventanaMercado.limpiarBordesVenderCliente();
+        ventanaMercado.limpiarBordesVender();
 
         if(ventanaMercado.getFilaSeleccionadaVender() != -1)
         {
@@ -1253,6 +1255,9 @@ public class ControladorMercado
         Fecha auxFecha;
 
         ArrayList<Producto> auxProductosCarrito;
+
+        ventanaMercado.limpiarBordesVender();
+        ventanaMercado.asignarBorderErrorVenderCliente();
 
         if(ventanaMercado.getFilaSeleccionadaVender() == -1)
         {
@@ -1322,11 +1327,13 @@ public class ControladorMercado
                     auxProducto = superMercadoUV.getProductoCodigo(auxCodigo);
                     if (auxProducto != null)
                     {
+                        ventanaMercado.limpiarBordesVenderNombrePrecio();
                         ventanaMercado.setNombreComprar(auxProducto.getNombre());
                         ventanaMercado.setPrecioCompraComprar("");
                         ventanaMercado.setStockComprar("");
                     } else
                     {
+                        ventanaMercado.limpiarBordesComprar();
                         ventanaMercado.setCodigoComprar("");
                         ventanaMercado.setNombreComprar("");
                         ventanaMercado.setPrecioCompraComprar("");
@@ -1341,11 +1348,13 @@ public class ControladorMercado
                     auxProducto = superMercadoUV.getProducto(auxCodigo);
                     if (auxProducto != null)
                     {
+                        ventanaMercado.limpiarBordesVenderNombrePrecio();
                         ventanaMercado.setNombreVender(auxProducto.getNombre());
                         ventanaMercado.setPrecioVentaVender(String.valueOf(auxProducto.getPrecioVenta()));
                         ventanaMercado.setStockVender("");
                     } else
                     {
+                        ventanaMercado.limpiarBordesVender();
                         ventanaMercado.setCodigoVender("");
                         ventanaMercado.setNombreVender("");
                         ventanaMercado.setPrecioVentaVender("");
