@@ -9,6 +9,13 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.lang.Math;
+
+/*
+ * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
+ * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
+ * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
+ */
+
 public class ControladorMercado
 {
     private final Empresa superMercadoUV;
@@ -19,8 +26,7 @@ public class ControladorMercado
         this.superMercadoUV = auxEmpresa;
         this.ventanaMercado = auxA;
 
-        ventanaMercado.setVisible(true);
-        ventanaMercado.setLocationRelativeTo(null);
+        ventanaMercado.pantallaCompleta();
 
         TextFieldListener textFieldListener = new TextFieldListener();
 
@@ -63,6 +69,7 @@ public class ControladorMercado
     {
         boolean camposValido;
         camposValido = !ventanaMercado.getNombreCliente().equals("") && !ventanaMercado.getNitCliente().equals("") && !ventanaMercado.getTelefonoCliente().equals("") && !ventanaMercado.getDireccionCliente().equals("");
+        ventanaMercado.asignarBorderErrorCliente();
         return camposValido;
     }
 
@@ -172,10 +179,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -196,6 +199,7 @@ public class ControladorMercado
         auxId = Integer.parseInt(ventanaMercado.getIdCliente());
         auxCliente = superMercadoUV.getCliente(auxId);
 
+        ventanaMercado.limpiarBordesCliente();
         if(auxCliente != null)
         {
             if(comprobarCamposCliente())
@@ -241,14 +245,10 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
-            ventanaMercado.mostrarMensajeError("Seleccione a un cliente");
+            ventanaMercado.mostrarMensajeError("Seleccione un cliente");
         }
     }
 
@@ -259,6 +259,7 @@ public class ControladorMercado
         auxId = Integer.parseInt(ventanaMercado.getIdCliente());
         auxCliente = superMercadoUV.getCliente(auxId);
 
+        ventanaMercado.limpiarBordesCliente();
         if(auxCliente != null)
         {
             if(superMercadoUV.eliminarCliente(auxCliente))
@@ -281,7 +282,7 @@ public class ControladorMercado
         }
         else
         {
-            ventanaMercado.mostrarMensajeError("Seleccione a un cliente");
+            ventanaMercado.mostrarMensajeError("Seleccione un cliente");
         }
     }
 
@@ -310,6 +311,7 @@ public class ControladorMercado
     {
         boolean camposValido;
         camposValido = !ventanaMercado.getNombreProveedor().equals("") && !ventanaMercado.getNitProveedor().equals("") && !ventanaMercado.getTelefonoProveedor().equals("") && !ventanaMercado.getDireccionProveedor().equals("") && !ventanaMercado.getRazonSocialProveedor().equals("");
+        ventanaMercado.asignarBorderErrorProveedor();
         return camposValido;
     }
 
@@ -424,10 +426,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -448,6 +446,7 @@ public class ControladorMercado
 
         auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
         auxProveedor = superMercadoUV.getProveedor(auxId);
+        ventanaMercado.limpiarBordesProveedor();
 
         if(auxProveedor != null)
         {
@@ -497,10 +496,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en los campos NIT y Telefono");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -512,8 +507,10 @@ public class ControladorMercado
     {
         Proveedor auxProveedor;
         int auxId;
+
         auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
         auxProveedor = superMercadoUV.getProveedor(auxId);
+        ventanaMercado.limpiarBordesProveedor();
 
         if(auxProveedor != null)
         {
@@ -538,7 +535,7 @@ public class ControladorMercado
         }
         else
         {
-            ventanaMercado.mostrarMensajeError("Seleccione a un proveedor");
+            ventanaMercado.mostrarMensajeError("Seleccione un proveedor");
         }
     }
 
@@ -567,6 +564,7 @@ public class ControladorMercado
     {
         boolean camposValido;
         camposValido = !ventanaMercado.getNombreProducto().equals("") && !ventanaMercado.getCodigoProducto().equals("") && !ventanaMercado.getPrecioVentaProducto().equals("") && ventanaMercado.getCategoriaProducto() != null;
+        ventanaMercado.asignarBorderErrorProducto();
         return camposValido;
     }
 
@@ -697,10 +695,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -717,6 +711,8 @@ public class ControladorMercado
 
         auxId = Integer.parseInt(ventanaMercado.getIdProducto());
         auxProducto = superMercadoUV.getProducto(auxId);
+
+        ventanaMercado.limpiarBordesProducto();
 
         if(auxProducto != null)
         {
@@ -755,10 +751,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -772,6 +764,8 @@ public class ControladorMercado
         int auxId;
         auxId = Integer.parseInt(ventanaMercado.getIdProducto());
         auxProducto = superMercadoUV.getProducto(auxId);
+
+        ventanaMercado.limpiarBordesProducto();
 
         if(auxProducto != null)
         {
@@ -847,6 +841,7 @@ public class ControladorMercado
     {
         boolean camposValidos;
         camposValidos = !ventanaMercado.getCodigoComprar().equals("") && !ventanaMercado.getNombreComprar().equals("") && !ventanaMercado.getPrecioCompraComprar().equals("") && !ventanaMercado.getStockComprar().equals("");
+        ventanaMercado.asignarBorderErrorComprar();
         return camposValidos;
     }
 
@@ -914,6 +909,8 @@ public class ControladorMercado
         double auxPrecioCompra;
         int auxStock;
 
+        ventanaMercado.limpiarBordesComprarProveedor();
+
         if(ventanaMercado.getFilaSeleccionadaComprar() == -1)
         {
             if(comprobarCamposCarritoCompra())
@@ -961,10 +958,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese valores validos en los campos codigo, stock y precio compra");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene los campos correctamente");
-            }
         }
         else
         {
@@ -975,6 +968,9 @@ public class ControladorMercado
     private  void eliminarProductoCarritoCompra()
     {
         Producto auxProducto;
+
+        ventanaMercado.limpiarBordesComprar();
+        ventanaMercado.limpiarBordesComprarProveedor();
 
         if (ventanaMercado.getFilaSeleccionadaComprar() != -1)
         {
@@ -1016,6 +1012,9 @@ public class ControladorMercado
         Fecha auxFecha;
 
         ArrayList<Producto> auxProductosCarrito;
+
+        ventanaMercado.limpiarBordesComprar();
+        ventanaMercado.asignarBorderErrorComprarProveedor();
 
         if(ventanaMercado.getFilaSeleccionadaComprar() == -1)
         {
@@ -1059,10 +1058,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Rellene la compra con productos");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Seleccione un proveedor");
-            }
         }
         else
         {
@@ -1095,7 +1090,8 @@ public class ControladorMercado
     private boolean comprobarCamposCarritoVenta()
     {
         boolean camposValidos;
-        camposValidos = !ventanaMercado.getCodigoVender().equals("") && !ventanaMercado.getStockVender().equals("");
+        camposValidos = !ventanaMercado.getCodigoVender().equals("") && !ventanaMercado.getStockVender().equals("") && !ventanaMercado.getPrecioVentaVender().equals("") && !ventanaMercado.getNombreVender().equals("");
+        ventanaMercado.asignarBorderErrorVender();
         return camposValidos;
     }
 
@@ -1152,6 +1148,8 @@ public class ControladorMercado
         double auxPrecioVenta;
         int auxStock;
 
+        ventanaMercado.limpiarBordesVenderCliente();
+
         if(ventanaMercado.getFilaSeleccionadaVender() == -1)
         {
             if(comprobarCamposCarritoVenta())
@@ -1163,9 +1161,9 @@ public class ControladorMercado
 
                     if(auxStock > 0)
                     {
-                        if(auxStock <= superMercadoUV.getProductoCodigo(auxCodigo).getStock())
+                        if(superMercadoUV.getProductoCodigo(auxCodigo) != null)
                         {
-                            if(superMercadoUV.getProductoCodigo(auxCodigo) != null)
+                            if(auxStock <= superMercadoUV.getProductoCodigo(auxCodigo).getStock())
                             {
                                 auxNombre =  superMercadoUV.getProductoCodigo(auxCodigo).getNombre();
                                 auxPrecioVenta = superMercadoUV.getProductoCodigo(auxCodigo).getPrecioVenta();
@@ -1189,12 +1187,12 @@ public class ControladorMercado
                             }
                             else
                             {
-                                ventanaMercado.mostrarMensajeError("El producto no existe, por favor agreguelo al inventario antes de continuar");
+                                ventanaMercado.mostrarMensajeError("Cantidad de este producto no disponible");
                             }
                         }
                         else
                         {
-                            ventanaMercado.mostrarMensajeError("Cantidad de este producto no disponible");
+                            ventanaMercado.mostrarMensajeError("El producto no existe, por favor agreguelo al inventario antes de continuar");
                         }
                     }
                     else
@@ -1207,10 +1205,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese valores validos en los campos codigo y stock");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene los campos correctamente");
-            }
         }
         else
         {
@@ -1221,6 +1215,9 @@ public class ControladorMercado
     private  void eliminarProductoCarritoVenta()
     {
         Producto auxProducto;
+
+        ventanaMercado.limpiarBordesVenderCliente();
+        ventanaMercado.limpiarBordesVender();
 
         if(ventanaMercado.getFilaSeleccionadaVender() != -1)
         {
@@ -1261,6 +1258,9 @@ public class ControladorMercado
 
         ArrayList<Producto> auxProductosCarrito;
 
+        ventanaMercado.limpiarBordesVender();
+        ventanaMercado.asignarBorderErrorVenderCliente();
+
         if(ventanaMercado.getFilaSeleccionadaVender() == -1)
         {
             auxCliente = ventanaMercado.getClienteVender();
@@ -1300,12 +1300,8 @@ public class ControladorMercado
                 }
                 else
                 {
-                    ventanaMercado.mostrarMensajeError("Rellene la Venta con productos");
+                    ventanaMercado.mostrarMensajeError("Rellene la venta con productos");
                 }
-            }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Seleccione un cliente");
             }
         }
         else
@@ -1329,11 +1325,13 @@ public class ControladorMercado
                     auxProducto = superMercadoUV.getProductoCodigo(auxCodigo);
                     if (auxProducto != null)
                     {
+                        ventanaMercado.limpiarBordesComprarNombre();
                         ventanaMercado.setNombreComprar(auxProducto.getNombre());
                         ventanaMercado.setPrecioCompraComprar("");
                         ventanaMercado.setStockComprar("");
                     } else
                     {
+                        ventanaMercado.limpiarBordesComprar();
                         ventanaMercado.setCodigoComprar("");
                         ventanaMercado.setNombreComprar("");
                         ventanaMercado.setPrecioCompraComprar("");
@@ -1348,11 +1346,13 @@ public class ControladorMercado
                     auxProducto = superMercadoUV.getProducto(auxCodigo);
                     if (auxProducto != null)
                     {
+                        ventanaMercado.limpiarBordesVenderNombrePrecio();
                         ventanaMercado.setNombreVender(auxProducto.getNombre());
                         ventanaMercado.setPrecioVentaVender(String.valueOf(auxProducto.getPrecioVenta()));
                         ventanaMercado.setStockVender("");
                     } else
                     {
+                        ventanaMercado.limpiarBordesVender();
                         ventanaMercado.setCodigoVender("");
                         ventanaMercado.setNombreVender("");
                         ventanaMercado.setPrecioVentaVender("");

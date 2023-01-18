@@ -6,12 +6,12 @@ import java.io.Serializable;
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
- */
+*/
 
 public class Producto implements Serializable
 {
     private int id;
-    private long codigo;
+    private final long codigo;
     private static int numero;
     private String nombre;
     private double precioVenta;
@@ -52,17 +52,7 @@ public class Producto implements Serializable
     {
         return id;
     }
-    
-    public void setId(int auxId)
-    {
-        this.id = auxId;
-    }
-    
-    public static int getNumero()
-    {
-        return numero;
-    }
-    
+
     public static void setNumeroProducto(int auxNumero)
     {
         Producto.numero = auxNumero;
@@ -72,12 +62,7 @@ public class Producto implements Serializable
     {
         return codigo;
     }
-    
-    public void setCodigo(long auxCodigo)
-    {
-        this.codigo = auxCodigo;
-    }
-    
+
     public String getNombre()
     {
         return nombre;
@@ -103,19 +88,9 @@ public class Producto implements Serializable
         return precioCompra;
     }
 
-    public void setPrecioCompra(double auxPrecioCompra)
-    {
-        this.precioCompra = auxPrecioCompra;
-    }
-    
     public int getStock()
     {
         return stock;
-    }
-    
-    public void setStock(int auxStock)
-    {
-        this.stock = auxStock;
     }
 
     public String getCategoria() 
@@ -123,15 +98,9 @@ public class Producto implements Serializable
         return categoria;
     }
 
-    public void setCategoria(String categoria)
-    {
-        this.categoria = categoria;
-    }
-    
     public String toString()
     {
-        String toString = nombre;
-        return toString;
+        return nombre;
     }
 
     public void aumentarStock(int auxStock)
