@@ -15,7 +15,7 @@ import static modelo.Venta.setNumeroVenta;
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
- */
+*/
 
 public class Empresa
 {
@@ -126,24 +126,9 @@ public class Empresa
         return this.ventaDao.anhadirVenta(auxVenta);
     }
 
-    public boolean actualizarVenta(Venta auxVenta)
-    {
-        return this.ventaDao.actualizarVenta(auxVenta);
-    }
-
-    public boolean eliminarVenta(Venta auxVenta)
-    {
-        return this.ventaDao.eliminarVenta(auxVenta);
-    }
-
     public ArrayList<Venta> getVentas()
     {
         return this.ventaDao.getVentas();
-    }
-
-    public Venta getVenta(int auxId)
-    {
-        return this.ventaDao.getVenta(auxId);
     }
     
     //----------|Compras|----------//
@@ -152,24 +137,9 @@ public class Empresa
         return this.compraDao.anhadirCompra(auxCompra);
     }
 
-    public boolean actualizarCompra(Compra auxCompra)
-    {
-        return this.compraDao.actualizarCompra(auxCompra);
-    }
-
-    public boolean eliminarCompra(Compra auxCompra)
-    {
-        return this.compraDao.eliminarCompra(auxCompra);
-    }
-
     public ArrayList<Compra> getCompras()
     {
         return this.compraDao.getCompras();
-    }
-
-    public Compra getCompra(int auxId)
-    {
-        return this.compraDao.getCompra(auxId);
     }
 
     public Producto getProductoCodigo(long auxCodigo)
@@ -289,8 +259,6 @@ public class Empresa
         conexion.setArchivo("ventas.bin");
         conexion.escribirDatosBinario(auxVentas);
     }
-
-
 
     public boolean recuperarDatos()
     {

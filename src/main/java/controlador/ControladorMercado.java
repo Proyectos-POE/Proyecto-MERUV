@@ -9,6 +9,13 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.lang.Math;
+
+/*
+ * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
+ * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
+ * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
+ */
+
 public class ControladorMercado
 {
     private final Empresa superMercadoUV;
@@ -241,7 +248,7 @@ public class ControladorMercado
         }
         else
         {
-            ventanaMercado.mostrarMensajeError("Seleccione a un cliente");
+            ventanaMercado.mostrarMensajeError("Seleccione un cliente");
         }
     }
 
@@ -275,7 +282,7 @@ public class ControladorMercado
         }
         else
         {
-            ventanaMercado.mostrarMensajeError("Seleccione a un cliente");
+            ventanaMercado.mostrarMensajeError("Seleccione un cliente");
         }
     }
 
@@ -528,7 +535,7 @@ public class ControladorMercado
         }
         else
         {
-            ventanaMercado.mostrarMensajeError("Seleccione a un proveedor");
+            ventanaMercado.mostrarMensajeError("Seleccione un proveedor");
         }
     }
 
@@ -1048,12 +1055,8 @@ public class ControladorMercado
                 }
                 else
                 {
-                    ventanaMercado.mostrarMensajeError("Rellene el carrito con productos");
+                    ventanaMercado.mostrarMensajeError("Rellene la compra con productos");
                 }
-            }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Seleccione un proveedor");
             }
         }
         else
@@ -1297,12 +1300,8 @@ public class ControladorMercado
                 }
                 else
                 {
-                    ventanaMercado.mostrarMensajeError("Rellene la Venta con productos");
+                    ventanaMercado.mostrarMensajeError("Rellene la venta con productos");
                 }
-            }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Seleccione un cliente");
             }
         }
         else
@@ -1326,7 +1325,7 @@ public class ControladorMercado
                     auxProducto = superMercadoUV.getProductoCodigo(auxCodigo);
                     if (auxProducto != null)
                     {
-                        ventanaMercado.limpiarBordesVenderNombrePrecio();
+                        ventanaMercado.limpiarBordesComprarNombre();
                         ventanaMercado.setNombreComprar(auxProducto.getNombre());
                         ventanaMercado.setPrecioCompraComprar("");
                         ventanaMercado.setStockComprar("");

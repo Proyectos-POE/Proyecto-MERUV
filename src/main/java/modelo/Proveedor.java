@@ -1,16 +1,17 @@
 package modelo;
+
 import java.io.Serializable;
 
 /*
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
- */
+*/
 
 public class Proveedor implements Serializable
 {
     private static int numero;
-    private int id;
+    private final int id;
     private String nombre;
     private long nit;
     private long telefono;
@@ -29,11 +30,6 @@ public class Proveedor implements Serializable
         this.razonSocial= auxRazonSocial;
     }
 
-    public static int getNumeroProveedor()
-    {
-        return numero;
-    }
-
     public static void setNumeroProveedor(int auxNumero)
     {
         Proveedor.numero = auxNumero;
@@ -42,11 +38,6 @@ public class Proveedor implements Serializable
     public int getId()
     {
         return id;
-    }
-
-    public void setId(int auxId)
-    {
-        this.id = auxId;
     }
 
     public String getNombre()

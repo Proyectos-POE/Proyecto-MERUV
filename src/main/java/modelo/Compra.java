@@ -7,17 +7,17 @@ import java.io.Serializable;
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
- */
+*/
 
 public class Compra implements Serializable
 {
     private static int numero;
-    private int id;
-    private Proveedor proveedor;
-    private double valorTotal;
-    private ArrayList<Producto> productosCompra;
-    private int cantidadProductos;
-    private Fecha fecha;
+    private final int id;
+    private final Proveedor proveedor;
+    private final double valorTotal;
+    private final ArrayList<Producto> productosCompra;
+    private final int cantidadProductos;
+    private final Fecha fecha;
     public Compra(Proveedor auxProveedor, double auxValorTotal, ArrayList<Producto> auxProductosCompra, int auxCantidadProductos, Fecha auxFecha)
     {
         numero++;
@@ -27,10 +27,6 @@ public class Compra implements Serializable
         this.productosCompra = auxProductosCompra;
         this.cantidadProductos = auxCantidadProductos;
         this.fecha = auxFecha;
-    }
-    public static int getNumeroCompra()
-    {
-        return numero;
     }
 
     public static void setNumeroCompra(int auxNumero)
@@ -43,19 +39,9 @@ public class Compra implements Serializable
         return id;
     }
 
-    public void setId(int auxId)
-    {
-        this.id = auxId;
-    }
-
     public Proveedor getProveedor()
     {
         return proveedor;
-    }
-
-    public void setProveedor(Proveedor auxpProveedor)
-    {
-        this.proveedor = auxpProveedor;
     }
 
     public double getValorTotal()
@@ -63,70 +49,49 @@ public class Compra implements Serializable
         return valorTotal;
     }
 
-    public void setValorTotal(double auxValorTotal)
-    {
-        this.valorTotal = auxValorTotal;
-    }
-
-    public ArrayList<Producto> getProductosCompra()
-    {
-        return productosCompra;
-    }
-
-    public void setProductosCompra(ArrayList<Producto> auxProductosCompra)
-    {
-        this.productosCompra = auxProductosCompra;
-    }
     public int getCantidadProductos()
     {
         return cantidadProductos;
     }
-    public void setCantidadProductos(int auxCantidadProductos)
-    {
-        this.cantidadProductos = auxCantidadProductos;
-    }
+
     public Fecha getFecha()
     {
         return fecha;
     }
-    public void setFecha(Fecha auxFecha)
-    {
-        this.fecha = auxFecha;
-    }
 
     public String getNombresProductosCompra()
     {
-        String auxProductos;
-        auxProductos = "";
+        StringBuilder auxProductos;
+        auxProductos = new StringBuilder();
         for (Producto producto : productosCompra)
         {
-            auxProductos = auxProductos + producto.getNombre() + "\n";
+            auxProductos.append(producto.getNombre()).append("\n");
         }
-        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
-        return auxProductos;
+        auxProductos = new StringBuilder(auxProductos.substring(0, auxProductos.length() - 1));
+        return auxProductos.toString();
     }
 
     public String getPreciosProductosCompra()
     {
-        String auxProductos;
-        auxProductos = "";
+        StringBuilder auxProductos;
+        auxProductos = new StringBuilder();
         for (Producto producto : productosCompra)
         {
-            auxProductos = auxProductos + producto.getPrecioCompra() + "\n";
+            auxProductos.append(producto.getPrecioCompra()).append("\n");
         }
-        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
-        return auxProductos;
+        auxProductos = new StringBuilder(auxProductos.substring(0, auxProductos.length() - 1));
+        return auxProductos.toString();
     }
 
     public String getStockProductosCompra()
     {
-        String auxProductos;
-        auxProductos = "";
+        StringBuilder auxProductos;
+        auxProductos = new StringBuilder();
         for (Producto producto : productosCompra)
         {
-            auxProductos = auxProductos + producto.getStock() + "\n";
+            auxProductos.append(producto.getStock()).append("\n");
         }
-        auxProductos = auxProductos.substring(0, auxProductos.length() - 1);
-        return auxProductos;
+        auxProductos = new StringBuilder(auxProductos.substring(0, auxProductos.length() - 1));
+        return auxProductos.toString();
     }
 }

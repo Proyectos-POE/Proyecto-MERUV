@@ -16,26 +16,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.LookAndFeel;
+import java.util.Arrays;
+import java.util.Objects;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-/**
- *
- * @author Nicolas Herrera
+
+/*
+ * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
+ * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
+ * @author Julian Rendon <julian.david.rendon@correounivalle.edu.co>
  */
+
 public class VentanaMercado extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public VentanaMercado() {
+    public VentanaMercado()
+    {
         initComponents();
         this.pagInicial();
         this.addBotonesPrincipalListener(new CambiarPaginaListener());
@@ -56,6 +56,8 @@ public class VentanaMercado extends javax.swing.JFrame {
         botonesPrincipal.add(btnVender);
         botonesPrincipal.add(btnCompras);
         botonesPrincipal.add(btnVentas);
+
+        UIManager.put("OptionPane.messageFont", new java.awt.Font("Montserrat", 0, 14));
     }
 
     public void pantallaCompleta()
@@ -71,7 +73,8 @@ public class VentanaMercado extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+    private void initComponents()
+    {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jpBotones = new javax.swing.JPanel();
@@ -258,16 +261,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnClientes.setBorderPainted(false);
         btnClientes.setContentAreaFilled(false);
         btnClientes.setFocusable(false);
-        btnClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnClientesMouseEntered(evt);
-            }
-        });
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
         btnClientes.setAlignmentX(CENTER_ALIGNMENT);
         btnClientes.setIconTextGap(8);
         btnClientes.putClientProperty("seleccionado", false);
@@ -282,11 +275,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnProveedores.setBorderPainted(false);
         btnProveedores.setContentAreaFilled(false);
         btnProveedores.setFocusable(false);
-        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProveedoresActionPerformed(evt);
-            }
-        });
         btnProveedores.setAlignmentX(CENTER_ALIGNMENT);
         btnProveedores.setIconTextGap(8);
         btnProveedores.putClientProperty("seleccionado", false);
@@ -316,11 +304,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnComprar.setBorderPainted(false);
         btnComprar.setContentAreaFilled(false);
         btnComprar.setFocusable(false);
-        btnComprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprarActionPerformed(evt);
-            }
-        });
         btnComprar.setAlignmentX(CENTER_ALIGNMENT);
         btnComprar.setIconTextGap(8);
         btnComprar.putClientProperty("seleccionado", false);
@@ -335,11 +318,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnVender.setBorderPainted(false);
         btnVender.setContentAreaFilled(false);
         btnVender.setFocusable(false);
-        btnVender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVenderActionPerformed(evt);
-            }
-        });
         btnVender.setAlignmentX(CENTER_ALIGNMENT);
         btnVender.setIconTextGap(8);
         btnVender.putClientProperty("seleccionado", false);
@@ -368,11 +346,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
         btnVentas.setFocusable(false);
-        btnVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVentasActionPerformed(evt);
-            }
-        });
         btnVentas.setAlignmentX(CENTER_ALIGNMENT);
         btnVentas.setIconTextGap(8);
         btnVentas.putClientProperty("seleccionado", false);
@@ -411,11 +384,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNitCliente.setToolTipText("");
         txtNitCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2,2,2,2));
         txtNitCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNitCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNitClienteActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -438,11 +406,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreClienteActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -465,11 +428,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtTelefonoCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtTelefonoCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtTelefonoCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtTelefonoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoClienteActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -492,11 +450,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtDireccionCliente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtDireccionCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtDireccionCliente.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtDireccionCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionClienteActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -605,11 +558,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEditarCliente.setText("EDITAR");
         btnEditarCliente.setBorderPainted(false);
         btnEditarCliente.setFocusable(false);
-        btnEditarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarClienteActionPerformed(evt);
-            }
-        });
         jpBotonesCliente.add(btnEditarCliente);
 
         btnEliminarCliente.setBackground(new java.awt.Color(102, 0, 0));
@@ -662,11 +610,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNitProveedor.setToolTipText("");
         txtNitProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNitProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNitProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNitProveedorActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -689,11 +632,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreProveedorActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -716,11 +654,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtTelefonoProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtTelefonoProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtTelefonoProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtTelefonoProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoProveedorActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -743,11 +676,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtDireccionProveedor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtDireccionProveedor.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtDireccionProveedor.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtDireccionProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionProveedorActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -868,11 +796,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEditarProveedor.setText("EDITAR");
         btnEditarProveedor.setBorderPainted(false);
         btnEditarProveedor.setFocusable(false);
-        btnEditarProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarProveedorActionPerformed(evt);
-            }
-        });
         jpBotonesProveedor.add(btnEditarProveedor);
 
         btnEliminarProveedor.setBackground(new java.awt.Color(102, 0, 0));
@@ -925,11 +848,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtCodigoProducto.setToolTipText("");
         txtCodigoProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtCodigoProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoProductoActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -952,11 +870,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreProductoActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -979,11 +892,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtPrecioVentaProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtPrecioVentaProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioVentaProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioVentaProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioVentaProductoActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -1007,11 +915,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtStockProducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtStockProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockProducto.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtStockProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockProductoActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -1036,7 +939,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jcbCategoriaProducto.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         jcbCategoriaProducto.setFocusable(false);
         jcbCategoriaProducto.setPreferredSize(new java.awt.Dimension(134, 19));
-        jcbCategoriaProducto.setUI(new MyComboBoxUI());
+        jcbCategoriaProducto.setUI(new ComboBoxPersonalizado());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -1127,11 +1030,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEditarProducto.setText("EDITAR");
         btnEditarProducto.setBorderPainted(false);
         btnEditarProducto.setFocusable(false);
-        btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarProductoActionPerformed(evt);
-            }
-        });
         jpBotonesInventario.add(btnEditarProducto);
 
         btnEliminarProducto.setBackground(new java.awt.Color(102, 0, 0));
@@ -1166,11 +1064,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtCodigoComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoComprar.setMinimumSize(new java.awt.Dimension(4, 23));
         txtCodigoComprar.setActionCommand("TextFieldComprar");
-        txtCodigoComprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoComprarActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1191,11 +1084,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreComprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreComprarActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -1215,11 +1103,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtPrecioCompraComprar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtPrecioCompraComprar.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioCompraComprar.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioCompraComprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioCompraComprarActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -1260,7 +1143,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jcbProveedorComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbProveedorComprar.setFocusable(false);
         jcbProveedorComprar.setPreferredSize(new java.awt.Dimension(134, 19));
-        jcbProveedorComprar.setUI(new MyComboBoxUI());
+        jcbProveedorComprar.setUI(new ComboBoxPersonalizado());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -1353,11 +1236,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarCompra.setText("AGREGAR");
         btnAgregarCompra.setBorderPainted(false);
         btnAgregarCompra.setFocusable(false);
-        btnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCompraActionPerformed(evt);
-            }
-        });
         jpBotonesComprar.add(btnAgregarCompra);
 
         btnRealizarCompra.setBackground(new java.awt.Color(249, 170, 51));
@@ -1367,11 +1245,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnRealizarCompra.setText("COMPRAR");
         btnRealizarCompra.setBorderPainted(false);
         btnRealizarCompra.setFocusable(false);
-        btnRealizarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarCompraActionPerformed(evt);
-            }
-        });
         jpBotonesComprar.add(btnRealizarCompra);
 
         btnEliminarCompra.setBackground(new java.awt.Color(102, 0, 0));
@@ -1381,11 +1254,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarCompra.setText("ELIMINAR");
         btnEliminarCompra.setBorderPainted(false);
         btnEliminarCompra.setFocusable(false);
-        btnEliminarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCompraActionPerformed(evt);
-            }
-        });
         jpBotonesComprar.add(btnEliminarCompra);
 
         jpInferiorComprar.add(jpBotonesComprar, java.awt.BorderLayout.CENTER);
@@ -1427,11 +1295,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtCodigoVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtCodigoVender.setMinimumSize(new java.awt.Dimension(4, 23));
         txtCodigoVender.setActionCommand("TextFieldVender");
-        txtCodigoVender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoVenderActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1453,11 +1316,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtNombreVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtNombreVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtNombreVender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreVenderActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -1479,11 +1337,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtPrecioVentaVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtPrecioVentaVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtPrecioVentaVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtPrecioVentaVender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioVentaVenderActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -1504,11 +1357,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtStockVender.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtStockVender.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         txtStockVender.setMinimumSize(new java.awt.Dimension(4, 23));
-        txtStockVender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockVenderActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -1534,7 +1382,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         jcbClienteVender.setMinimumSize(new java.awt.Dimension(160, 23));
         jcbClienteVender.setName(""); // NOI18N
         jcbClienteVender.setPreferredSize(new java.awt.Dimension(134, 19));
-        jcbClienteVender.setUI(new MyComboBoxUI());
+        jcbClienteVender.setUI(new ComboBoxPersonalizado());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -1628,11 +1476,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarVenta.setText("AGREGAR");
         btnAgregarVenta.setBorderPainted(false);
         btnAgregarVenta.setFocusable(false);
-        btnAgregarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarVentaActionPerformed(evt);
-            }
-        });
         jpBotonesVender.add(btnAgregarVenta);
 
         btnRealizarVenta.setBackground(new java.awt.Color(249, 170, 51));
@@ -1642,11 +1485,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnRealizarVenta.setText("VENDER");
         btnRealizarVenta.setBorderPainted(false);
         btnRealizarVenta.setFocusable(false);
-        btnRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarVentaActionPerformed(evt);
-            }
-        });
         jpBotonesVender.add(btnRealizarVenta);
 
         btnEliminarVenta.setBackground(new java.awt.Color(102, 0, 0));
@@ -1656,11 +1494,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarVenta.setText("ELIMINAR");
         btnEliminarVenta.setBorderPainted(false);
         btnEliminarVenta.setFocusable(false);
-        btnEliminarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarVentaActionPerformed(evt);
-            }
-        });
         jpBotonesVender.add(btnEliminarVenta);
 
         jpInferiorVender.add(jpBotonesVender, java.awt.BorderLayout.CENTER);
@@ -1707,9 +1540,9 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaCompras.setEnabled(false);
         jtTablaCompras.getTableHeader().setResizingAllowed(false);
         jtTablaCompras.getTableHeader().setReorderingAllowed(false);
-        jtTablaCompras.getColumnModel().getColumn(1).setCellRenderer(new WordWrapRenderer());
-        jtTablaCompras.getColumnModel().getColumn(2).setCellRenderer(new WordWrapRenderer());
-        jtTablaCompras.getColumnModel().getColumn(3).setCellRenderer(new WordWrapRenderer());
+        jtTablaCompras.getColumnModel().getColumn(1).setCellRenderer(new JTableCeldaPersonalizada());
+        jtTablaCompras.getColumnModel().getColumn(2).setCellRenderer(new JTableCeldaPersonalizada());
+        jtTablaCompras.getColumnModel().getColumn(3).setCellRenderer(new JTableCeldaPersonalizada());
         jspTablaCompras.setViewportView(jtTablaCompras);
 
         jpCompras.add(jspTablaCompras, java.awt.BorderLayout.CENTER);
@@ -1749,9 +1582,9 @@ public class VentanaMercado extends javax.swing.JFrame {
         jtTablaVentas.setEnabled(false);
         jtTablaVentas.getTableHeader().setResizingAllowed(false);
         jtTablaVentas.getTableHeader().setReorderingAllowed(false);
-        jtTablaVentas.getColumnModel().getColumn(1).setCellRenderer(new WordWrapRenderer());
-        jtTablaVentas.getColumnModel().getColumn(2).setCellRenderer(new WordWrapRenderer());
-        jtTablaVentas.getColumnModel().getColumn(3).setCellRenderer(new WordWrapRenderer());
+        jtTablaVentas.getColumnModel().getColumn(1).setCellRenderer(new JTableCeldaPersonalizada());
+        jtTablaVentas.getColumnModel().getColumn(2).setCellRenderer(new JTableCeldaPersonalizada());
+        jtTablaVentas.getColumnModel().getColumn(3).setCellRenderer(new JTableCeldaPersonalizada());
         jspTablaVentas.setViewportView(jtTablaVentas);
 
         jpVentas.add(jspTablaVentas, java.awt.BorderLayout.CENTER);
@@ -1784,142 +1617,6 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
-
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNitClienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtTelefonoClienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtDireccionClienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnClientesMouseEntered(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNitProveedorActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtTelefonoProveedorActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtDireccionProveedorActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtCodigoComprarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreComprarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtPrecioCompraComprarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnEliminarCompraActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnRealizarCompraActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtStockVenderActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnEliminarVentaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreVenderActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtCodigoVenderActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtPrecioVentaVenderActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtPrecioVentaProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtStockProductoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
     //==========|ActionListener Botones Formulario|==========//
     //=====|Cliente|=====//
@@ -2142,31 +1839,31 @@ public class VentanaMercado extends javax.swing.JFrame {
                         boton.putClientProperty("seleccionado", false);
                         if(boton.getActionCommand().equalsIgnoreCase("CLIENTES"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/cliente.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/cliente.png"))));
                         }
                         if(boton.getActionCommand().equalsIgnoreCase("PROVEEDORES"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/proveedor.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/proveedor.png"))));
                         }
                         if(boton.getActionCommand().equalsIgnoreCase("INVENTARIO"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/inventario.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/inventario.png"))));
                         }
                         if(boton.getActionCommand().equalsIgnoreCase("COMPRAR"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/compra.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/compra.png"))));
                         }
                         if(boton.getActionCommand().equalsIgnoreCase("VENDER"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/venta.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/venta.png"))));
                         }
                         if(boton.getActionCommand().equalsIgnoreCase("COMPRAS"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/factura.png"))));
                         }
                         if(boton.getActionCommand().equalsIgnoreCase("VENTAS"))
                         {
-                            boton.setIcon(new ImageIcon(getClass().getResource("/factura.png")));
+                            boton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/factura.png"))));
                         }
                         limpiarBordesCliente();
                         limpiarBordesProveedor();
@@ -2607,20 +2304,10 @@ public class VentanaMercado extends javax.swing.JFrame {
         return jtTablaCompras.getModel();
     }
 
-    public int getFilaSeleccionadaCompras()
-    {
-        return jtTablaCompras.getSelectedRow();
-    }
-
     //=====|Ventas|=====//
     public TableModel getModelTablaVentas()
     {
         return jtTablaVentas.getModel();
-    }
-
-    public int getFilaSeleccionadaVentas()
-    {
-        return jtTablaVentas.getSelectedRow();
     }
 
     //==========|Setters|==========//
@@ -2726,11 +2413,6 @@ public class VentanaMercado extends javax.swing.JFrame {
     public void setPrecioCompraComprar(String txt)
     {
         txtPrecioCompraComprar.setText(txt);
-    }
-
-    public void setPrecioVentaComprar(String txt)
-    {
-        txtPrecioVentaProducto.setText(txt);
     }
 
     public void setStockComprar(String txt)
@@ -2869,11 +2551,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         return txtPrecioVentaProducto.getText();
     }
 
-    public String getStockProducto()
-    {
-        return txtStockProducto.getText();
-    }
-
     public String getCategoriaProducto()
     {
         return (String) jcbCategoriaProducto.getSelectedItem();
@@ -2956,11 +2633,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         jcbProveedorComprar.setSelectedItem(null);
     }
 
-    public void vaciarProveedorComprar()
-    {
-        jcbProveedorComprar.removeAllItems();
-    }
-
     //=====|Vender|=====//
     public void rellenarClienteVender(Cliente auxCliente)
     {
@@ -2972,11 +2644,6 @@ public class VentanaMercado extends javax.swing.JFrame {
     {
         jcbClienteVender.removeItem(auxCliente);
         jcbClienteVender.setSelectedItem(null);
-    }
-
-    public void vaciarClienteVender()
-    {
-        jcbClienteVender.removeAllItems();
     }
 
     //==========|Mensajes Emergentes|==========//
@@ -3002,6 +2669,8 @@ public class VentanaMercado extends javax.swing.JFrame {
         txtCodigoVender.addActionListener(listenControles);
     }
 
+    //==========|Visuales Campos Vacios|==========//
+    //=====|Cliente|=====//
     public void asignarBorderErrorCliente()
     {
         if(txtNitCliente.getText().equals(""))
@@ -3011,8 +2680,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
         else
         {
-            txtNitCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblNitClienteVacio.setText("");
+            if(!lblNitClienteVacio.equals(""))
+            {
+                txtNitCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblNitClienteVacio.setText("");
+            }
         }
         if(txtNombreCliente.getText().equals(""))
         {
@@ -3021,8 +2693,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
         else
         {
-            txtNombreCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblNombreClienteVacio.setText("");
+            if(!lblNombreClienteVacio.equals(""))
+            {
+                txtNombreCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblNombreClienteVacio.setText("");
+            }
         }
         if(txtTelefonoCliente.getText().equals(""))
         {
@@ -3031,8 +2706,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
         else
         {
-            txtTelefonoCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblTelefonoClienteVacio.setText("");
+            if(!lblTelefonoClienteVacio.equals(""))
+            {
+                txtTelefonoCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblTelefonoClienteVacio.setText("");
+            }
         }
         if(txtDireccionCliente.getText().equals(""))
         {
@@ -3041,11 +2719,39 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
         else
         {
+            if(!lblDireccionClienteVacio.equals(""))
+            {
+                txtDireccionCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                lblDireccionClienteVacio.setText("");
+            }
+        }
+    }
+
+    public void limpiarBordesCliente()
+    {
+        if(!lblNitClienteVacio.equals(""))
+        {
+            txtNitCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNitClienteVacio.setText("");
+        }
+        if(!lblNombreClienteVacio.equals(""))
+        {
+            txtNombreCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreClienteVacio.setText("");
+        }
+        if(!lblTelefonoClienteVacio.equals(""))
+        {
+            txtTelefonoCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblTelefonoClienteVacio.setText("");
+        }
+        if(!lblDireccionClienteVacio.equals(""))
+        {
             txtDireccionCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
             lblDireccionClienteVacio.setText("");
         }
     }
 
+    //=====|Proveedor|=====//
     public void asignarBorderErrorProveedor()
     {
         if(txtNitProveedor.getText().equals(""))
@@ -3115,6 +2821,36 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
+    public void limpiarBordesProveedor()
+    {
+        if(!lblNitProveedorVacio.equals(""))
+        {
+            txtNitProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNitProveedorVacio.setText("");
+        }
+        if(!lblNombreProveedorVacio.equals(""))
+        {
+            txtNombreProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreProveedorVacio.setText("");
+        }
+        if(!lblTelefonoProveedorVacio.equals(""))
+        {
+            txtTelefonoProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblTelefonoProveedorVacio.setText("");
+        }
+        if(!lblDireccionProveedorVacio.equals(""))
+        {
+            txtDireccionProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblDireccionProveedorVacio.setText("");
+        }
+        if(!lblRSProveedorVacio.equals(""))
+        {
+            txtRazonSocialProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblRSProveedorVacio.setText("");
+        }
+    }
+
+    //=====|Producto|=====//
     public void asignarBorderErrorProducto()
     {
         if(txtCodigoProducto.getText().equals(""))
@@ -3171,7 +2907,31 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
-    //----------|Comprar|----------//
+    public void limpiarBordesProducto()
+    {
+        if(!lblCodigoProductoVacio.equals(""))
+        {
+            txtCodigoProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblCodigoProductoVacio.setText("");
+        }
+        if(!lblNombreProductoVacio.equals(""))
+        {
+            txtNombreProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblNombreProductoVacio.setText("");
+        }
+        if(!lblPrecioProductoVacio.equals(""))
+        {
+            txtPrecioVentaProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblPrecioProductoVacio.setText("");
+        }
+        if(!lblCategoriaProductoVacio.equals(""))
+        {
+            jcbCategoriaProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            lblCategoriaProductoVacio.setText("");
+        }
+    }
+
+    //=====|Comprar|=====//
     public void asignarBorderErrorComprar()
     {
         if(txtCodigoComprar.getText().equals(""))
@@ -3287,7 +3047,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
-    //----------|Venta|----------//
+    //=====|Venta|=====//
     public void asignarBorderErrorVender()
     {
         if(txtCodigoVender.getText().equals(""))
@@ -3408,76 +3168,11 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
-    public void limpiarBordesProducto()
-    {
-        if(!lblCodigoProductoVacio.equals(""))
-        {
-            txtCodigoProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblCodigoProductoVacio.setText("");
-        }
-        if(!lblNombreProductoVacio.equals(""))
-        {
-            txtNombreProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblNombreProductoVacio.setText("");
-        }
-        if(!lblPrecioProductoVacio.equals(""))
-        {
-            txtPrecioVentaProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblPrecioProductoVacio.setText("");
-        }
-        if(!lblCategoriaProductoVacio.equals(""))
-        {
-            jcbCategoriaProducto.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblCategoriaProductoVacio.setText("");
-        }
-    }
-
-    public void limpiarBordesProveedor()
-    {
-        if(!lblNitProveedorVacio.equals(""))
-        {
-            txtNitProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblNitProveedorVacio.setText("");
-        }
-        if(!lblNombreProveedorVacio.equals(""))
-        {
-            txtNombreProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblNombreProveedorVacio.setText("");
-        }
-        if(!lblTelefonoProveedorVacio.equals(""))
-        {
-            txtTelefonoProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblTelefonoProveedorVacio.setText("");
-        }
-        if(!lblDireccionProveedorVacio.equals(""))
-        {
-            txtDireccionProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblDireccionProveedorVacio.setText("");
-        }
-        if(!lblRSProveedorVacio.equals(""))
-        {
-            txtRazonSocialProveedor.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            lblRSProveedorVacio.setText("");
-        }
-    }
-
-    public void limpiarBordesCliente()
-    {
-        txtNitCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-        txtNombreCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-        txtTelefonoCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-        txtDireccionCliente.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-        lblNitClienteVacio.setText("");
-        lblNombreClienteVacio.setText("");
-        lblTelefonoClienteVacio.setText("");
-        lblDireccionClienteVacio.setText("");
-    }
-
     //==========|Render para JTable Compras y Ventas|==========//
 
-    class WordWrapRenderer extends JTextArea implements TableCellRenderer
+    private static class JTableCeldaPersonalizada extends JTextArea implements TableCellRenderer
     {
-        WordWrapRenderer()
+        JTableCeldaPersonalizada()
         {
             setLineWrap(true);
             setWrapStyleWord(true);
@@ -3487,8 +3182,6 @@ public class VentanaMercado extends javax.swing.JFrame {
         {
             setText( (value == null) ? "" : value.toString() );
             setSize(table.getColumnModel().getColumn(column).getWidth(), table.getRowHeight(row));
-
-            //  Recalculate the preferred height now that the text and renderer width have been set.
 
             int preferredHeight = getPreferredSize().height;
 
@@ -3501,7 +3194,8 @@ public class VentanaMercado extends javax.swing.JFrame {
         }
     }
 
-    public static class MyComboBoxUI extends BasicComboBoxUI
+    //==========|Render para ComboBox|==========//
+    private static class ComboBoxPersonalizado extends BasicComboBoxUI
     {
         @Override
         protected void installDefaults()
@@ -3516,7 +3210,7 @@ public class VentanaMercado extends javax.swing.JFrame {
             final JButton button = new JButton();
             button.setBorderPainted(false);
             button.setContentAreaFilled(false);
-            button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha.png")));
+            button.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/flecha.png"))));
             button.setName("ComboBox.arrowButton"); //Mandatory, as per BasicComboBoxUI#createArrowButton().
             return button;
         }
