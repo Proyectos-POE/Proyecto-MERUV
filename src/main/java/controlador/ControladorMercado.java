@@ -381,7 +381,6 @@ public class ControladorMercado
         String auxRazonSocial;
 
         auxId = Integer.parseInt(ventanaMercado.getIdProveedor());
-        System.out.println(auxId);
         if(auxId == 0)
         {
             if(comprobarCamposProveedor())
@@ -877,7 +876,6 @@ public class ControladorMercado
     private void listarComprasAgregar(Compra auxCompra)
     {
         DefaultTableModel tablaModel = (DefaultTableModel) ventanaMercado.getModelTablaCompras();
-        System.out.println(auxCompra.getId() + "-" + auxCompra.getNombresProductosCompra() + "-" + auxCompra.getPreciosProductosCompra() + "-" + auxCompra.getStockProductosCompra() + "-" + Math.round(auxCompra.getValorTotal()) + "-" + auxCompra.getCantidadProductos() + "-" + auxCompra.getProveedor().toString() + "-" + auxCompra.getFecha().getFecha().toString());
         tablaModel.addRow(new Object[]{auxCompra.getId(), auxCompra.getNombresProductosCompra(),  auxCompra.getPreciosProductosCompra(), auxCompra.getStockProductosCompra(), Math.round(auxCompra.getValorTotal()), auxCompra.getCantidadProductos(), auxCompra.getProveedor().toString(), auxCompra.getFecha().getFecha().toString()});
     }
 
@@ -1116,7 +1114,6 @@ public class ControladorMercado
     private void listarVentasAgregar(Venta auxVenta)
     {
         DefaultTableModel tablaModel = (DefaultTableModel) ventanaMercado.getModelTablaVentas();
-        System.out.println(auxVenta.getId() + "-" + auxVenta.getNombresProductosVenta() + "-" + auxVenta.getPreciosProductosVenta() + "-" + auxVenta.getStockProductosVenta() + "-" + Math.round(auxVenta.getValorTotal()) + "-" + auxVenta.getCantidadProductos() + "-" + auxVenta.getCliente().toString() + "-" + auxVenta.getFecha().getFecha().toString());
         tablaModel.addRow(new Object[]{auxVenta.getId(), auxVenta.getNombresProductosVenta(),  auxVenta.getPreciosProductosVenta(), auxVenta.getStockProductosVenta(), Math.round(auxVenta.getValorTotal()), auxVenta.getCantidadProductos(), auxVenta.getCliente().toString(), auxVenta.getFecha().getFecha().toString()});
     }
 
@@ -1225,9 +1222,9 @@ public class ControladorMercado
     {
         Producto auxProducto;
 
-        if (ventanaMercado.getFilaSeleccionadaVender() != -1)
+        if(ventanaMercado.getFilaSeleccionadaVender() != -1)
         {
-            auxProducto = superMercadoUV.getProductoCarritoVenta(ventanaMercado.getFilaSeleccionadaVentas());
+            auxProducto = superMercadoUV.getProductoCarritoVenta(ventanaMercado.getFilaSeleccionadaVender());
 
             if(superMercadoUV.eliminarProductoCarritoVenta(auxProducto, auxProducto.getPrecioVenta()))
             {
@@ -1279,7 +1276,7 @@ public class ControladorMercado
                     auxVenta = new Venta(auxCliente, auxValorVenta, auxProductosCarrito, auxProductosTotales, auxFecha);
                     if (superMercadoUV.agregarVenta(auxVenta))
                     {
-                        ventanaMercado.mostrarMensaje("Compra realizada con exito");
+                        ventanaMercado.mostrarMensaje("Venta realizada con exito");
                         ventanaMercado.setCodigoVender("");
                         ventanaMercado.setNombreVender("");
                         ventanaMercado.setPrecioVentaVender("");
@@ -1298,12 +1295,12 @@ public class ControladorMercado
                     }
                     else
                     {
-                        ventanaMercado.mostrarMensajeError("Compra no realizada");
+                        ventanaMercado.mostrarMensajeError("Venta no realizada");
                     }
                 }
                 else
                 {
-                    ventanaMercado.mostrarMensajeError("Rellene la compra con productos");
+                    ventanaMercado.mostrarMensajeError("Rellene la Venta con productos");
                 }
             }
             else
