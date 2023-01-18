@@ -558,6 +558,7 @@ public class ControladorMercado
     {
         boolean camposValido;
         camposValido = !ventanaMercado.getNombreProducto().equals("") && !ventanaMercado.getCodigoProducto().equals("") && !ventanaMercado.getPrecioVentaProducto().equals("") && ventanaMercado.getCategoriaProducto() != null;
+        ventanaMercado.asignarBorderErrorProducto();
         return camposValido;
     }
 
@@ -688,10 +689,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -708,6 +705,8 @@ public class ControladorMercado
 
         auxId = Integer.parseInt(ventanaMercado.getIdProducto());
         auxProducto = superMercadoUV.getProducto(auxId);
+
+        ventanaMercado.limpiarBordesProducto();
 
         if(auxProducto != null)
         {
@@ -746,10 +745,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese numeros enteros en el campo Codigo y Precio Venta");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene todos los campos");
-            }
         }
         else
         {
@@ -763,6 +758,8 @@ public class ControladorMercado
         int auxId;
         auxId = Integer.parseInt(ventanaMercado.getIdProducto());
         auxProducto = superMercadoUV.getProducto(auxId);
+
+        ventanaMercado.limpiarBordesProducto();
 
         if(auxProducto != null)
         {
@@ -838,6 +835,7 @@ public class ControladorMercado
     {
         boolean camposValidos;
         camposValidos = !ventanaMercado.getCodigoComprar().equals("") && !ventanaMercado.getNombreComprar().equals("") && !ventanaMercado.getPrecioCompraComprar().equals("") && !ventanaMercado.getStockComprar().equals("");
+        ventanaMercado.asignarBorderErrorComprar();
         return camposValidos;
     }
 
@@ -905,6 +903,8 @@ public class ControladorMercado
         double auxPrecioCompra;
         int auxStock;
 
+        ventanaMercado.limpiarBordesComprarProveedor();
+
         if(ventanaMercado.getFilaSeleccionadaComprar() == -1)
         {
             if(comprobarCamposCarritoCompra())
@@ -952,10 +952,6 @@ public class ControladorMercado
                     ventanaMercado.mostrarMensajeError("Ingrese valores validos en los campos codigo, stock y precio compra");
                 }
             }
-            else
-            {
-                ventanaMercado.mostrarMensajeError("Rellene los campos correctamente");
-            }
         }
         else
         {
@@ -966,6 +962,9 @@ public class ControladorMercado
     private  void eliminarProductoCarritoCompra()
     {
         Producto auxProducto;
+
+        ventanaMercado.limpiarBordesComprar();
+        ventanaMercado.limpiarBordesComprarProveedor();
 
         if (ventanaMercado.getFilaSeleccionadaComprar() != -1)
         {
@@ -1008,6 +1007,9 @@ public class ControladorMercado
 
         ArrayList<Producto> auxProductosCarrito;
 
+        ventanaMercado.limpiarBordesComprar();
+        ventanaMercado.asignarBorderErrorComprarProveedor();
+
         if(ventanaMercado.getFilaSeleccionadaComprar() == -1)
         {
             if(ventanaMercado.getProveedorComprar() != null)
@@ -1047,7 +1049,7 @@ public class ControladorMercado
                 }
                 else
                 {
-                    ventanaMercado.mostrarMensajeError("Rellene la compra con productos");
+                    ventanaMercado.mostrarMensajeError("Rellene el carrito con productos");
                 }
             }
             else
