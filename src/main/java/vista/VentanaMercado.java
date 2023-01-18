@@ -58,6 +58,12 @@ public class VentanaMercado extends javax.swing.JFrame {
         botonesPrincipal.add(btnVentas);
     }
 
+    public void pantallaCompleta()
+    {
+        this.setVisible(true);
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -573,8 +579,6 @@ public class VentanaMercado extends javax.swing.JFrame {
                         "ID","NIT", "NOMBRE", "TELEFONO", "DIRECCION"
                 }
         ));
-        jtTablaCliente.setEditingColumn(1);
-        jtTablaCliente.setEditingRow(1);
         jtTablaCliente.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTablaCliente.getTableHeader().setResizingAllowed(false);
         jtTablaCliente.getTableHeader().setReorderingAllowed(false);
@@ -588,6 +592,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarCliente.setBackground(new java.awt.Color(0, 102, 51));
         btnAgregarCliente.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnAgregarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
         btnAgregarCliente.setText("AGREGAR");
         btnAgregarCliente.setBorderPainted(false);
         btnAgregarCliente.setFocusable(false);
@@ -596,6 +601,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEditarCliente.setBackground(new java.awt.Color(249, 170, 51));
         btnEditarCliente.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEditarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
         btnEditarCliente.setText("EDITAR");
         btnEditarCliente.setBorderPainted(false);
         btnEditarCliente.setFocusable(false);
@@ -609,6 +615,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarCliente.setBackground(new java.awt.Color(102, 0, 0));
         btnEliminarCliente.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEliminarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         btnEliminarCliente.setText("ELIMINAR");
         btnEliminarCliente.setBorderPainted(false);
         btnEliminarCliente.setFocusable(false);
@@ -835,6 +842,7 @@ public class VentanaMercado extends javax.swing.JFrame {
                         "ID","NIT", "NOMBRE", "TELEFONO", "DIRECCION", "RAZON SOCIAL"
                 }
         ));
+        jtTablaProveedor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTablaProveedor.getTableHeader().setResizingAllowed(false);
         jtTablaProveedor.getTableHeader().setReorderingAllowed(false);
         jspTablaProveedor.setViewportView(jtTablaProveedor);
@@ -847,6 +855,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarProveedor.setBackground(new java.awt.Color(0, 102, 51));
         btnAgregarProveedor.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnAgregarProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
         btnAgregarProveedor.setText("AGREGAR");
         btnAgregarProveedor.setBorderPainted(false);
         btnAgregarProveedor.setFocusable(false);
@@ -855,6 +864,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEditarProveedor.setBackground(new java.awt.Color(249, 170, 51));
         btnEditarProveedor.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEditarProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
         btnEditarProveedor.setText("EDITAR");
         btnEditarProveedor.setBorderPainted(false);
         btnEditarProveedor.setFocusable(false);
@@ -868,6 +878,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarProveedor.setBackground(new java.awt.Color(102, 0, 0));
         btnEliminarProveedor.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEliminarProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         btnEliminarProveedor.setText("ELIMINAR");
         btnEliminarProveedor.setBorderPainted(false);
         btnEliminarProveedor.setFocusable(false);
@@ -1090,6 +1101,7 @@ public class VentanaMercado extends javax.swing.JFrame {
                         "ID","CODIGO", "NOMBRE", "PRECIO VENTA", "STOCK", "CATEGORIA"
                 }
         ));
+        jtTablaInventario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTablaInventario.getTableHeader().setResizingAllowed(false);
         jtTablaInventario.getTableHeader().setReorderingAllowed(false);
         jspTablaInventario.setViewportView(jtTablaInventario);
@@ -1102,6 +1114,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarProducto.setBackground(new java.awt.Color(0, 102, 51));
         btnAgregarProducto.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnAgregarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
         btnAgregarProducto.setText("AGREGAR");
         btnAgregarProducto.setBorderPainted(false);
         btnAgregarProducto.setFocusable(false);
@@ -1110,6 +1123,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEditarProducto.setBackground(new java.awt.Color(249, 170, 51));
         btnEditarProducto.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEditarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
         btnEditarProducto.setText("EDITAR");
         btnEditarProducto.setBorderPainted(false);
         btnEditarProducto.setFocusable(false);
@@ -1123,6 +1137,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarProducto.setBackground(new java.awt.Color(102, 0, 0));
         btnEliminarProducto.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEliminarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         btnEliminarProducto.setText("ELIMINAR");
         btnEliminarProducto.setBorderPainted(false);
         btnEliminarProducto.setFocusable(false);
@@ -1318,6 +1333,7 @@ public class VentanaMercado extends javax.swing.JFrame {
                         "ID", "CODIGO", "PRODUCTO", "STOCK", "PRECIO UNITARIO"
                 }
         ));
+        jtTablaComprar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTablaComprar.getTableHeader().setResizingAllowed(false);
         jtTablaComprar.getTableHeader().setReorderingAllowed(false);
         jspTablaComprar.setViewportView(jtTablaComprar);
@@ -1333,6 +1349,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarCompra.setBackground(new java.awt.Color(0, 102, 51));
         btnAgregarCompra.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnAgregarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
         btnAgregarCompra.setText("AGREGAR");
         btnAgregarCompra.setBorderPainted(false);
         btnAgregarCompra.setFocusable(false);
@@ -1345,6 +1362,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
         btnRealizarCompra.setBackground(new java.awt.Color(249, 170, 51));
         btnRealizarCompra.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnRealizarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprar.png"))); // NOI18N
         btnRealizarCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnRealizarCompra.setText("COMPRAR");
         btnRealizarCompra.setBorderPainted(false);
@@ -1359,6 +1377,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarCompra.setBackground(new java.awt.Color(102, 0, 0));
         btnEliminarCompra.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEliminarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         btnEliminarCompra.setText("ELIMINAR");
         btnEliminarCompra.setBorderPainted(false);
         btnEliminarCompra.setFocusable(false);
@@ -1589,6 +1608,7 @@ public class VentanaMercado extends javax.swing.JFrame {
                         "ID", "CODIGO", "PRODUCTO", "STOCK", "PRECIO UNITARIO"
                 }
         ));
+        jtTablaVender.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTablaVender.getTableHeader().setResizingAllowed(false);
         jtTablaVender.getTableHeader().setReorderingAllowed(false);
         jspTablaVender.setViewportView(jtTablaVender);
@@ -1604,6 +1624,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnAgregarVenta.setBackground(new java.awt.Color(0, 102, 51));
         btnAgregarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnAgregarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar.png"))); // NOI18N
         btnAgregarVenta.setText("AGREGAR");
         btnAgregarVenta.setBorderPainted(false);
         btnAgregarVenta.setFocusable(false);
@@ -1617,6 +1638,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnRealizarVenta.setBackground(new java.awt.Color(249, 170, 51));
         btnRealizarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnRealizarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vender.png"))); // NOI18N
         btnRealizarVenta.setText("VENDER");
         btnRealizarVenta.setBorderPainted(false);
         btnRealizarVenta.setFocusable(false);
@@ -1630,6 +1652,7 @@ public class VentanaMercado extends javax.swing.JFrame {
         btnEliminarVenta.setBackground(new java.awt.Color(102, 0, 0));
         btnEliminarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnEliminarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         btnEliminarVenta.setText("ELIMINAR");
         btnEliminarVenta.setBorderPainted(false);
         btnEliminarVenta.setFocusable(false);
@@ -1681,6 +1704,7 @@ public class VentanaMercado extends javax.swing.JFrame {
                         "ID","PRODUCTOS", "PRECIO UNITARIO", "STOCKS", "PRECIO TOTAL", "STOCK TOTAL", "PROVEEDOR", "FECHA"
                 }
         ));
+        jtTablaCompras.setEnabled(false);
         jtTablaCompras.getTableHeader().setResizingAllowed(false);
         jtTablaCompras.getTableHeader().setReorderingAllowed(false);
         jtTablaCompras.getColumnModel().getColumn(1).setCellRenderer(new WordWrapRenderer());
@@ -1722,6 +1746,7 @@ public class VentanaMercado extends javax.swing.JFrame {
 
                 }
         ));
+        jtTablaVentas.setEnabled(false);
         jtTablaVentas.getTableHeader().setResizingAllowed(false);
         jtTablaVentas.getTableHeader().setReorderingAllowed(false);
         jtTablaVentas.getColumnModel().getColumn(1).setCellRenderer(new WordWrapRenderer());

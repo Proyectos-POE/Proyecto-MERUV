@@ -19,8 +19,7 @@ public class ControladorMercado
         this.superMercadoUV = auxEmpresa;
         this.ventanaMercado = auxA;
 
-        ventanaMercado.setVisible(true);
-        ventanaMercado.setLocationRelativeTo(null);
+        ventanaMercado.pantallaCompleta();
 
         TextFieldListener textFieldListener = new TextFieldListener();
 
