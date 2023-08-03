@@ -1,5 +1,4 @@
-
-# Miniproyecto No. 4
+# Proyecto-MERUV
 **Tema: GUI – MVC**
 
 La dirección general de Univalle ha decidido la creación de un supermercado para el servicio
